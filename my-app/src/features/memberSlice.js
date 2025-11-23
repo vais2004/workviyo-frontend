@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//import React, { act } from "react";
-
 export const fetchMembersAsync = createAsyncThunk(
   "members/fetchMembersAsync",
   async () => {
