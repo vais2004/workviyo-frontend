@@ -108,5 +108,44 @@ export const taskSlice = createSlice({
       state.status = "error";
       state.error = action.error.message;
     });
+    //add
+    builder.addCase(addTaskAsync.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(addTaskAsync.fulfilled, (state, action) => {
+      state.status = "Added tasks";
+      state.tasks = action.payload;
+    });
+    builder.addCase(addTaskAsync.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+    //update
+    builder.addCase(updateTaskAsync.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(addTaskAsync.fulfilled, (state, action) => {
+      state.status = "Updated tasks";
+      state.tasks = action.payload;
+    });
+    builder.addCase(updateTaskAsync.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+    //delete
+
+    builder.addCase(deleteTaskAsync.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(deleteTaskAsync.fulfilled, (state, action) => {
+      state.status = "deleted tasks";
+      state.tasks = action.payload;
+    });
+    builder.addCase(deleteTaskAsync.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
   },
 });
+
+export default taskSlice.reducer;
