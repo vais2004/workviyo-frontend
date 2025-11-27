@@ -92,10 +92,37 @@ export default function ProjectList({ search }) {
             <div className="col-md-4 py-3" key={project._id}>
               <Link
                 style={{ textDecoration: "none" }}
-                to={`/projects/${project._id}`}
-              />
+                to={`/projects/${project._id}`}>
+                <div className="card pt-5 p-3 bg-light border-0">
+                  <h5>{project.name}</h5>
+                  <p>Description: {project.description}</p>
+                  <div className="card-img-overlay p-1">
+                    <span
+                      className={`d-inline-block px-2 rounded ${
+                        project.status === "Blocked"
+                          ? "text-bg-danger"
+                          : project.status === "Completed"
+                          ? "text-bg-primary"
+                          : project.status === "To Do"
+                          ? "text-bg-warning"
+                          : "text-bg-info"
+                      }`}
+                      style={{ width: "fit-content", minWidth: "auto" }}>
+                      {project.status}
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
+        <div
+          className="modal fade"
+          id="addNewProject"
+          tabIndex="-1"
+          aria-labelledby="projectModelLabel"
+          aria-hidden="true">
+          <AddProject />
+        </div>
       </div>
     </div>
   );
