@@ -107,9 +107,23 @@ export default function Projects() {
           <section className="row pb-3 px-1">
             <span className="col-auto">
               <button
-                className="col-auto"
+                className="btn border "
                 onClick={() => taskFilters("prioritySort", "Low-High")}>
                 Low-High Priority
+              </button>
+            </span>
+            <span className="col-auto">
+              <button
+                className="btn border "
+                onClick={() => taskFilters("prioritySort", "High-Low")}>
+                High-Low Priority
+              </button>
+            </span>
+            <span className="col-auto">
+              <button
+                className="btn border "
+                onClick={() => taskFilters("dateSort", "Newest-Oldest")}>
+                Newest First
               </button>
             </span>
           </section>
