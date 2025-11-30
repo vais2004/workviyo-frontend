@@ -126,6 +126,13 @@ export default function Projects() {
                 Newest First
               </button>
             </span>
+             <span className="col-auto">
+              <button
+                className="btn border "
+                onClick={() => taskFilters("dateSort", "Oldest-Newest")}>
+                Oldest First
+              </button>
+            </span>
           </section>
         </div>
       </div>
