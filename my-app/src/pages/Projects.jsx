@@ -126,11 +126,33 @@ export default function Projects() {
                 Newest First
               </button>
             </span>
-             <span className="col-auto">
+            <span className="col-auto">
               <button
                 className="btn border "
                 onClick={() => taskFilters("dateSort", "Oldest-Newest")}>
                 Oldest First
+              </button>
+            </span>
+            <span className="col-auto  ">
+              <select
+                value={taskStatus}
+                onChange={(e) => filterByStatus(e.target.value)}
+                className="form-select mt-1 ">
+                <option value="">Filter</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="To Do">To Do</option>
+                <option value="Blocked">Blocked</option>
+              </select>
+            </span>
+            <span className="col-auto  ">
+              <button
+                type="button"
+                className="btn btn-primary mt-1"
+                data-bs-toggle="modal"
+                data-bs-target="#addNewTask"
+                data-bs-whatever="@mdo">
+                + New Task
               </button>
             </span>
           </section>
