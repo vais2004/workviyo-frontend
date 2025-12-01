@@ -156,6 +156,96 @@ export default function Projects() {
               </button>
             </span>
           </section>
+
+          <section className="pb-3 pe-2">
+            <table className="table border rounded-2">
+              <thead>
+                <tr>
+                  <th className="table-light" scope="col">
+                    Tasks
+                  </th>
+                  <th className="table-light" scope="col">
+                    Owners
+                  </th>
+                  <th className="table-light" scope="col">
+                    Priority
+                  </th>
+                  <th className="table-light" scope="col">
+                    Due On
+                  </th>
+                  <th className="table-light" scope="col">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {tasksFromProject
+                  ? tasksFromProject.map((task, index) => (
+                      <tr key={index}>
+                        <th scope="row container">{task.name}</th>{" "}
+                        <td>
+                          {task.owners.map((owner, index) => (
+                            <span
+                              key={index}
+                              style={{
+                                display: "inline-block",
+                                width: "30px",
+                                height: "30px",
+                                border: "1px solid white",
+                                borderRadius: "50%",
+                                textAlign: "center",
+                                lineHeight: "30px",
+                                backgroundColor: "antiquewhite",
+                                color: "brown",
+                                zIndex: 1,
+
+                                paddingBottom: "8px",
+                              }}>
+                              {owner.name.charAt(0)}{" "}
+                            </span>
+                          ))}
+                        </td>
+                        <td
+                          className={
+                            task.priority === "High"
+                              ? "bg-danger-subtle text-danger-emphasis rounded-pill fw-normal px-2 py-1"
+                              : task.priority === "Medium"
+                              ? "bg-emphasise-purple-text-purple rounded-pill fw-normal px-2 py-1"
+                              : "bg-body-tertiary rounded-pill fw-normal px-2 py-1"
+                          }>
+                          <span>
+                            {task.priority ? task.priority : "Medium"}
+                          </span>
+                        </td>
+                        <td>{task?.createdAt.split("T").slice(0, 1)}</td>
+                        <td>
+                          <span
+                            className={
+                              task.status === "Completed"
+                                ? "bg-success-subtle text-success-emphasis rounded fw-normal px-2 py-1"
+                                : task.status === "Blocked"
+                                ? "bg-danger-subtle text-danger-emphasis rounded fw-normal px-2 py-1"
+                                : task.status === "In Progress"
+                                ? "bg-warning-subtle text-warning-emphasis fw-normal px-2 py-1"
+                                : "bg-body-tertiary rounded fw-normal px-2 py-1"
+                            }>
+                            {task.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  : ""}
+              </tbody>
+            </table>
+          </section>
+          <div
+            className="modal fade"
+            id="addNewTask"
+            tabIndex="-1"
+            aria-labelledby="taskModelLabel"
+            aria-hidden="true">
+            <AddTask />
+          </div>
         </div>
       </div>
     </div>
