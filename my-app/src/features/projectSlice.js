@@ -50,7 +50,7 @@ export const updateProjectAsync = createAsyncThunk(
       { headers: { Authorization: `${token}` } }
     );
 
-    const data = response.data.projects; // backend returns { projects: [...] }
+    const data = response.data.projects;
     return data;
   }
 );
