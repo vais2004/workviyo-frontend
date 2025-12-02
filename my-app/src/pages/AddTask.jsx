@@ -231,6 +231,65 @@ export default function AddTask() {
                   value={newTag}
                 />
               </div>
+              <div className="col-md-3">
+                <button
+                  onClick={handleAddTag}
+                  type="button"
+                  className="btn btn-outline-primary btn-sm">
+                  Add Tag
+                </button>
+              </div>
+            </div>
+            <div className="mb-2 row">
+              {" "}
+              {tags?.length > 0 &&
+                tags.map((tag, index) => (
+                  <div className="col-md-3" key={index}>
+                    {tag}
+                  </div>
+                ))}
+            </div>
+
+            <div className="row mb-3">
+              <div className="col-md-3">
+                {""}{" "}
+                <label htmlFor="estimateTime" className="col-form-label">
+                  Estimate Time
+                </label>
+              </div>
+              <div className="col-md-9">
+                <input
+                  className="form-control"
+                  type="number"
+                  value={timeout}
+                  placeholder="Enter Time in Days"
+                  onChange={(e) => setTimeout(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-2">
+              <div className="col-md-3">
+                <label htmlFor="priority" className="col-form-label">
+                  Priority
+                </label>
+              </div>
+              <div className="col-md-9">
+                <select
+                  className="form-select"
+                  onChange={(e) => setPriority(e.target.value)}
+                  value={priority}>
+                  <option value="">---select---</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-primary mx-1 float-end">
+                {existing ? "Update" : "Create"}
+              </button>
             </div>
           </form>
         </div>
