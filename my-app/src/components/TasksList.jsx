@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasksAsync } from "../features/taskSlice";
-import toast, { Toaster } from "react-hot-toast";
+//import toast, { Toaster } from "react-hot-toast";
 import { Link, useSearchParams } from "react-router-dom";
 import AddTask from "../pages/AddTask";
 

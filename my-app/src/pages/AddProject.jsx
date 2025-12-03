@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { addProjectAsync, updateProjectAsync } from "../features/projectSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function AddProject() {
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
@@ -71,6 +73,7 @@ export default function AddProject() {
             aria-label="Close"></button>
         </div>
         <div className="modal-body">
+           <ToastContainer />
           <form onSubmit={handleAddProject}>
             <div className="mb-3">
               <label htmlFor="name" className="col-form-label">

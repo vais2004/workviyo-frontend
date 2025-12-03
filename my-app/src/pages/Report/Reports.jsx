@@ -1,5 +1,5 @@
 import SideNav from "../../components/SideNav";
-import { TotalWorkDoneLastWeek } from "./TotalWorkDoneLastWeek";
+import  TotalWorkDoneLastWeek  from "./TotalWorkDoneLastWeek";
 import TaskClosedBy from "./TaskClosedBy";
 import TotalDaysOfWorkPending from "./TotalDaysOfWorkPending";
 

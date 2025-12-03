@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsAsync } from "../features/projectSlice";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import AddProject from "../Pages/AddProject";
+import AddProject from "../pages/AddProject";
 
 export default function ProjectList({ search }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [userId, setUserId] = useState(null);
   const dispatch = useDispatch();
   const { projects, status } = useSelector((state) => state.projects);
 

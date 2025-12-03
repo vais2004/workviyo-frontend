@@ -4,7 +4,7 @@ import {
   deleteProjectAsync,
   fetchProjectsAsync,
 } from "../features/projectSlice";
-import { deleteTeamAsync, fetchTeamAsync } from "../features/teamSlice";
+import { deleteTeamAsync, fetchTeamsAsync } from "../features/teamSlice";
 import { deleteTaskAsync, fetchTasksAsync } from "../features/taskSlice";
 import { Link, useNavigate } from "react-router-dom";
 import SideNav from "../components/SideNav";
@@ -28,7 +28,7 @@ export default function Settings() {
   }, [projectStatus]);
 
   useEffect(() => {
-    dispatch(fetchTeamAsync());
+    dispatch(fetchTeamsAsync());
     dispatch(fetchTasksAsync());
   }, []);
 

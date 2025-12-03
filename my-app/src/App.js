@@ -9,7 +9,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Settings from "./pages/Settings.jsx";
 import AddTask from "./pages/AddTask.jsx";
-import AddProject from "./Pages/AddProject.jsx";
+import AddProject from "./pages/AddProject.jsx";
 import AddTeam from "./pages/AddTeam.jsx";
 
 function App() {
