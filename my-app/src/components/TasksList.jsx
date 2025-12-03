@@ -11,6 +11,28 @@ export default function TasksList() {
   const { tasks, status, error } = useSelector((state) => state.tasks);
 
   const taskStatus = searchParams.get("taskStatus") || "";
+
+  useEffect(() => {
+    dispatch(fetchTasksAsync({ taskStatus }));
+  }, [taskStatus]);
+
+  const handleFilterByStatus = (value) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (value) {
+      newParams.set("taskStatus", value);
+    } else {
+      newParams.delete("taskStatus");
+    }
+    setSearchParams(newParams);
+  };
+
+  const findTaskByQuery =
+    searchQuery === ""
+      ? tasks
+      : tasks?.filter((task) =>
+          task?.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
   return (
     <div className="row">
       <div className="col-md-1">
