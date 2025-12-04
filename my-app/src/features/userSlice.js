@@ -24,7 +24,7 @@ export const registerUserAsync = createAsyncThunk(
   "users/registerUserAsync",
   async (credentials) => {
     const response = await axios.post(
-      `https://workviyo.vercel.app/users/register`,
+      `https://workviyo.vercel.app/auth/signup`,
       credentials
     );
     const data = response.data;
@@ -40,7 +40,7 @@ export const userLoginAsync = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axios.post(
-        `https://workviyo.vercel.app/users/login`,
+        `https://workviyo.vercel.app/auth/login`,
         credentials
       );
       console.log("Login response: ", response.data);

@@ -6,8 +6,12 @@ import {
   updateTeamAsync,
 } from "../features/teamSlice";
 import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
+import { useParams } from "react-router-dom";
 
 export default function AddMember() {
+  const { teamId } = useParams();
+  console.log("teamId from params:", teamId);
+
   const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
 

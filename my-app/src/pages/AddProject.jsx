@@ -6,18 +6,22 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddProject() {
+  const { projectId } = useParams();
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log("projectId from params:", projectId);
+
   const { projects } = useSelector((state) => state.projects);
 
   const projectExist =
-    projectId &&
-    projects?.length > 0 &&
-    projects?.fing((project) => project._id == projectId);
+    projectId && projects?.length > 0
+      ? projects?.find((project) => project._id === projectId)
+      : null;
+
   const existing = Boolean(projectExist);
 
   useEffect(() => {
@@ -30,7 +34,7 @@ export default function AddProject() {
 
   const handleAddProject = (e) => {
     e.preventDefault();
-    if (existing) {
+    if (existing && projectId) {
       dispatch(
         updateProjectAsync({
           id: projectId,
@@ -41,7 +45,6 @@ export default function AddProject() {
       );
       toast.success("Project Updated Successfullt!");
       setTimeout(() => {
-        window.location.reload();
         navigate("/dashboard");
       }, 2000);
     } else {
@@ -73,7 +76,7 @@ export default function AddProject() {
             aria-label="Close"></button>
         </div>
         <div className="modal-body">
-           <ToastContainer />
+          <ToastContainer />
           <form onSubmit={handleAddProject}>
             <div className="mb-3">
               <label htmlFor="name" className="col-form-label">

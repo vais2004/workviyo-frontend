@@ -13,11 +13,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTask() {
-   const { taskId } = useParams(); 
+  const { taskId } = useParams();
+  console.log("taskId from params:", taskId);
+
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [teamName, setTeam] = useState("");
-  const [timeout, setTimeout] = useState("");
+  const [timeoutValue, setTimeoutValue] = useState("");
   const [owners, setOwners] = useState([]);
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
@@ -48,7 +50,7 @@ export default function AddTask() {
       setProjectName(existingTask.project || "");
       setTaskName(existingTask.name || "");
       setTeam(existingTask.team || "");
-      setTimeout(existingTask.timeToComplete || "");
+      setTimeoutValue(existingTask.timeToComplete || "");
       setOwners(existingTask.owners || "");
       setTags(existingTask.tags || "");
       setPriority(existingTask.priority || "");
@@ -73,7 +75,7 @@ export default function AddTask() {
           name: taskName,
           project: projectName,
           team: teamName,
-          timeToComplete: timeout,
+          timeToComplete: timeoutValue,
           tags: tags,
           owners: owners,
           priority: priority,
@@ -88,7 +90,7 @@ export default function AddTask() {
           name: taskName,
           project: projectName,
           team: teamName,
-          timeToComplete: timeout,
+          timeToComplete: timeoutValue,
           tags: tags,
           owners: owners,
           priority: priority,
@@ -265,9 +267,9 @@ export default function AddTask() {
                 <input
                   className="form-control"
                   type="number"
-                  value={timeout}
+                  value={timeoutValue}
                   placeholder="Enter Time in Days"
-                  onChange={(e) => setTimeout(e.target.value)}
+                  onChange={(e) => setTimeoutValue(e.target.value)}
                 />
               </div>
             </div>
