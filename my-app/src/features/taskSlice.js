@@ -124,7 +124,7 @@ export const taskSlice = createSlice({
     builder.addCase(updateTaskAsync.pending, (state) => {
       state.status = "Loading";
     });
-    builder.addCase(addTaskAsync.fulfilled, (state, action) => {
+    builder.addCase(updateTaskAsync.fulfilled, (state, action) => {
       state.status = "Updated tasks";
       state.tasks = action.payload;
     });

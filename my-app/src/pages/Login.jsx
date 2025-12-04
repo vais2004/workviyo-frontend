@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLoginAsync } from "../features/userSlice";
 import ShowHidePassword from "../components/ShowHidePassword";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -42,6 +44,7 @@ export default function Login() {
   };
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
+      <ToastContainer />
       <div
         className="card  border-0 p-4 "
         style={{ width: "400px", backgroundColor: "#ffffff" }}>

@@ -11,6 +11,9 @@ import SideNav from "../components/SideNav";
 import AddProject from "../pages/AddProject";
 import AddTask from "../pages/AddTask";
 import AddTeam from "../pages/AddTeam";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+<ToastContainer />;
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -63,6 +66,7 @@ export default function Settings() {
 
   return (
     <div className="container-fluid">
+      <ToastContainer />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"

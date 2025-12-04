@@ -9,6 +9,7 @@ export default function TasksList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { tasks, status, error } = useSelector((state) => state.tasks);
+  const [search, setSearch] = useState("");
 
   const taskStatus = searchParams.get("taskStatus") || "";
 
@@ -27,10 +28,10 @@ export default function TasksList() {
   };
 
   const findTaskByQuery =
-    searchQuery === ""
+    search === ""
       ? tasks
       : tasks?.filter((task) =>
-          task?.name.toLowerCase().includes(searchQuery.toLowerCase())
+          task?.name.toLowerCase().includes(search.toLowerCase())
         );
 
   return (

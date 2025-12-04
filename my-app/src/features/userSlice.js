@@ -8,6 +8,8 @@ import axios from "axios";
 export const fetchUserAsync = createAsyncThunk(
   "users/fetchUserAsync",
   async () => {
+    const token = localStorage.getItem("token");
+
     const response = await axios.get(`https://workviyo.vercel.app/users`, {
       headers: {
         Authorization: `${token}`,

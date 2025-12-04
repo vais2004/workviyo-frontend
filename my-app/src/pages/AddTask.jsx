@@ -9,8 +9,11 @@ import { fetchTeamsAsync } from "../features/teamSlice";
 import { addTaskAsync, updateTaskAsync } from "../features/taskSlice";
 import { fetchUserAsync } from "../features/userSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTask() {
+   const { taskId } = useParams(); 
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [teamName, setTeam] = useState("");
@@ -81,7 +84,7 @@ export default function AddTask() {
       document.querySelector("#addNewTask .btn-close").click();
     } else {
       dispatch(
-        addTasksAsync({
+        addTaskAsync({
           name: taskName,
           project: projectName,
           team: teamName,
@@ -112,6 +115,7 @@ export default function AddTask() {
         </div>
 
         <div className="modal-body">
+          <ToastContainer />
           <form onSubmit={handleAddTask}>
             <div className="row mb-3">
               <div className="col-md-3">

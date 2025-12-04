@@ -9,6 +9,8 @@ import {
 } from "../features/memberSlice";
 import SideNav from "../components/SideNav";
 import AddMember from "./AddMember";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function TeamDetail() {
   const [newName, setNewName] = useState("");
@@ -66,6 +68,7 @@ export default function TeamDetail() {
 
   return (
     <div className="container-fluid">
+      <ToastContainer />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"
