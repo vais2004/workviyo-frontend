@@ -48,6 +48,7 @@ export const userLoginAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.error("Login error: ", error.response?.data);
+      throw error
     }
   }
 );

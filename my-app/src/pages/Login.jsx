@@ -30,12 +30,19 @@ export default function Login() {
       const guestEmail = "guest1@example.com";
       const guestPassword = "guest1";
 
-      setEmail(guestEmail);
-      setPassword(guestPassword);
+      await dispatch(
+        userLoginAsync({ email: guestEmail, password: guestPassword })
+      ).unwrap();
 
-      console.log(email, password);
+      // const guestEmail = "guest1@example.com";
+      // const guestPassword = "guest1";
 
-      await dispatch(userLoginAsync({ email, password })).unwrap();
+      // setEmail(guestEmail);
+      // setPassword(guestPassword);
+
+      // console.log(email, password);
+
+      // await dispatch(userLoginAsync({ email, password })).unwrap();
       toast.success("Login successful!");
       navigate("/dashboard");
     } catch (error) {
