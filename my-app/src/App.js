@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
@@ -31,7 +31,22 @@ function App() {
         <Route path="/addProject/:projectId" element={<AddProject />} />
         <Route path="/addTeam" element={<AddTeam />} />
         <Route path="/addTeam/:teamId" element={<AddTeam />} />
-      </Routes>
+      */}
+        <Route path="/" element={<Login />} />
+  <Route path="/signup" element={<Signup />} />
+  <Route path="/dashboard" element={<Home />} />
+  <Route path="/projects" element={<Projects />} />               {/* List all projects */}
+  <Route path="/projects/view/:projectId" element={<AddProject />} /> {/* View/Edit project */}
+  <Route path="/addProject" element={<AddProject />} />          {/* Create new project */}
+  <Route path="/teams" element={<Teams />} />
+  <Route path="/teamDetail/:teamId" element={<TeamDetail />} />
+  <Route path="/addTask" element={<AddTask />} />                {/* Create new task */}
+  <Route path="/addTask/:taskId" element={<AddTask />} />       {/* Edit existing task */}
+  <Route path="/reports" element={<Reports />} />
+  <Route path="/settings" element={<Settings />} />
+  <Route path="/addTeam" element={<AddTeam />} />
+  <Route path="/addTeam/:teamId" element={<AddTeam />} />
+      </Routes> 
     </>
   );
 }

@@ -19,7 +19,7 @@ export default function Signup() {
     event.preventDefault();
     try {
       await dispatch(registerUserAsync({ name, email, password })).unwrap();
-      toast.success("Sighup successful!");
+      toast.success("Signup successful!");
       navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid credentials!");
