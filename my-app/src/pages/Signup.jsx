@@ -17,25 +17,33 @@ export default function Signup() {
 
   const handleUserRegister = async (event) => {
     event.preventDefault();
+
+    console.log(name, email, password); // Check before sending
+
     try {
       await dispatch(registerUserAsync({ name, email, password })).unwrap();
       toast.success("Signup successful!");
       navigate("/dashboard");
     } catch (error) {
-      toast.error("Invalid credentials!");
+      toast.error(error?.message || "Signup failed!");
     }
   };
 
   const guestLoginHandler = async () => {
-    setEmail("vkawale2004@gmail.com");
-    setPassword("vkawale2004");
+    const guestEmail = "vkawale2004@gmail.com";
+    const guestPassword = "vkawale2004";
+
+    setEmail(guestEmail);
+    setPassword(guestPassword);
 
     try {
-      await dispatch(userLoginAsync({ email, password })).unwrap();
+      await dispatch(
+        userLoginAsync({ email: guestEmail, password: guestPassword })
+      ).unwrap();
       toast.success("Login successful!");
       navigate("/dashboard");
     } catch (error) {
-      toast.error("Invalid credentials while Logging In!");
+      toast.error("Invalid guest credentials!");
     }
   };
 
@@ -86,7 +94,7 @@ export default function Signup() {
           <div className="d-grid mb-2">
             <button
               className="btn btn-outline-secondary"
-              onClick={() => guestLoginHandler}>
+              onClick={guestLoginHandler}>
               Continue as Guest
             </button>
           </div>
