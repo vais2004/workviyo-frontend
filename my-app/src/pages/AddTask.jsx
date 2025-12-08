@@ -51,7 +51,7 @@ export default function AddTask() {
       setTaskName(existingTask.name || "");
       setTeam(existingTask.team || "");
       setTimeoutValue(existingTask.timeToComplete || "");
-      setOwners(existingTask.owners || "");
+      setOwners(existingTask.owners || []);
       setTags(existingTask.tags || "");
       setPriority(existingTask.priority || "");
       setTaskStatus(existingTask.status || "");
@@ -70,7 +70,7 @@ export default function AddTask() {
 
     if (existing) {
       dispatch(
-        updateProjectAsync({
+        updateTaskAsync({
           id: taskId,
           name: taskName,
           project: projectName,
@@ -210,7 +210,7 @@ export default function AddTask() {
               <div className="col-md-9">
                 <select
                   className="form-select"
-                  onChange={(e) => setOwners(e.target.value)}>
+                  onChange={(e) => setOwners([e.target.value])}>
                   <option value="">Select owner</option>
                   {members?.map((owner) => (
                     <option key={owner._id} value={owner._id}>

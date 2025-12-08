@@ -86,7 +86,7 @@ export default function AddProject() {
                 type="text"
                 className="form-control"
                 placeholder="Enter Project Name"
-                value={existing ? projectName : ""}
+                value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
               />
             </div>
@@ -98,7 +98,7 @@ export default function AddProject() {
                 className="form-control"
                 placeholder="Enter Project Description"
                 onChange={(e) => setProjectDescription(e.target.value)}
-                value={existing ? projectDescription : ""}></textarea>
+                value={projectDescription}></textarea>
             </div>
             <div className="mb-3">
               <label htmlFor="status" className="col-form-label">
@@ -106,7 +106,7 @@ export default function AddProject() {
               </label>
               <select
                 className="form-select"
-                value={existing ? status : ""}
+                value={status}
                 onChange={(e) => setStatus(e.target.value)}>
                 <option value="">---select---</option>
                 <option value="To Do">To Do</option>

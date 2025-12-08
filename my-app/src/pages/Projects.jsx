@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { fetchProjectsAsync } from "../features/projectSlice";
@@ -8,11 +8,11 @@ import AddTask from "../pages/AddTask";
 
 export default function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const projectId = useParams();
+  const { projectId } = useParams();
   const dispatch = useDispatch();
 
-  const { projects } = useSelector((state) => state.projects);
-  const { tasks } = useSelector((state) => state.tasks);
+  const { projects = [] } = useSelector((state) => state.projects);
+  const { tasks = [] } = useSelector((state) => state.tasks);
 
   const taskStatus = searchParams.get("taskStatus") || "";
   const prioritySort = searchParams.get("prioritySort") || "";
@@ -46,12 +46,10 @@ export default function Projects() {
     setSearchParams(newParams);
   };
 
-  const projectData = projects?.find(
-    (project) => project._id === projectId.projectId
-  );
+  const projectData = projects.find((project) => project._id === projectId);
 
   const tasksFromProject = projectData
-    ? tasks.filter((task) => task.project.name === projectData?.name)
+    ? tasks.filter((task) => task.project?.name === projectData?.name)
     : tasks;
 
   return (
