@@ -52,7 +52,7 @@ export default function AddTask() {
       setTeam(existingTask.team || "");
       setTimeoutValue(existingTask.timeToComplete || "");
       setOwners(existingTask.owners || []);
-      setTags(existingTask.tags || "");
+      setTags(existingTask.tags || []);
       setPriority(existingTask.priority || "");
       setTaskStatus(existingTask.status || "");
     }
@@ -76,8 +76,8 @@ export default function AddTask() {
           project: projectName,
           team: teamName,
           timeToComplete: timeoutValue,
-          tags: tags,
-          owners: owners,
+          tags: tags.map((t) => t._id || t),
+          owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
         })
@@ -91,8 +91,7 @@ export default function AddTask() {
           project: projectName,
           team: teamName,
           timeToComplete: timeoutValue,
-          tags: tags,
-          owners: owners,
+          owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
         })

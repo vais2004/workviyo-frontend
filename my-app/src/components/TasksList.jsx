@@ -98,7 +98,7 @@ export default function TasksList() {
                           paddingBottom: "8px",
                           marginRight: "-10px",
                         }}>
-                        {owner.name.charAt(0)}
+                        {owner.name}
                       </span>{" "}
                     </span>
                   ))}

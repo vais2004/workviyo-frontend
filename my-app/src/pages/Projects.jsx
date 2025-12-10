@@ -48,9 +48,10 @@ export default function Projects() {
 
   const projectData = projects.find((project) => project._id === projectId);
 
-  const tasksFromProject = projectData
-    ? tasks.filter((task) => task.project?.name === projectData?.name)
-    : tasks;
+ const tasksFromProject = projectData
+  ? tasks.filter((task) => task.project?.name === projectData?.name)
+  : Array.isArray(tasks) ? tasks : [];
+
 
   return (
     <div className="container-fluid">
@@ -178,8 +179,9 @@ export default function Projects() {
               </thead>
               <tbody>
                 {tasksFromProject
-                  ? tasksFromProject.map((task, index) => (
-                      <tr key={index}>
+                  ?Array.isArray(tasksFromProject) &&
+  tasksFromProject.map((task, index) => (
+    <tr key={index}>
                         <th scope="row container">{task.name}</th>{" "}
                         <td>
                           {task.owners.map((owner, index) => (
