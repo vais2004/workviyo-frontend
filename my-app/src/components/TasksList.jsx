@@ -82,14 +82,14 @@ export default function TasksList() {
                 <p>
                   Owners:
                   {task.owners.map((owner, index) => (
-                    <span className="col-md-1 " key={index}>
+                    <span className="col-md-4 " key={index}>
                       <span
                         style={{
                           display: "inline-block",
-                          width: "30px",
+                          width: "100px",
                           height: "30px",
                           border: "1px solid white",
-                          borderRadius: "50%",
+                          borderRadius: "20%",
                           textAlign: "center",
                           lineHeight: "30px",
                           backgroundColor: "antiquewhite",
@@ -103,7 +103,7 @@ export default function TasksList() {
                     </span>
                   ))}
                 </p>
-                <p>Team:{task.team?.name}</p>
+                <p>Team: {task.team?.name}</p>
                 <div className="card-img-overlay p-1">
                   <span
                     className={`d-inline-block px-2 rounded ${

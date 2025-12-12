@@ -76,10 +76,10 @@ export default function AddTask() {
           project: projectName,
           team: teamName,
           timeToComplete: timeoutValue,
-          tags: tags.map((t) => t._id || t),
           owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
+          tags: tags.map((t) => t.name || t), // ← FIX HERE
         })
       );
       toast.success("Task Updated successfully!");
@@ -94,6 +94,7 @@ export default function AddTask() {
           owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
+          tags: tags.map((t) => t.name || t), // ← FIX HERE
         })
       );
       toast.success("New task created successfully!");
