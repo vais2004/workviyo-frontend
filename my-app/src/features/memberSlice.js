@@ -5,9 +5,12 @@ export const fetchMembersAsync = createAsyncThunk(
   "members/fetchMembersAsync",
   async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.get(`https://workviyo.vercel.app/members`, {
-      headers: { Authorization: `${token}` },
-    });
+    const response = await axios.get(
+      `https://workviyo-production.up.railway.app/members`,
+      {
+        headers: { Authorization: `${token}` },
+      }
+    );
     const data = response.data;
     return data;
   }
@@ -18,7 +21,7 @@ export const addMembersAsync = createAsyncThunk(
   async ({ name }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo.vercel.app/members`,
+      `https://workviyo-production.up.railway.app/members`,
       { name },
       { headers: { Authorization: `${token}` } }
     );
@@ -33,7 +36,7 @@ export const deleteMembersAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://workviyo.vercel.app/members/${id}`,
+      `https://workviyo-production.up.railway.app/members/${id}`,
       {
         headers: {
           Authorization: `${token}`,

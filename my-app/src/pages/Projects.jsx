@@ -48,10 +48,11 @@ export default function Projects() {
 
   const projectData = projects.find((project) => project._id === projectId);
 
- const tasksFromProject = projectData
-  ? tasks.filter((task) => task.project?.name === projectData?.name)
-  : Array.isArray(tasks) ? tasks : [];
-
+  const tasksFromProject = projectData
+    ? tasks.filter((task) => task.project?.name === projectData?.name)
+    : Array.isArray(tasks)
+    ? tasks
+    : [];
 
   return (
     <div className="container-fluid">
@@ -179,10 +180,10 @@ export default function Projects() {
               </thead>
               <tbody>
                 {tasksFromProject
-                  ?Array.isArray(tasksFromProject) &&
-  tasksFromProject.map((task, index) => (
-    <tr key={index}>
-                        <th scope="row container">{task.name}</th>{" "}
+                  ? Array.isArray(tasksFromProject) &&
+                    tasksFromProject.map((task, index) => (
+                      <tr key={index}>
+                        <th scope="row container">{task.name}</th>
                         <td>
                           {task.owners.map((owner, index) => (
                             <span
@@ -201,7 +202,7 @@ export default function Projects() {
 
                                 paddingBottom: "8px",
                               }}>
-                              {owner.name.charAt(0)}{" "}
+                              {owner.name.charAt(0)}
                             </span>
                           ))}
                         </td>
@@ -219,18 +220,19 @@ export default function Projects() {
                         </td>
                         <td>{task?.createdAt.split("T").slice(0, 1)}</td>
                         <td>
+                          <p className="d-grid gap-2 col-6 mx-auto text-center">
                           <span
                             className={
                               task.status === "Completed"
-                                ? "bg-success-subtle text-success-emphasis rounded fw-normal px-2 py-1"
+                                ? "bg-primary-subtle text-success-emphasis rounded fw-normal "
                                 : task.status === "Blocked"
-                                ? "bg-danger-subtle text-danger-emphasis rounded fw-normal px-2 py-1"
+                                ? "bg-danger-subtle text-danger-emphasis rounded fw-normal "
                                 : task.status === "In Progress"
-                                ? "bg-warning-subtle text-warning-emphasis fw-normal px-2 py-1"
-                                : "bg-body-tertiary rounded fw-normal px-2 py-1"
+                                ? "bg-info-subtle text-info-emphasis fw-normal "
+                                : "bg-warning-subtle text-warning-emphasis fw-normal "
                             }>
                             {task.status}
-                          </span>
+                          </span></p>
                         </td>
                       </tr>
                     ))

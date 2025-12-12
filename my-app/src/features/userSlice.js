@@ -10,11 +10,14 @@ export const fetchUserAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
 
-    const response = await axios.get(`https://workviyo.vercel.app/auth/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `https://workviyo-production.up.railway.app/auth/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const data = response.data;
     return data;
   }
@@ -24,7 +27,7 @@ export const registerUserAsync = createAsyncThunk(
   "users/registerUserAsync",
   async (credentials) => {
     const response = await axios.post(
-      `https://workviyo.vercel.app/auth/signup`,
+      `https://workviyo-production.up.railway.app/auth/signup`,
       credentials,
       {
         headers: { "Content-Type": "application/json" },
@@ -41,7 +44,7 @@ export const userLoginAsync = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axios.post(
-        `https://workviyo.vercel.app/auth/login`,
+        `https://workviyo-production.up.railway.app/auth/login`,
         credentials
       );
       console.log("Login response: ", response.data);

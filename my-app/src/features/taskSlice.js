@@ -12,7 +12,7 @@ export const fetchTasksAsync = createAsyncThunk(
 
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `https://workviyo.vercel.app/tasks?${queryParams.toString()}`,
+      `https://workviyo-production.up.railway.app/tasks?${queryParams.toString()}`,
       { headers: { Authorization: `${token}` } }
     );
     const data = response.data;
@@ -34,7 +34,7 @@ export const addTaskAsync = createAsyncThunk(
   }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo.vercel.app/tasks`,
+      `https://workviyo-production.up.railway.app/tasks`,
       { name, project, team, timeToComplete, tags, owners, priority, status },
       {
         headers: {
@@ -62,7 +62,7 @@ export const updateTaskAsync = createAsyncThunk(
   }) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `https://workviyo.vercel.app/tasks/${id}`,
+      `https://workviyo-production.up.railway.app/tasks/${id}`,
       { name, project, team, timeToComplete, tags, owners, priority, status },
       { headers: { Authorization: `${token}` } }
     );
@@ -76,7 +76,7 @@ export const deleteTaskAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://workviyo.vercel.app/tasks/${id}`,
+      `https://workviyo-production.up.railway.app/tasks/${id}`,
       {
         headers: { Authorization: `${token}` },
       }

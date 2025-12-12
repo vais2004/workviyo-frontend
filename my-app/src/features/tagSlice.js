@@ -5,9 +5,12 @@ export const fetchTagsAsync = createAsyncThunk(
   "tags/fetchTagsAsync",
   async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.get(`https://workviyo.vercel.app/tags`, {
-      headers: { Authorization: `${token}` },
-    });
+    const response = await axios.get(
+      `https://workviyo-production.up.railway.app/tags`,
+      {
+        headers: { Authorization: `${token}` },
+      }
+    );
     const data = response.data;
     return data;
   }
@@ -18,7 +21,7 @@ export const addTagsAsync = createAsyncThunk(
   async (newTag) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo.vercel.app/tags`,
+      `https://workviyo-production.up.railway.app/tags`,
       newTag,
       { headers: { Authorization: `${token}` } }
     );
