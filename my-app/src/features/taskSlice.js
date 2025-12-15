@@ -114,7 +114,7 @@ export const taskSlice = createSlice({
     });
     builder.addCase(addTaskAsync.fulfilled, (state, action) => {
       state.status = "Added tasks";
-      state.tasks = action.payload;
+      state.tasks.push(action.payload);
     });
     builder.addCase(addTaskAsync.rejected, (state, action) => {
       state.status = "error";
@@ -126,7 +126,9 @@ export const taskSlice = createSlice({
     });
     builder.addCase(updateTaskAsync.fulfilled, (state, action) => {
       state.status = "Updated tasks";
-      state.tasks = action.payload;
+      state.tasks = state.tasks.map((task) =>
+        task._id === action.payload._id ? action.payload : task
+      );
     });
     builder.addCase(updateTaskAsync.rejected, (state, action) => {
       state.status = "error";

@@ -23,7 +23,8 @@ export default function TeamDetail() {
     dispatch(fetchMembersAsync());
   }, [dispatch]);
 
-  const teamData = teams?.find((team) => team._id === teamId);
+  const teamList = Array.isArray(teams) ? teams : [teams];
+  const teamData = teamList.find((team) => team?._id === teamId);
 
   console.log(teamData);
 
@@ -142,14 +143,13 @@ export default function TeamDetail() {
                     </p>
                     {member.name}
                   </div>
-                  {/* <div className="col-md-4">
+                  <div className="col-md-4">
                     <button
                       className="btn btn-outline-danger btn-sm"
-                      onClick={() => handleRemoveMember(member._id)}
-                    >
-                      Delete
+                      onClick={() => handleRemoveMember(member._id)}>
+                      Remove Member
                     </button>
-                  </div> */}
+                  </div>
                 </div>
               ))}
             </div>
@@ -166,7 +166,7 @@ export default function TeamDetail() {
               </button>
             </div>
             <div className="col-auto">
-              <div className="input-group w-75 mt-1">
+              <div className="input-group w-80 mt-1">
                 <input
                   className="form-control"
                   type="text"

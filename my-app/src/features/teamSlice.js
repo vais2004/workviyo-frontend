@@ -110,7 +110,9 @@ export const teamSlice = createSlice({
     });
     builder.addCase(updateTeamAsync.fulfilled, (state, action) => {
       state.status = "updated teams";
-      state.teams = action.payload;
+      state.teams = state.teams.map((team) =>
+        team._id === action.payload._id ? action.payload : team
+      );
       console.log(action.payload, "payload");
     });
     builder.addCase(updateTeamAsync.rejected, (state, action) => {
