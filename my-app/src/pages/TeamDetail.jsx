@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function TeamDetail() {
   const [newName, setNewName] = useState("");
-  const teamId = useParams();
+  const { teamId } = useParams();
   const dispatch = useDispatch();
   const { teams } = useSelector((state) => state.teams);
   const { members } = useSelector((state) => state.members);
@@ -23,16 +23,17 @@ export default function TeamDetail() {
     dispatch(fetchMembersAsync());
   }, [dispatch]);
 
-  const teamData = teams?.find((team) => team._id == teamId.teamId);
+  const teamData = teams?.find((team) => team._id === teamId);
+
   console.log(teamData);
 
   useEffect(() => {
     dispatch(fetchTeamsAsync());
-  }, []);
+  }, [dispatch]);
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     try {
-      dispatch(addMembersAsync({ name: newName })).unwrap();
+      await dispatch(addMembersAsync({ name: newName })).unwrap();
       setNewName("");
       toast.success("Member created");
       dispatch(fetchMembersAsync());
@@ -58,9 +59,10 @@ export default function TeamDetail() {
           id: teamData._id,
           updateTeam: { members: updatedMembers },
         })
-      );
-      window.location.reload();
+      ).unwrap();
+      //window.location.reload();
       toast.success("Member deleted successfully.");
+      dispatch(fetchTeamsAsync());
     } catch (error) {
       console.log("Error:", error);
     }
@@ -117,7 +119,7 @@ export default function TeamDetail() {
             <div className="p-4">
               <h3>{teamData?.name}</h3>
               <h4 className="fw-normal fs-5 text-light-gray">MEMBERS</h4>
-              {teamData?.members.map((member, index) => (
+              {teamData?.members?.map((member, index) => (
                 <div className="pb-1 row" key={index}>
                   <div className="col-md-4">
                     {" "}
