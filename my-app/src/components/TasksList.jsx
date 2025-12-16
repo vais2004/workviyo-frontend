@@ -41,7 +41,7 @@ export default function TasksList() {
       </div>
       <div className="col-md-5">
         <select className="form-select mb-3">
-          <option value=""></option>
+          <option value="">---Select Status---</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
           <option value="To Do">To Do</option>
@@ -80,23 +80,16 @@ export default function TasksList() {
                 <h5 className="mb-3">{task.name}</h5>
                 <p>Due Date:{task.timeToComplete}</p>
                 <p>
-                  Owners:
+                  Owners: {" "}
                   {task.owners.map((owner, index) => (
                     <span className="col-md-4 " key={index}>
                       <span
+                        className="d-inline-flex align-items-center justify-content-center
+                 border rounded-pill px-3 me-n2"
                         style={{
-                          display: "inline-block",
-                          width: "100px",
-                          height: "30px",
-                          border: "1px solid white",
-                          borderRadius: "20%",
-                          textAlign: "center",
-                          lineHeight: "30px",
                           backgroundColor: "antiquewhite",
-                          color: "brown",
-                          zIndex: 1,
-                          paddingBottom: "8px",
-                          marginRight: "-10px",
+                          minWidth: "80px",
+                          height: "30px",
                         }}>
                         {owner.name}
                       </span>{" "}
@@ -106,7 +99,7 @@ export default function TasksList() {
                 <p>Team: {task.team?.name}</p>
                 <div className="card-img-overlay p-1">
                   <span
-                    className={`d-inline-block px-2 rounded ${
+                    className={`d-inline-block px-3 rounded ${
                       task.status === "Blocked"
                         ? "text-bg-danger"
                         : task.status === "Completed"

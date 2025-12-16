@@ -99,10 +99,11 @@ export default function Projects() {
               {projectData?.name || "Projects view"}
             </span>
 
-            <p>
+            <p className="text-muted">
               {projectData?.description ||
                 "Displaying: tasks, owners, priority, due dates,status"}
             </p>
+            <hr/>
           </section>
           <section className="row pb-3 px-1">
             <span className="col-auto">
@@ -206,33 +207,36 @@ export default function Projects() {
                             </span>
                           ))}
                         </td>
-                        <td
-                          className={
-                            task.priority === "High"
-                              ? "bg-danger-subtle text-danger-emphasis rounded-pill fw-normal px-2 py-1"
-                              : task.priority === "Medium"
-                              ? "bg-emphasise-purple-text-purple rounded-pill fw-normal px-2 py-1"
-                              : "bg-body-tertiary rounded-pill fw-normal px-2 py-1"
-                          }>
-                          <span>
-                            {task.priority ? task.priority : "Medium"}
+                        <td>
+                          <span
+                            style={{
+                              backgroundColor:
+                                task.priority === "High"
+                                  ? "#e6d1fcff"
+                                  : task.priority === "Medium"
+                                  ? "#d3ecfcff"
+                                  : "#dbdee2ff",
+                            }}
+                            className="rounded-pill fw-normal px-3 py-1 ">
+                            {task.priority}
                           </span>
                         </td>
                         <td>{task?.createdAt.split("T").slice(0, 1)}</td>
                         <td>
                           <p className="d-grid gap-2 col-6 mx-auto text-center">
-                          <span
-                            className={
-                              task.status === "Completed"
-                                ? "bg-primary-subtle text-success-emphasis rounded fw-normal "
-                                : task.status === "Blocked"
-                                ? "bg-danger-subtle text-danger-emphasis rounded fw-normal "
-                                : task.status === "In Progress"
-                                ? "bg-info-subtle text-info-emphasis fw-normal "
-                                : "bg-warning-subtle text-warning-emphasis fw-normal "
-                            }>
-                            {task.status}
-                          </span></p>
+                            <span
+                              className={
+                                task.status === "Completed"
+                                  ? "bg-primary-subtle text-success-emphasis rounded fw-normal "
+                                  : task.status === "Blocked"
+                                  ? "bg-danger-subtle text-danger-emphasis rounded fw-normal "
+                                  : task.status === "In Progress"
+                                  ? "bg-info-subtle text-info-emphasis fw-normal "
+                                  : "bg-warning-subtle text-warning-emphasis fw-normal "
+                              }>
+                              {task.status}
+                            </span>
+                          </p>
                         </td>
                       </tr>
                     ))

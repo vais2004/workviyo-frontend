@@ -1,0 +1,177 @@
+import React, { useEffect, useMemo } from "react";
+import SideNav from "../components/SideNav";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTasksAsync } from "../features/taskSlice";
+import moment from "moment";
+
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+const PIE_COLORS = ["#f4a261", "#e9c46a", "#2a9d8f", "#8ab17d"];
+const BAR_COLOR_1 = "#cdb4db";
+const BAR_COLOR_2 = "#ffb703";
+
+export default function Reports() {
+  const dispatch = useDispatch();
+  const { tasks, status } = useSelector((state) => state.tasks);
+
+  useEffect(() => {
+    dispatch(fetchTasksAsync());
+  }, [dispatch]);
+
+  /* -------------------- PIE: Tasks Closed by Team -------------------- */
+  const closedTasksByTeam = useMemo(() => {
+    const completed = tasks?.filter((t) => t.status === "Completed") || [];
+    const grouped = completed.reduce((acc, curr) => {
+      const teamName = curr.team?.name || "Unknown";
+      acc[teamName] = (acc[teamName] || 0) + 1;
+      return acc;
+    }, {});
+    return Object.entries(grouped).map(([name, value]) => ({
+      name,
+      value,
+    }));
+  }, [tasks]);
+
+  /* -------------------- BAR: Work Done Last Week -------------------- */
+  const workDoneLastWeek = useMemo(() => {
+    const filtered =
+      tasks?.filter(
+        (task) =>
+          task.status === "Completed" &&
+          moment(task.updatedAt).isAfter(moment().subtract(7, "days"))
+      ) || [];
+
+    const grouped = filtered.reduce((acc, curr) => {
+      const project = curr.project?.name || "Unknown";
+      acc[project] = (acc[project] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(grouped).map(([project, tasks]) => ({
+      project,
+      tasks,
+    }));
+  }, [tasks]);
+
+  /* -------------------- BAR: Pending Work -------------------- */
+  const pendingWork = useMemo(() => {
+    const pending =
+      tasks?.filter(
+        (task) => task.status === "To Do" || task.status === "Blocked"
+      ) || [];
+
+    const grouped = pending.reduce((acc, curr) => {
+      const project = curr.project?.name || "Unknown";
+      acc[project] = (acc[project] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(grouped).map(([project, tasks]) => ({
+      project,
+      tasks,
+    }));
+  }, [tasks]);
+
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        {/* Sidebar */}
+        <div className="col-md-3 col-lg-2 d-none d-md-block p-0">
+          <SideNav />
+        </div>
+
+        {/* Main Content */}
+        <div className="col-12 col-md-9 col-lg-10 p-4">
+          <h2 className="fw-bold mb-4">Reports</h2>
+
+          {/* ---------------- PIE CHART ---------------- */}
+          <section className="shadow p-3 mb-4 bg-white rounded">
+            <h5 className="text-center mb-3">
+              Tasks Closed by Team
+            </h5>
+
+            {status === "Loading" ? (
+              <p className="text-center">Loading...</p>
+            ) : (
+              <div style={{ width: "100%", height: 350 }}>
+                <ResponsiveContainer>
+                  <PieChart>
+                    <Tooltip />
+                    <Legend />
+                    <Pie
+                      data={closedTasksByTeam}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      label
+                    >
+                      {closedTasksByTeam.map((_, index) => (
+                        <Cell
+                          key={index}
+                          fill={PIE_COLORS[index % PIE_COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </section>
+
+          {/* ---------------- BAR CHART: LAST WEEK ---------------- */}
+          <section className="shadow p-3 mb-4 bg-white rounded">
+            <h5 className="text-center mb-3">
+              Total Work Done Last Week
+            </h5>
+
+            <div style={{ width: "100%", height: 350 }}>
+              <ResponsiveContainer>
+                <BarChart data={workDoneLastWeek}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="project" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="tasks" fill={BAR_COLOR_1} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+
+          {/* ---------------- BAR CHART: PENDING ---------------- */}
+          <section className="shadow p-3 mb-4 bg-white rounded">
+            <h5 className="text-center mb-3">
+              Total Days of Work Pending
+            </h5>
+
+            <div style={{ width: "100%", height: 350 }}>
+              <ResponsiveContainer>
+                <BarChart data={pendingWork}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="project" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="tasks" fill={BAR_COLOR_2} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -91,27 +91,33 @@ export default function ProjectList({ search }) {
         {findProjectByQuery?.length > 0 &&
           findProjectByQuery?.map((project) => (
             <div className="col-md-4 py-3" key={project._id}>
-              <Link
-                style={{ textDecoration: "none" }}
-                to={`/projects/${project._id}`}>
-                <div className="card pt-5 p-3 bg-light border-0">
+              <Link style={{ textDecoration: "none" }}>
+                <div className="card pt-5 p-3 bg-light border-0 position-relative">
+                  {/* Status badge */}
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      backgroundColor:
+                        project.status === "Blocked"
+                          ? "#f7cce1ff" // soft plum
+                          : project.status === "Completed"
+                          ? "#c1f9b7ff" // soft gold
+                          : project.status === "To Do"
+                          ? "#f5cdb9ff" // coral-peach
+                          : "#aeedcfff", // lavender-charcoal
+
+                      padding: "4px 10px",
+                      borderRadius: "12px",
+                      fontSize: "12px",
+                      fontWeight: "500",
+                    }}>
+                    {project.status}
+                  </span>
+
                   <h5>{project.name}</h5>
                   <p>Description: {project.description}</p>
-                  <div className="card-img-overlay p-1">
-                    <span
-                      className={`d-inline-block px-2 rounded ${
-                        project.status === "Blocked"
-                          ? "text-bg-danger"
-                          : project.status === "Completed"
-                          ? "text-bg-primary"
-                          : project.status === "To Do"
-                          ? "text-bg-warning"
-                          : "text-bg-info"
-                      }`}
-                      style={{ width: "fit-content", minWidth: "auto" }}>
-                      {project.status}
-                    </span>
-                  </div>
                 </div>
               </Link>
             </div>

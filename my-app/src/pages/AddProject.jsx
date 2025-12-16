@@ -43,7 +43,7 @@ export default function AddProject() {
           status: status,
         })
       );
-      toast.success("Project Updated Successfullt!");
+      toast.success("Project Updated Successfull!");
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
@@ -55,7 +55,13 @@ export default function AddProject() {
           status: status,
         })
       );
-      toast.success("Project Created Successfullt!");
+      toast.success("Project Created Successfull!");
+
+      // ✅ CLEAR FORM FIELDS
+      setProjectName("");
+      setProjectDescription("");
+      setStatus("");
+
       setTimeout(() => {
         window.location.reload();
       }, 2000);
@@ -66,7 +72,7 @@ export default function AddProject() {
     <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
-          <h1 className="modal-title fs-5" id="projectModelLabel">
+          <h1 className="modal-title fs-4" id="projectModelLabel">
             {existing ? "Edit Project" : "Create New Project"}
           </h1>
           <button
@@ -80,7 +86,7 @@ export default function AddProject() {
           <form onSubmit={handleAddProject}>
             <div className="mb-3">
               <label htmlFor="name" className="col-form-label">
-                Project Name
+                Project Name:
               </label>
               <input
                 type="text"
@@ -92,7 +98,7 @@ export default function AddProject() {
             </div>
             <div className="mb-2">
               <label htmlFor="description" className="col-form-label">
-                Project Description
+                Project Description:
               </label>
               <textarea
                 className="form-control"
@@ -102,13 +108,13 @@ export default function AddProject() {
             </div>
             <div className="mb-3">
               <label htmlFor="status" className="col-form-label">
-                Status
+                Status:
               </label>
               <select
                 className="form-select"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}>
-                <option value="">---select---</option>
+                <option value="">---Select Status---</option>
                 <option value="To Do">To Do</option>
                 <option value="Completed">Completed</option>
                 <option value="Blocked">Blocked</option>

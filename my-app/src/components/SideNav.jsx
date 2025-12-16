@@ -8,13 +8,14 @@ export default function SideNav() {
   return (
     <div
       className="p-3 vh-100 d-flex flex-column align-items-center"
-      style={{ width: "230px", backgroundColor: "#f3f0ff" }}>
-      <h4>workviyo</h4>
+      style={{ width: "230px", backgroundColor: "#e9f5faff" }}>
+      <Link className="navbar-brand fs-1 fw-semibold" to="/dashboard"><h3>workviyo</h3>
+      </Link>
       <ul className="nav flex-column py-3">
         <li className="nav-item">
           <NavLink
             style={({ isActive }) => ({
-              color: isActive ? "#6818F1" : "#a6a4a4",
+              color: isActive ? "#464ff5ff" : "#a6a4a4",
             })}
             className="nav-link "
             to="/dashboard">
@@ -24,7 +25,7 @@ export default function SideNav() {
         <li className="nav-item mt-2">
           <NavLink
             style={({ isActive }) => ({
-              color: isActive ? "#6818F1" : "#a6a4a4",
+              color: isActive ? "#464ff5ff" : "#a6a4a4",
             })}
             className="nav-link "
             to="/projects">
@@ -34,7 +35,7 @@ export default function SideNav() {
         <li className="nav-item mt-2">
           <NavLink
             style={({ isActive }) => ({
-              color: isActive ? "#6818F1" : "#a6a4a4",
+              color: isActive ? "#464ff5ff" : "#a6a4a4",
             })}
             className="nav-link "
             to="/teams">
@@ -44,7 +45,7 @@ export default function SideNav() {
         <li className="nav-item mt-2">
           <NavLink
             style={({ isActive }) => ({
-              color: isActive ? "#6818F1" : "#a6a4a4",
+              color: isActive ? "#464ff5ff" : "#a6a4a4",
             })}
             className="nav-link "
             to="/reports">
@@ -54,7 +55,7 @@ export default function SideNav() {
         <li className="nav-item mt-2">
           <NavLink
             style={({ isActive }) => ({
-              color: isActive ? "#6818F1" : "#a6a4a4",
+              color: isActive ? "#464ff5ff" : "#a6a4a4",
             })}
             className="nav-link "
             to="/settings">

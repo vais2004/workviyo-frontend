@@ -141,7 +141,7 @@ export default function AddTask() {
                   className="form-select"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}>
-                  <option value="">---select---</option>
+                  <option value="">---Select Project---</option>
 
                   {projects?.length > 0 &&
                     projects.map((project) => (
@@ -180,7 +180,7 @@ export default function AddTask() {
                   className="form-select"
                   onChange={(e) => setTeam(e.target.value)}
                   value={teamName}>
-                  <option value="">---select---</option>
+                  <option value="">---Select Team---</option>
 
                   {teams?.length > 0 &&
                     teams.map((team) => (
@@ -203,7 +203,7 @@ export default function AddTask() {
                   className="form-select"
                   value={taskStatus}
                   onChange={(e) => setTaskStatus(e.target.value)}>
-                  <option value="Dropdown">Dropdown</option>
+                  <option value="">---Select Status---</option>
                   <option value="To Do">To Do</option>
                   <option value="Completed">Completed</option>
                   <option value="Blocked">Blocked</option>
@@ -222,7 +222,7 @@ export default function AddTask() {
                 <select
                   className="form-select"
                   onChange={(e) => setOwners([e.target.value])}>
-                  <option value="">Select owner</option>
+                  <option value="">---Select Owner---</option>
                   {members?.map((owner) => (
                     <option key={owner._id} value={owner._id}>
                       {owner.name}
@@ -296,7 +296,7 @@ export default function AddTask() {
                   className="form-select"
                   onChange={(e) => setPriority(e.target.value)}
                   value={priority}>
-                  <option value="">---select---</option>
+                  <option value="">---Select Priority---</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>

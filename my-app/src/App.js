@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import Projects from "./pages/Projects.jsx";
 import Teams from "./pages/Teams.jsx";
 import TeamDetail from "./pages/TeamDetail.jsx";
-import Reports from "./pages/Report/Reports.jsx";
+import Reports from "./pages/Reports.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Settings from "./pages/Settings.jsx";
