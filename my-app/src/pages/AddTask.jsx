@@ -47,11 +47,11 @@ export default function AddTask() {
 
   useEffect(() => {
     if (existing) {
-      setProjectName(existingTask.project || "");
+      setProjectName(existingTask.project?._id || "");
       setTaskName(existingTask.name || "");
-      setTeam(existingTask.team || "");
+      setTeam(existingTask.team?._id || "");
       setTimeoutValue(existingTask.timeToComplete || "");
-      setOwners(existingTask.owners || []);
+      setOwners(existingTask.owners?.map((o) => o._id) || []);
       setTags(existingTask.tags || []);
       setPriority(existingTask.priority || "");
       setTaskStatus(existingTask.status || "");
@@ -68,6 +68,17 @@ export default function AddTask() {
   const handleAddTask = (e) => {
     e.preventDefault();
 
+    if (
+      !taskName ||
+      !projectName ||
+      !teamName ||
+      owners.length === 0 ||
+      !timeoutValue
+    ) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+
     if (existing) {
       dispatch(
         updateTaskAsync({
@@ -75,11 +86,11 @@ export default function AddTask() {
           name: taskName,
           project: projectName,
           team: teamName,
-          timeToComplete: timeoutValue,
+          timeToComplete: Number(timeoutValue),
           owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
-          tags: tags.map((t) => t.name || t), // ← FIX HERE
+          tags: [],
         })
       );
       toast.success("Task Updated successfully!");
@@ -90,11 +101,11 @@ export default function AddTask() {
           name: taskName,
           project: projectName,
           team: teamName,
-          timeToComplete: timeoutValue,
+          timeToComplete: Number(timeoutValue),
           owners: owners.map((o) => o._id || o),
           priority: priority,
           status: taskStatus,
-          tags: tags.map((t) => t.name || t), // ← FIX HERE
+          tags: [],
         })
       );
       toast.success("New task created successfully!");
