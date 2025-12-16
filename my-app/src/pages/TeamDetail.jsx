@@ -140,7 +140,7 @@ export default function TeamDetail() {
                         paddingBottom: "8px",
                       }}>
                       {member.name.charAt(0)}
-                    </p>
+                    </p> {" "}
                     {member.name}
                   </div>
                   <div className="col-md-4">
@@ -158,22 +158,23 @@ export default function TeamDetail() {
             <div className="py-1 col-auto">
               <button
                 type="button"
-                className="btn btn-primary ms-auto me-2"
+                className="btn btn-outline-secondary ms-auto me-2"
                 data-bs-toggle="modal"
                 data-bs-target="#addNewMember"
                 data-bs-whatever="@mdo">
                 + Members
               </button>
             </div>
+            
             <div className="col-auto">
-              <div className="input-group w-80 mt-1">
+              <div className="input-group w-75 mt-1">
                 <input
                   className="form-control"
                   type="text"
                   placeholder="Add member name"
                   onChange={(e) => setNewName(e.target.value)}
                 />
-                <button className="btn btn-primary" onClick={handleAdd}>
+                <button className="btn btn-outline-primary" onClick={handleAdd}>
                   Add
                 </button>
               </div>

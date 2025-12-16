@@ -18,7 +18,23 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const PIE_COLORS = ["#f4a261", "#e9c46a", "#2a9d8f", "#8ab17d"];
+const PIE_COLORS = [
+  "#e76f51",
+  "#f1c27d",
+  "#cdb4db",
+  "#7ab05aff",
+  "#84a59d",
+  "#ffcdb2",
+  "#757539ff",
+  "#a6a67fff",
+  "#e5989b",
+  "#ffd166",
+  "#90dbf4",
+  "#a9def9",
+  "#b5838d",
+  "#dda15e",
+  "#588157",
+];
 const BAR_COLOR_1 = "#cdb4db";
 const BAR_COLOR_2 = "#ffb703";
 
@@ -98,9 +114,7 @@ export default function Reports() {
 
           {/* ---------------- PIE CHART ---------------- */}
           <section className="shadow p-3 mb-4 bg-white rounded">
-            <h5 className="text-center mb-3">
-              Tasks Closed by Team
-            </h5>
+            <h5 className="text-center mb-3">Tasks Closed by Team</h5>
 
             {status === "Loading" ? (
               <p className="text-center">Loading...</p>
@@ -116,8 +130,7 @@ export default function Reports() {
                       nameKey="name"
                       cx="50%"
                       cy="50%"
-                      label
-                    >
+                      label>
                       {closedTasksByTeam.map((_, index) => (
                         <Cell
                           key={index}
@@ -133,9 +146,7 @@ export default function Reports() {
 
           {/* ---------------- BAR CHART: LAST WEEK ---------------- */}
           <section className="shadow p-3 mb-4 bg-white rounded">
-            <h5 className="text-center mb-3">
-              Total Work Done Last Week
-            </h5>
+            <h5 className="text-center mb-3">Total Work Done Last Week</h5>
 
             <div style={{ width: "100%", height: 350 }}>
               <ResponsiveContainer>
@@ -153,9 +164,7 @@ export default function Reports() {
 
           {/* ---------------- BAR CHART: PENDING ---------------- */}
           <section className="shadow p-3 mb-4 bg-white rounded">
-            <h5 className="text-center mb-3">
-              Total Days of Work Pending
-            </h5>
+            <h5 className="text-center mb-3">Total Days of Work Pending</h5>
 
             <div style={{ width: "100%", height: 350 }}>
               <ResponsiveContainer>

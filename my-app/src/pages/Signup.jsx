@@ -30,8 +30,8 @@ export default function Signup() {
   };
 
   const guestLoginHandler = async () => {
-    const guestEmail = "vkawale2004@gmail.com";
-    const guestPassword = "vkawale2004";
+    const guestEmail = "vaishnavikawale3@gmail.com";
+    const guestPassword = "123456789";
 
     setEmail(guestEmail);
     setPassword(guestPassword);

@@ -40,7 +40,9 @@ export default function TasksList() {
         <h3>Tasks</h3>
       </div>
       <div className="col-md-5">
-        <select className="form-select mb-3">
+        <select
+          className="form-select mb-3"
+          onChange={(e) => handleFilterByStatus(e.target.value)}>
           <option value="">---Select Status---</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
@@ -80,7 +82,7 @@ export default function TasksList() {
                 <h5 className="mb-3">{task.name}</h5>
                 <p>Due Date:{task.timeToComplete}</p>
                 <p>
-                  Owners: {" "}
+                  Owners:{" "}
                   {task.owners.map((owner, index) => (
                     <span className="col-md-4 " key={index}>
                       <span
