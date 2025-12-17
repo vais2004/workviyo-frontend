@@ -90,6 +90,7 @@ export default function Login() {
           </div>
           <div className="d-grid mb-2">
             <button
+              type="button"
               className="btn btn-outline-secondary"
               onClick={handleGuestLogin}>
               Continue as Guest

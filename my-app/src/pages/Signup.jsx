@@ -30,8 +30,8 @@ export default function Signup() {
   };
 
   const guestLoginHandler = async () => {
-    const guestEmail = "vaishnavikawale3@gmail.com";
-    const guestPassword = "123456789";
+    const guestEmail = "guest1@example.com";
+    const guestPassword = "guest1";
 
     setEmail(guestEmail);
     setPassword(guestPassword);
@@ -93,6 +93,7 @@ export default function Signup() {
           </div>
           <div className="d-grid mb-2">
             <button
+              type="button"
               className="btn btn-outline-secondary"
               onClick={guestLoginHandler}>
               Continue as Guest
