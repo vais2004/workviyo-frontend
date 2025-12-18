@@ -133,7 +133,7 @@ export default function Settings() {
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
                             data-bs-toggle="modal"
-                            data-bs-target="#addNewProject"
+                            data-bs-target={`#addNewProject-${project._id}`}
                             data-bs-whatever="@mdo">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +166,7 @@ export default function Settings() {
                     </div>
                     <div
                       className="modal fade"
-                      id="addNewProject"
+                      id={`addNewProject-${project._id}`}
                       tabIndex="-1"
                       aria-labelledby="projectModelLabel"
                       aria-hidden="true">
@@ -193,7 +193,7 @@ export default function Settings() {
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
                             data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-bs-target={`#addNewTeam-${team._id}`}
                             data-bs-whatever="@mdo">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +226,7 @@ export default function Settings() {
                     </div>
                     <div
                       className="modal fade"
-                      id="exampleModal"
+                      id={`addNewTeam-${team._id}`}
                       tabIndex="-1"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
@@ -241,8 +241,7 @@ export default function Settings() {
                             <button
                               type="button"
                               className="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"></button>
+                              data-bs-dismiss="modal"></button>
                           </div>
                           <AddTeam teamId={team._id} />
                         </div>
@@ -270,7 +269,7 @@ export default function Settings() {
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
                             data-bs-toggle="modal"
-                            data-bs-target="#addNewTask"
+                            data-bs-target={`#addNewTask-${task._id}`}
                             data-bs-whatever="@mdo">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -303,7 +302,7 @@ export default function Settings() {
                     </div>
                     <div
                       className="modal fade"
-                      id="addNewTask"
+                      id={`addNewTask-${task._id}`}
                       tabIndex="-1"
                       aria-labelledby="taskModelLabel"
                       aria-hidden="true">

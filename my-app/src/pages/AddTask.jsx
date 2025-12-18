@@ -12,9 +12,9 @@ import { fetchMembersAsync } from "../features/memberSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function AddTask() {
-  const { taskId } = useParams();
-  console.log("taskId from params:", taskId);
+export default function AddTask({ taskId }) {
+  //const { taskId } = useParams();
+  //console.log("taskId from params:", taskId);
 
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
@@ -94,7 +94,7 @@ export default function AddTask() {
         })
       );
       toast.success("Task Updated successfully!");
-      document.querySelector("#addNewTask .btn-close").click();
+      document.querySelector(".btn-close").click();
     } else {
       dispatch(
         addTaskAsync({
@@ -109,7 +109,7 @@ export default function AddTask() {
         })
       );
       toast.success("New task created successfully!");
-      document.querySelector("#addNewTask .btn-close").click();
+      document.querySelector(".btn-close").click();
     }
   };
 

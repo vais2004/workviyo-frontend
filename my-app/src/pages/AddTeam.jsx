@@ -7,11 +7,24 @@ import {
 } from "../features/teamSlice";
 import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
 
-export default function AddTeam() {
+export default function AddTeam({ teamId }) {
   const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
   const { members } = useSelector((state) => state.members);
   const dispatch = useDispatch();
+  const { teams } = useSelector((state) => state.teams);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (teamId) {
+      const team = teams.find((t) => t._id === teamId);
+      if (team) {
+        setTeamName(team.name);
+        setSelectedMembers(team.members || []);
+        setInitialized(true);
+      }
+    }
+  }, [teamId, teams,initialized]);
 
   const selectMemberHandler = (event) => {
     const { checked, value } = event.target;
@@ -26,17 +39,27 @@ export default function AddTeam() {
   const handleAddTeam = (e) => {
     e.preventDefault();
 
-    dispatch(
-      addTeamsAsync({
-        name: teamName,
-        members: selectedMembers,
-      })
-    );
+    if (teamId) {
+      dispatch(
+        updateTeamAsync({
+          id: teamId,
+          name: teamName,
+          members: selectedMembers,
+        })
+      );
+    } else {
+      dispatch(
+        addTeamsAsync({
+          name: teamName,
+          members: selectedMembers,
+        })
+      );
+    }
+
     setTeamName("");
     setSelectedMembers([]);
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+
+    document.querySelector(".btn-close").click();
   };
 
   useEffect(() => {
