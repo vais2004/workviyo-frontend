@@ -43,7 +43,7 @@ export default function TasksList() {
         <select
           className="form-select mb-3"
           onChange={(e) => handleFilterByStatus(e.target.value)}>
-          <option value="">---Select Status---</option>
+          <option value="">---Filter Tasks By Status---</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
           <option value="To Do">To Do</option>

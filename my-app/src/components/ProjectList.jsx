@@ -62,7 +62,7 @@ export default function ProjectList({ search }) {
           onChange={(e) => filterByStatus(e.target.value)}
           value={projectStatus}
           className="form-select mx-3">
-          <option value="">Filter</option>
+          <option value="">---Filter Projects By Status---</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
           <option value="To Do">To Do</option>
