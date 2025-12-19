@@ -6,14 +6,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddProject({ projectId }) {
-  // const { projectId } = useParams();
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  //console.log("projectId from params:", projectId);
 
   const { projects } = useSelector((state) => state.projects);
 

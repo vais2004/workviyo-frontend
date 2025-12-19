@@ -46,7 +46,7 @@ export default function Reports() {
     dispatch(fetchTasksAsync());
   }, [dispatch]);
 
-  /* -------------------- PIE: Tasks Closed by Team -------------------- */
+  //PIE chart for tasks closed by team
   const closedTasksByTeam = useMemo(() => {
     const completed = tasks?.filter((t) => t.status === "Completed") || [];
     const grouped = completed.reduce((acc, curr) => {
@@ -60,7 +60,7 @@ export default function Reports() {
     }));
   }, [tasks]);
 
-  /* -------------------- BAR: Work Done Last Week -------------------- */
+  // BAR chart for work done last week
   const workDoneLastWeek = useMemo(() => {
     const filtered =
       tasks?.filter(
@@ -81,7 +81,7 @@ export default function Reports() {
     }));
   }, [tasks]);
 
-  /* -------------------- BAR: Pending Work -------------------- */
+  //BAR chart for pending work
   const pendingWork = useMemo(() => {
     const pending =
       tasks?.filter(
@@ -103,16 +103,14 @@ export default function Reports() {
   return (
     <div className="container-fluid">
       <div className="row">
-        {/* Sidebar */}
         <div className="col-md-3 col-lg-2 d-none d-md-block p-0">
           <SideNav />
         </div>
 
-        {/* Main Content */}
         <div className="col-12 col-md-9 col-lg-10 p-4">
           <h2 className="fw-bold mb-4">Reports</h2>
 
-          {/* ---------------- PIE CHART ---------------- */}
+          {/* PIE chart */}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Tasks Closed by Team</h5>
 
@@ -144,7 +142,7 @@ export default function Reports() {
             )}
           </section>
 
-          {/* ---------------- BAR CHART: LAST WEEK ---------------- */}
+          {/*BAR chart LAST WEEK*/}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Total Work Done Last Week</h5>
 
@@ -162,7 +160,7 @@ export default function Reports() {
             </div>
           </section>
 
-          {/* ---------------- BAR CHART: PENDING ---------------- */}
+          {/*BAR chart: PENDING*/}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Total Days of Work Pending</h5>
 
