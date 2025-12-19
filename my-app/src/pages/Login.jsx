@@ -34,15 +34,6 @@ export default function Login() {
         userLoginAsync({ email: guestEmail, password: guestPassword })
       ).unwrap();
 
-      // const guestEmail = "guest1@example.com";
-      // const guestPassword = "guest1";
-
-      // setEmail(guestEmail);
-      // setPassword(guestPassword);
-
-      // console.log(email, password);
-
-      // await dispatch(userLoginAsync({ email, password })).unwrap();
       toast.success("Login successful!");
       navigate("/dashboard");
     } catch (error) {

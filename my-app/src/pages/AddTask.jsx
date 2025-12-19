@@ -13,9 +13,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTask({ taskId }) {
-  //const { taskId } = useParams();
-  //console.log("taskId from params:", taskId);
-
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [teamName, setTeam] = useState("");
