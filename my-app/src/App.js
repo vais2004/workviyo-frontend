@@ -11,6 +11,7 @@ import Settings from "./pages/Settings.jsx";
 import AddTask from "./pages/AddTask.jsx";
 import AddProject from "./pages/AddProject.jsx";
 import AddTeam from "./pages/AddTeam.jsx";
+import ProjectDetails from "./pages/ProjectDetails.jsx";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/addTeam" element={<AddTeam />} />
         <Route path="/addTeam/:teamId" element={<AddTeam />} />
+        <Route path="/projectDetails/:projectId" element={<ProjectDetails />} />
       </Routes>
     </>
   );

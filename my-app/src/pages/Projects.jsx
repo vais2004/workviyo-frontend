@@ -99,54 +99,56 @@ export default function Projects() {
               {projectData?.name || "Projects view"}
             </span>
 
-            <p className="text-muted">
-              {projectData?.description ||
-                "Displaying: tasks, owners, priority, due dates,status"}
+            <p>
+              <small style={{color:'#999898ff'}} >
+                {projectData?.description ||
+                  "Displaying: tasks, owners, priority, due dates,status"}
+              </small>
             </p>
-            <hr/>
+            <hr />
           </section>
           <section className="row pb-3 px-1">
-            <span className="col-auto">
+            <span className="col-auto mb-1">
               <button
                 className="btn border "
                 onClick={() => taskFilters("prioritySort", "Low-High")}>
                 Low-High Priority
               </button>
             </span>
-            <span className="col-auto">
+            <span className="col-auto mb-1">
               <button
                 className="btn border "
                 onClick={() => taskFilters("prioritySort", "High-Low")}>
                 High-Low Priority
               </button>
             </span>
-            <span className="col-auto">
+            <span className="col-auto mb-1">
               <button
                 className="btn border "
                 onClick={() => taskFilters("dateSort", "Newest-Oldest")}>
                 Newest First
               </button>
             </span>
-            <span className="col-auto">
+            <span className="col-auto mb-1">
               <button
                 className="btn border "
                 onClick={() => taskFilters("dateSort", "Oldest-Newest")}>
                 Oldest First
               </button>
             </span>
-            <span className="col-auto  ">
+            <span className="col-auto mb-1">
               <select
                 value={taskStatus}
                 onChange={(e) => filterByStatus(e.target.value)}
-                className="form-select mt-1 ">
-                <option value="">Filter</option>
+                className="form-select">
+                <option value="">---Filter by Status---</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
                 <option value="To Do">To Do</option>
                 <option value="Blocked">Blocked</option>
               </select>
             </span>
-            <span className="col-auto  ">
+            <span className="col-auto mb-1">
               <button
                 type="button"
                 className="btn btn-primary mt-1"
