@@ -12,7 +12,7 @@ export default function Projects() {
   const dispatch = useDispatch();
 
   const { projects = [] } = useSelector((state) => state.projects);
-  const { tasks = [] } = useSelector((state) => state.tasks);
+  const { tasks = [], status } = useSelector((state) => state.tasks);
 
   const taskStatus = searchParams.get("taskStatus") || "";
   const prioritySort = searchParams.get("prioritySort") || "";
@@ -170,8 +170,13 @@ export default function Projects() {
               </button>
             </span>
           </section>
-
           <section className="pb-3 pe-2">
+            {status === "Loading" && (
+              <div className="alert alert-info py-2 text-center">
+                Loading tasks...
+              </div>
+            )}
+
             <table className="table">
               <thead>
                 <tr>
@@ -217,7 +222,6 @@ export default function Projects() {
                                 backgroundColor: "antiquewhite",
                                 color: "brown",
                                 zIndex: 1,
-
                                 paddingBottom: "8px",
                               }}>
                               {owner.name.charAt(0)}
