@@ -11,7 +11,7 @@ export const fetchUserAsync = createAsyncThunk(
     const token = localStorage.getItem("token");
 
     const response = await axios.get(
-      `https://workviyo-production.up.railway.app/auth/me`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/me`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ export const registerUserAsync = createAsyncThunk(
   "users/registerUserAsync",
   async (credentials) => {
     const response = await axios.post(
-      `https://workviyo-production.up.railway.app/auth/signup`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/signup`,
       credentials,
       {
         headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ export const userLoginAsync = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axios.post(
-        `https://workviyo-production.up.railway.app/auth/login`,
+        `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/login`,
         credentials
       );
       console.log("Login response: ", response.data);

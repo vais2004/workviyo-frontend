@@ -73,7 +73,7 @@ export default function ProjectList({ search }) {
       <div className="col-md-3">
         <button
           type="button"
-          className="btn btn-primary float-end ms-auto me-2"
+          className="btn btn-outline-primary float-end ms-auto me-2"
           data-bs-toggle="modal"
           data-bs-target="#addNewProject"
           data-bs-whatever="@mdo">
@@ -91,7 +91,9 @@ export default function ProjectList({ search }) {
         {findProjectByQuery?.length > 0 &&
           findProjectByQuery?.map((project) => (
             <div className="col-md-4 py-3" key={project._id}>
-              <Link style={{ textDecoration: "none" }}>
+              <Link
+                to={`/projectDetails/${project._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}>
                 <div className="card pt-5 p-3 bg-light border-0 position-relative">
                   {/* Status badge */}
                   <span

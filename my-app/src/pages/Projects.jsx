@@ -54,6 +54,17 @@ export default function Projects() {
     ? tasks
     : [];
 
+  const dueDate = (createdAt, timeToComplete) => {
+    const created = new Date(createdAt);
+    const due = new Date(created);
+    due.setDate(due.getDate() + Number(timeToComplete));
+    return due;
+  };
+
+  const isOverdue = (task) => {
+    return new Date() > dueDate(task.createdAt, task.timeToComplete);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -100,7 +111,7 @@ export default function Projects() {
             </span>
 
             <p>
-              <small style={{color:'#999898ff'}} >
+              <small style={{ color: "#999898ff" }}>
                 {projectData?.description ||
                   "Displaying: tasks, owners, priority, due dates,status"}
               </small>
@@ -151,7 +162,7 @@ export default function Projects() {
             <span className="col-auto mb-1">
               <button
                 type="button"
-                className="btn btn-primary mt-1"
+                className="btn btn-outline-primary mt-1"
                 data-bs-toggle="modal"
                 data-bs-target="#addNewTask"
                 data-bs-whatever="@mdo">
@@ -161,7 +172,7 @@ export default function Projects() {
           </section>
 
           <section className="pb-3 pe-2">
-            <table className="table border rounded-2">
+            <table className="table">
               <thead>
                 <tr>
                   <th className="table-light" scope="col">
@@ -174,8 +185,12 @@ export default function Projects() {
                     Priority
                   </th>
                   <th className="table-light" scope="col">
+                    Created On
+                  </th>
+                  <th className="table-light" scope="col">
                     Due On
                   </th>
+
                   <th className="table-light" scope="col">
                     Status
                   </th>
@@ -223,7 +238,20 @@ export default function Projects() {
                             {task.priority}
                           </span>
                         </td>
-                        <td>{task?.createdAt.split("T").slice(0, 1)}</td>
+
+                        <td>{new Date(task.createdAt).toLocaleDateString()}</td>
+                        <td>
+                          <span
+                            className={
+                              isOverdue(task) ? "text-danger fw-bold" : ""
+                            }>
+                            {dueDate(
+                              task.createdAt,
+                              task.timeToComplete
+                            ).toLocaleDateString()}
+                          </span>
+                        </td>
+
                         <td>
                           <p className="d-grid gap-2 col-6 mx-auto text-center">
                             <span

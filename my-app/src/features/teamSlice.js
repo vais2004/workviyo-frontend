@@ -6,7 +6,7 @@ export const fetchTeamsAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `https://workviyo-production.up.railway.app/teams`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
       {
         headers: {
           Authorization: `${token}`,
@@ -24,7 +24,7 @@ export const addTeamsAsync = createAsyncThunk(
     console.log({ name, members });
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo-production.up.railway.app/teams`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
       { name, members },
       { headers: { Authorization: `${token}` } }
     );
@@ -39,7 +39,7 @@ export const updateTeamAsync = createAsyncThunk(
   async ({ id, name, members }) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `https://workviyo-production.up.railway.app/teams/${id}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       { name, members },
       {
         headers: {
@@ -57,7 +57,7 @@ export const deleteTeamAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://workviyo-production.up.railway.app/teams/${id}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       {
         headers: {
           Authorization: `${token}`,

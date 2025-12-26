@@ -10,7 +10,7 @@ export const fetchProjectsAsync = createAsyncThunk(
 
     if (projectStatus) queryParams.append("status", projectStatus);
     const response = await axios.get(
-      `https://workviyo-production.up.railway.app/projects?${queryParams.toString()}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects?${queryParams.toString()}`,
       {
         headers: {
           Authorization: `${token}`,
@@ -27,7 +27,7 @@ export const addProjectAsync = createAsyncThunk(
   async ({ name, description, status }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo-production.up.railway.app/projects`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects`,
       { name, description, status },
       {
         headers: {
@@ -45,7 +45,7 @@ export const updateProjectAsync = createAsyncThunk(
   async ({ id, name, description, status }) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `https://workviyo-production.up.railway.app/projects/${id}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
       { name, description, status },
       { headers: { Authorization: `${token}` } }
     );
@@ -60,7 +60,7 @@ export const deleteProjectAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://workviyo-production.up.railway.app/projects/${id}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
       {
         headers: {
           Authorization: `${token}`,

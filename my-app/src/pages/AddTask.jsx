@@ -301,7 +301,7 @@ export default function AddTask({ taskId }) {
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-primary mx-1 float-end">
+              <button className="btn btn-outline-primary mx-1 float-end">
                 {existing ? "Update" : "Create"}
               </button>
             </div>

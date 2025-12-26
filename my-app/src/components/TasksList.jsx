@@ -53,7 +53,7 @@ export default function TasksList() {
       <div className="col-md-3">
         <button
           type="button"
-          className="btn btn-primary float-end ms-auto me-2"
+          className="btn btn-outline-primary float-end ms-auto me-2"
           data-bs-toggle="modal"
           data-bs-target="#addNewTask"
           data-bs-whatever="@mdo">
@@ -79,8 +79,8 @@ export default function TasksList() {
               <div
                 className="card pt-5 p-3 bg-light border-0"
                 style={{ width: "330px", height: "200px" }}>
-                <h5 className="mb-3">{task.name}</h5>
-                <p>Due Date:{task.timeToComplete}</p>
+                <h5 className="mb-3"> {task.name}</h5>
+                <p>Time to Complete: {task.timeToComplete}</p>
                 <p>
                   Owners:{" "}
                   {task.owners.map((owner, index) => (

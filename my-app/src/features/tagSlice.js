@@ -6,7 +6,7 @@ export const fetchTagsAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `https://workviyo-production.up.railway.app/tags`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tags`,
       {
         headers: { Authorization: `${token}` },
       }
@@ -21,7 +21,7 @@ export const addTagsAsync = createAsyncThunk(
   async (newTag) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo-production.up.railway.app/tags`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tags`,
       newTag,
       { headers: { Authorization: `${token}` } }
     );

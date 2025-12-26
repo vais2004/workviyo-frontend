@@ -6,7 +6,7 @@ export const fetchMembersAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `https://workviyo-production.up.railway.app/members`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members`,
       {
         headers: { Authorization: `${token}` },
       }
@@ -21,7 +21,7 @@ export const addMembersAsync = createAsyncThunk(
   async ({ name }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://workviyo-production.up.railway.app/members`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members`,
       { name },
       { headers: { Authorization: `${token}` } }
     );
@@ -36,7 +36,7 @@ export const deleteMembersAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://workviyo-production.up.railway.app/members/${id}`,
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members/${id}`,
       {
         headers: {
           Authorization: `${token}`,
