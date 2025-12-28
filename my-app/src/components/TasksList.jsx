@@ -76,45 +76,47 @@ export default function TasksList() {
         {findTaskByQuery?.length > 0 &&
           findTaskByQuery?.map((task, index) => (
             <div className="col-md-4 py-2" key={index}>
-              <div
-                className="card pt-5 p-3 bg-light border-0"
-                style={{ width: "330px", height: "200px" }}>
-                <h5 className="mb-3"> {task.name}</h5>
-                <p>Time to Complete: {task.timeToComplete}</p>
-                <p>
-                  Owners:{" "}
-                  {task.owners.map((owner, index) => (
-                    <span className="col-md-4 " key={index}>
-                      <span
-                        className="d-inline-flex align-items-center justify-content-center
+              <Link to={`/tasks/${task._id}`} className="text-decoration-none">
+                <div
+                  className="card pt-5 p-3 bg-light border-0"
+                  style={{ width: "330px", height: "200px" }}>
+                  <h5 className="mb-3"> {task.name}</h5>
+                  <p>Time to Complete: {task.timeToComplete}</p>
+                  <p>
+                    Owners:{" "}
+                    {task.owners.map((owner, index) => (
+                      <span className="col-md-4 " key={index}>
+                        <span
+                          className="d-inline-flex align-items-center justify-content-center
                  border rounded-pill px-3 me-n2"
-                        style={{
-                          backgroundColor: "antiquewhite",
-                          minWidth: "80px",
-                          height: "30px",
-                        }}>
-                        {owner.name}
-                      </span>{" "}
+                          style={{
+                            backgroundColor: "antiquewhite",
+                            minWidth: "80px",
+                            height: "30px",
+                          }}>
+                          {owner.name}
+                        </span>{" "}
+                      </span>
+                    ))}
+                  </p>
+                  <p>Team: {task.team?.name}</p>
+                  <div className="card-img-overlay p-1">
+                    <span
+                      className={`d-inline-block px-3 rounded ${
+                        task.status === "Blocked"
+                          ? "text-bg-danger"
+                          : task.status === "Completed"
+                          ? "text-bg-primary"
+                          : task.status === "To Do"
+                          ? "text-bg-warning"
+                          : "text-bg-info"
+                      }`}
+                      style={{ width: "fit-content", minWidth: "auto" }}>
+                      {task.status}
                     </span>
-                  ))}
-                </p>
-                <p>Team: {task.team?.name}</p>
-                <div className="card-img-overlay p-1">
-                  <span
-                    className={`d-inline-block px-3 rounded ${
-                      task.status === "Blocked"
-                        ? "text-bg-danger"
-                        : task.status === "Completed"
-                        ? "text-bg-primary"
-                        : task.status === "To Do"
-                        ? "text-bg-warning"
-                        : "text-bg-info"
-                    }`}
-                    style={{ width: "fit-content", minWidth: "auto" }}>
-                    {task.status}
-                  </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         <div
