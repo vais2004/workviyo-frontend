@@ -84,10 +84,10 @@ export default function AddTask({ taskId }) {
           project: projectName,
           team: teamName,
           timeToComplete: Number(timeoutValue),
-          owners: owners.map((o) => o._id || o),
+          owners: owners,
           priority: priority,
           status: taskStatus,
-          tags: [],
+          tags: tags,
         })
       );
       toast.success("Task Updated successfully!");
@@ -99,10 +99,10 @@ export default function AddTask({ taskId }) {
           project: projectName,
           team: teamName,
           timeToComplete: Number(timeoutValue),
-          owners: owners.map((o) => o._id || o),
+          owners: owners,
           priority: priority,
           status: taskStatus,
-          tags: [],
+          tags: tags,
         })
       );
       toast.success("New task created successfully!");
@@ -240,9 +240,9 @@ export default function AddTask({ taskId }) {
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="Tags"
-                  onChange={(e) => setNewTag(e.target.value)}
+                  placeholder="Enter tag"
                   value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
                 />
               </div>
               <div className="col-md-3">
@@ -255,13 +255,11 @@ export default function AddTask({ taskId }) {
               </div>
             </div>
             <div className="mb-2 row">
-              {" "}
-              {tags?.length > 0 &&
-                tags.map((tag, index) => (
-                  <div className="col-md-3" key={index}>
-                    {tag}
-                  </div>
-                ))}
+              {tags.map((tag, index) => (
+                <span key={index} className="badge bg-secondary me-2">
+                  {tag}
+                </span>
+              ))}
             </div>
 
             <div className="row mb-3">
