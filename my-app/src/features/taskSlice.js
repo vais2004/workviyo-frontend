@@ -1,90 +1,64 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchTasksAsync = createAsyncThunk(
-  "tasks/fetchTasksAsync",
-  async ({ taskStatus, prioritySort, dateSort } = {}) => {
-    const queryParams = new URLSearchParams();
+const API_URL = "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks";
 
-    if (taskStatus) queryParams.append("status", taskStatus);
-    if (prioritySort) queryParams.append("prioritySort", prioritySort);
-    if (dateSort) queryParams.append("dateSort", dateSort);
+// FETCH TASKS
+export const fetchTasksAsync = createAsyncThunk("tasks/fetch", async () => {
+  const token = localStorage.getItem("token");
+  const res = await axios.get(API_URL, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+});
 
-    const token = localStorage.getItem("token");
-    const response = await axios.get(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks?${queryParams.toString()}`,
-      { headers: { Authorization: `${token}` } }
-    );
-    const data = response.data;
-    return data;
-  }
-);
+// ADD TASK
+export const addTaskAsync = createAsyncThunk("tasks/add", async (task) => {
+  const token = localStorage.getItem("token");
 
-export const addTaskAsync = createAsyncThunk(
-  "tasks/addTaskAsync",
-  async ({
-    name,
-    project,
-    team,
-    timeToComplete,
-    tags,
-    owners,
-    priority,
-    status,
-  }) => {
-    const token = localStorage.getItem("token");
-    const response = await axios.post(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks`,
-      { name, project, team, timeToComplete, tags, owners, priority, status },
-      {
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
-    );
-    const data = response.data;
-    return data;
-  }
-);
+  const payload = {
+    name: task.name,
+    project: task.project,
+    team: task.team,
+    owners: task.owners,
+    timeToComplete: task.timeToComplete,
+    priority: task.priority || "Medium",
+    status: task.status || "To Do",
+    // FIX: Ensure tags is a proper array
+    tags: Array.isArray(task.tags)
+      ? task.tags.map((t) => t.toString().trim())
+      : [],
+  };
 
+  const res = await axios.post(API_URL, payload, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  return res.data;
+});
+
+// UPDATE TASK
 export const updateTaskAsync = createAsyncThunk(
-  "tasks/updateTaskAsync",
-  async ({
-    id,
-    name,
-    project,
-    team,
-    timeToComplete,
-    tags,
-    owners,
-    priority,
-    status,
-  }) => {
+  "tasks/update",
+  async ({ id, ...task }) => {
     const token = localStorage.getItem("token");
-    const response = await axios.put(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
-      { name, project, team, timeToComplete, tags, owners, priority, status },
-      { headers: { Authorization: `${token}` } }
-    );
-    const data = response.data;
-    return data;
+
+    const res = await axios.put(`${API_URL}/${id}`, task, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return res.data;
   }
 );
 
-export const deleteTaskAsync = createAsyncThunk(
-  "tasks/deleteTaskAsync",
-  async ({ id }) => {
-    const token = localStorage.getItem("token");
-    const response = await axios.delete(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
-      {
-        headers: { Authorization: `${token}` },
-      }
-    );
-    const data = response.data;
-    return data;
-  }
-);
+// DELETE TASK
+export const deleteTaskAsync = createAsyncThunk("tasks/delete", async (id) => {
+  const token = localStorage.getItem("token");
+  await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return id;
+});
 
 export const taskSlice = createSlice({
   name: "tasks",
@@ -95,58 +69,39 @@ export const taskSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    //fetch
-    builder.addCase(fetchTasksAsync.pending, (state) => {
-      state.status = "Loading";
-    });
-    builder.addCase(fetchTasksAsync.fulfilled, (state, action) => {
-      state.status = "All Tasks";
-      state.tasks = action.payload;
-      console.log(action.payload, "payload");
-    });
-    builder.addCase(fetchTasksAsync.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.error.message;
-    });
-    //add
-    builder.addCase(addTaskAsync.pending, (state) => {
-      state.status = "Loading";
-    });
-    builder.addCase(addTaskAsync.fulfilled, (state, action) => {
-      state.status = "Added tasks";
-      state.tasks.push(action.payload);
-    });
-    builder.addCase(addTaskAsync.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.error.message;
-    });
-    //update
-    builder.addCase(updateTaskAsync.pending, (state) => {
-      state.status = "Loading";
-    });
-    builder.addCase(updateTaskAsync.fulfilled, (state, action) => {
-      state.status = "Updated tasks";
-      state.tasks = state.tasks.map((task) =>
-        task._id === action.payload._id ? action.payload : task
-      );
-    });
-    builder.addCase(updateTaskAsync.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.error.message;
-    });
-    //delete
+    builder
+      .addCase(fetchTasksAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTasksAsync.fulfilled, (state, action) => {
+        state.status = "success";
+        state.tasks = action.payload;
+      })
+      .addCase(fetchTasksAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message;
+      })
 
-    builder.addCase(deleteTaskAsync.pending, (state) => {
-      state.status = "Loading";
-    });
-    builder.addCase(deleteTaskAsync.fulfilled, (state, action) => {
-      state.status = "deleted tasks";
-      state.tasks = action.payload;
-    });
-    builder.addCase(deleteTaskAsync.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.error.message;
-    });
+      .addCase(addTaskAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addTaskAsync.fulfilled, (state, action) => {
+        state.tasks.push(action.payload);
+      })
+      .addCase(addTaskAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message;
+      })
+
+      .addCase(updateTaskAsync.fulfilled, (state, action) => {
+        state.tasks = state.tasks.map((t) =>
+          t._id === action.payload._id ? action.payload : t
+        );
+      })
+
+      .addCase(deleteTaskAsync.fulfilled, (state, action) => {
+        state.tasks = state.tasks.filter((t) => t._id !== action.payload);
+      });
   },
 });
 

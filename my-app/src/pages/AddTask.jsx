@@ -1,308 +1,225 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  fetchProjectsAsync,
-  updateProjectAsync,
-} from "../features/projectSlice";
+import { fetchProjectsAsync } from "../features/projectSlice";
 import { fetchTeamsAsync } from "../features/teamSlice";
 import { addTaskAsync, updateTaskAsync } from "../features/taskSlice";
-import { fetchUserAsync } from "../features/userSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
+import { fetchUserAsync } from "../features/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTask({ taskId }) {
-  const [projectName, setProjectName] = useState("");
+  const dispatch = useDispatch();
+
+  const [projectId, setProjectId] = useState("");
   const [taskName, setTaskName] = useState("");
-  const [teamName, setTeam] = useState("");
-  const [timeoutValue, setTimeoutValue] = useState("");
+  const [teamId, setTeamId] = useState("");
+  const [timeToComplete, setTimeToComplete] = useState("");
   const [owners, setOwners] = useState([]);
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
   const [priority, setPriority] = useState("");
-  const [taskStatus, setTaskStatus] = useState("");
+  const [status, setStatus] = useState("");
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { projects } = useSelector((state) => state.projects);
   const { teams } = useSelector((state) => state.teams);
-  const { members } = useSelector((state) => {
-    return state.members;
-  });
+  const { members } = useSelector((state) => state.members);
   const { tasks } = useSelector((state) => state.tasks);
-  const existingTask =
-    taskId && tasks?.length > 0 && tasks?.find((task) => task._id == taskId);
-  const existing = Boolean(existingTask);
+
+  const existingTask = taskId && tasks.find((task) => task._id === taskId);
+  const isEdit = Boolean(existingTask);
 
   useEffect(() => {
     dispatch(fetchMembersAsync());
     dispatch(fetchProjectsAsync());
     dispatch(fetchTeamsAsync());
     dispatch(fetchUserAsync());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    if (existing) {
-      setProjectName(existingTask.project?._id || "");
+    if (isEdit) {
+      setProjectId(existingTask.project?._id || "");
       setTaskName(existingTask.name || "");
-      setTeam(existingTask.team?._id || "");
-      setTimeoutValue(existingTask.timeToComplete || "");
+      setTeamId(existingTask.team?._id || "");
+      setTimeToComplete(existingTask.timeToComplete || "");
       setOwners(existingTask.owners?.map((o) => o._id) || []);
       setTags(existingTask.tags || []);
       setPriority(existingTask.priority || "");
-      setTaskStatus(existingTask.status || "");
+      setStatus(existingTask.status || "");
     }
-  }, [existingTask, existing]);
+  }, [isEdit, existingTask]);
 
   const handleAddTag = () => {
     if (newTag && !tags.includes(newTag)) {
-      setTags((prevTag) => [...prevTag, newTag]);
+      setTags([...tags, newTag]);
       setNewTag("");
     }
   };
 
-  const handleAddTask = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
-      !taskName ||
-      !projectName ||
-      !teamName ||
+      !taskName.trim() ||
+      !projectId ||
+      !teamId ||
       owners.length === 0 ||
-      !timeoutValue
+      !timeToComplete
     ) {
       toast.error("Please fill all required fields");
       return;
     }
 
-    if (existing) {
-      dispatch(
-        updateTaskAsync({
-          id: taskId,
-          name: taskName,
-          project: projectName,
-          team: teamName,
-          timeToComplete: Number(timeoutValue),
-          owners: owners,
-          priority: priority,
-          status: taskStatus,
-          tags: tags,
-        })
-      );
-      toast.success("Task Updated successfully!");
-      document.querySelector(".btn-close").click();
+    const payload = {
+      name: taskName.trim(),
+      project: projectId,
+      team: teamId,
+      owners,
+      timeToComplete: Number(timeToComplete),
+      priority: priority || "Medium",
+      status: status || "To Do",
+      tags: tags || [],
+    };
+
+    console.log("TASK PAYLOAD BEFORE SENDING:", payload);
+
+    if (isEdit) {
+      dispatch(updateTaskAsync({ id: taskId, ...payload }))
+        .unwrap()
+        .then(() => toast.success("Task updated successfully"))
+        .catch(() => toast.error("Failed to update task"));
     } else {
-      dispatch(
-        addTaskAsync({
-          name: taskName,
-          project: projectName,
-          team: teamName,
-          timeToComplete: Number(timeoutValue),
-          owners: owners,
-          priority: priority,
-          status: taskStatus,
-          tags: tags,
-        })
-      );
-      toast.success("New task created successfully!");
-      document.querySelector(".btn-close").click();
+      dispatch(addTaskAsync(payload))
+        .unwrap()
+        .then(() => toast.success("Task created successfully"))
+        .catch(() => toast.error("Failed to create task"));
     }
+
+    document.querySelector(".btn-close")?.click();
   };
 
   return (
     <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
-          <h1 className="modal-title fs-5" id="taskModalLabel">
-            Create New Project
-          </h1>
+          <h5 className="modal-title">
+            {isEdit ? "Update Task" : "Create Task"}
+          </h5>
           <button
             type="button"
             className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"></button>
+            data-bs-dismiss="modal"></button>
         </div>
 
         <div className="modal-body">
           <ToastContainer />
-          <form onSubmit={handleAddTask}>
-            <div className="row mb-3">
-              <div className="col-md-3">
-                <label htmlFor="project" className="col-form-label">
-                  Select Project
-                </label>
-              </div>
-              <div className="col-md-9">
-                <select
-                  className="form-select"
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}>
-                  <option value="">---Select Project---</option>
-
-                  {projects?.length > 0 &&
-                    projects.map((project) => (
-                      <option key={project._id} value={project._id}>
-                        {project.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-            <div className="row mb-3">
-              <div className="col-md-3">
-                <label htmlFor="taskName" className="col-form-label">
-                  Task Name
-                </label>
-              </div>
-              <div className="col-md-9">
-                <input
-                  className=" form-control"
-                  type="text"
-                  placeholder="Enter Task Name"
-                  onChange={(e) => setTaskName(e.target.value)}
-                  value={taskName}
-                />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <div className="col-md-3">
-                {" "}
-                <label htmlFor="team" className="col-form-label">
-                  Select Team
-                </label>
-              </div>
-              <div className="col-md-9">
-                <select
-                  className="form-select"
-                  onChange={(e) => setTeam(e.target.value)}
-                  value={teamName}>
-                  <option value="">---Select Team---</option>
-
-                  {teams?.length > 0 &&
-                    teams.map((team) => (
-                      <option key={team._id} value={team._id}>
-                        {team.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-            <div className="row mb-3">
-              <div className="col-md-3">
-                {" "}
-                <label htmlFor="status" className="col-form-label">
-                  Status
-                </label>
-              </div>
-              <div className="col-md-9">
-                <select
-                  className="form-select"
-                  value={taskStatus}
-                  onChange={(e) => setTaskStatus(e.target.value)}>
-                  <option value="">---Select Status---</option>
-                  <option value="To Do">To Do</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Blocked">Blocked</option>
-                  <option value="In Progress">In Progress</option>
-                </select>
-              </div>
-            </div>
-            <div className="row mb-3">
-              <div className="col-md-3">
-                {" "}
-                <label htmlFor="owners" className="col-form-label">
-                  Owners:
-                </label>
-              </div>
-              <div className="col-md-9">
-                <select
-                  className="form-select"
-                  onChange={(e) => setOwners([e.target.value])}>
-                  <option value="">---Select Owner---</option>
-                  {members?.map((owner) => (
-                    <option key={owner._id} value={owner._id}>
-                      {owner.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="row mb-3">
-              <div className="col-md-3">
-                {" "}
-                <label htmlFor="dueDate" className="col-form-label">
-                  Tags:
-                </label>
-              </div>
-              <div className="col-md-6">
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Enter tag"
-                  value={newTag}
-                  onChange={(e) => setNewTag(e.target.value)}
-                />
-              </div>
-              <div className="col-md-3">
-                <button
-                  onClick={handleAddTag}
-                  type="button"
-                  className="btn btn-outline-primary btn-sm">
-                  Add Tag
-                </button>
-              </div>
-            </div>
-            <div className="mb-2 row">
-              {tags.map((tag, index) => (
-                <span key={index} className="badge bg-secondary me-2">
-                  {tag}
-                </span>
+          <form onSubmit={handleSubmit}>
+            {/* Project */}
+            <select
+              className="form-select mb-3"
+              value={projectId}
+              onChange={(e) => setProjectId(e.target.value)}>
+              <option value="">Select Project</option>
+              {projects.map((p) => (
+                <option key={p._id} value={p._id}>
+                  {p.name}
+                </option>
               ))}
-            </div>
+            </select>
 
-            <div className="row mb-3">
-              <div className="col-md-3">
-                {""}{" "}
-                <label htmlFor="estimateTime" className="col-form-label">
-                  Estimate Time
-                </label>
-              </div>
-              <div className="col-md-9">
-                <input
-                  className="form-control"
-                  type="number"
-                  value={timeoutValue}
-                  placeholder="Enter Time in Days"
-                  onChange={(e) => setTimeoutValue(e.target.value)}
-                />
-              </div>
-            </div>
+            {/* Task Name */}
+            <input
+              className="form-control mb-3"
+              placeholder="Task name"
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
+            />
 
-            <div className="row mb-2">
-              <div className="col-md-3">
-                <label htmlFor="priority" className="col-form-label">
-                  Priority
-                </label>
-              </div>
-              <div className="col-md-9">
-                <select
-                  className="form-select"
-                  onChange={(e) => setPriority(e.target.value)}
-                  value={priority}>
-                  <option value="">---Select Priority---</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
-                </select>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button className="btn btn-outline-primary mx-1 float-end">
-                {existing ? "Update" : "Create"}
+            {/* Team */}
+            <select
+              className="form-select mb-3"
+              value={teamId}
+              onChange={(e) => setTeamId(e.target.value)}>
+              <option value="">Select Team</option>
+              {teams.map((t) => (
+                <option key={t._id} value={t._id}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
+
+            {/* Status */}
+            <select
+              className="form-select mb-3"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}>
+              <option value="">Select Status</option>
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Blocked">Blocked</option>
+            </select>
+
+            {/* Owner */}
+            <select
+              className="form-select mb-3"
+              value={owners[0] || ""}
+              onChange={(e) =>
+                setOwners(e.target.value ? [e.target.value] : [])
+              }>
+              <option value="">Select Owner</option>
+              {members.map((m) => (
+                <option key={m._id} value={m._id}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
+
+            {/* Tags */}
+            <div className="d-flex mb-2">
+              <input
+                className="form-control me-2"
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                placeholder="Add tag"
+              />
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={handleAddTag}>
+                Add
               </button>
             </div>
+
+            {tags.map((tag, i) => (
+              <span key={i} className="badge bg-secondary me-2">
+                {tag}
+              </span>
+            ))}
+
+            {/* Time */}
+            <input
+              type="number"
+              className="form-control my-3"
+              placeholder="Time to complete"
+              value={timeToComplete}
+              onChange={(e) => setTimeToComplete(e.target.value)}
+            />
+
+            {/* Priority */}
+            <select
+              className="form-select mb-3"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}>
+              <option value="">Select Priority</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+
+            <button className="btn btn-outline-primary float-end">
+              {isEdit ? "Update" : "Create"}
+            </button>
           </form>
         </div>
       </div>

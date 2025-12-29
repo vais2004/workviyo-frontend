@@ -67,6 +67,14 @@ export default function TaskDetails() {
           <SideNav />
         </div>
         <div className="col-12 col-md-9 col-lg-10 p-4">
+          <button
+            className="btn btn-outline-primary d-md-none mb-3"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar"
+            aria-controls="mobileSidebar">
+            <i className="bi bi-list"></i>
+          </button>
           <div className="card border-0 shadow-sm">
             <div className="card-body">
               <h3 className="mb-3">{task.name}</h3>
@@ -138,26 +146,14 @@ export default function TaskDetails() {
               <hr />
 
               <p className="mb-1">
-                <strong>Team Members:</strong>
-              </p>
-              {task.team?.members?.length > 0 ? (
-                task.team.members.map((member, index) => (
-                  <span key={index} className="badge bg-light text-dark me-2">
-                    {member.name}
-                  </span>
-                ))
-              ) : (
-                <span className="text-muted">No team members</span>
-              )}
-
-              <hr />
-
-              <p className="mb-1">
                 <strong>Tags:</strong>
               </p>
               {task.tags?.length > 0 ? (
                 task.tags.map((tag, index) => (
-                  <span key={index} className="badge bg-info me-2">
+                  <span
+                    style={{ backgroundColor: "#fcc7eeff" }}
+                    key={index}
+                    className="rounded-pill px-2 pb-1 me-2">
                     {tag}
                   </span>
                 ))

@@ -12,9 +12,7 @@ export const fetchProjectsAsync = createAsyncThunk(
     const response = await axios.get(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects?${queryParams.toString()}`,
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data; // backend returns array directly
@@ -30,9 +28,7 @@ export const addProjectAsync = createAsyncThunk(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects`,
       { name, description, status },
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data.projects; // backend returns { projects: [...] }
@@ -47,7 +43,7 @@ export const updateProjectAsync = createAsyncThunk(
     const response = await axios.put(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
       { name, description, status },
-      { headers: { Authorization: `${token}` } }
+      { headers: { Authorization: token } }
     );
 
     const data = response.data.projects;
@@ -62,9 +58,7 @@ export const deleteProjectAsync = createAsyncThunk(
     const response = await axios.delete(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data.projects; // backend returns { projects: [...] }

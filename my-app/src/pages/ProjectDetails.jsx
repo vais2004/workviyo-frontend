@@ -34,6 +34,14 @@ const ProjectDetails = () => {
         </div>
 
         <div className="col-12 col-md-9 col-lg-10 p-4">
+        <button
+            className="btn btn-outline-primary d-md-none mb-3"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar"
+            aria-controls="mobileSidebar">
+            <i className="bi bi-list"></i>
+          </button>
           {project ? (
             <div className=" mb-4">
               <div>

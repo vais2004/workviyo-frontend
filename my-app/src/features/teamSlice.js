@@ -8,9 +8,7 @@ export const fetchTeamsAsync = createAsyncThunk(
     const response = await axios.get(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data;
@@ -26,7 +24,7 @@ export const addTeamsAsync = createAsyncThunk(
     const response = await axios.post(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
       { name, members },
-      { headers: { Authorization: `${token}` } }
+      { headers: { Authorization: token } }
     );
     const data = response.data;
     console.log("added data", data);
@@ -42,9 +40,7 @@ export const updateTeamAsync = createAsyncThunk(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       { name, members },
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data;
@@ -59,9 +55,7 @@ export const deleteTeamAsync = createAsyncThunk(
     const response = await axios.delete(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data;

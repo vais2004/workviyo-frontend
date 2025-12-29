@@ -8,7 +8,7 @@ export const fetchMembersAsync = createAsyncThunk(
     const response = await axios.get(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members`,
       {
-        headers: { Authorization: `${token}` },
+        headers: { Authorization: token },
       }
     );
     const data = response.data;
@@ -23,7 +23,7 @@ export const addMembersAsync = createAsyncThunk(
     const response = await axios.post(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members`,
       { name },
-      { headers: { Authorization: `${token}` } }
+      { headers: { Authorization: token } }
     );
     const data = response.data;
     console.log(data, "data submited");
@@ -38,9 +38,7 @@ export const deleteMembersAsync = createAsyncThunk(
     const response = await axios.delete(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/members/${id}`,
       {
-        headers: {
-          Authorization: `${token}`,
-        },
+        headers: { Authorization: token },
       }
     );
     const data = response.data;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasksAsync } from "../features/taskSlice";
-//import toast, { Toaster } from "react-hot-toast";
 import { Link, useSearchParams } from "react-router-dom";
 import AddTask from "../pages/AddTask";
 
@@ -62,40 +61,39 @@ export default function TasksList() {
       </div>
 
       <div className="row">
-        {error !== null && (
+        {error && (
           <p className="text-center p-3 mb-2 bg-warning-subtle text-info-emphasis fw-normal">
             {error}
           </p>
         )}
         {status === "Loading" && (
-          <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis fw-normal ">
+          <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis fw-normal">
             Loading...
           </p>
         )}
 
         {findTaskByQuery?.length > 0 &&
-          findTaskByQuery?.map((task, index) => (
+          findTaskByQuery.map((task, index) => (
             <div className="col-md-4 py-2" key={index}>
               <Link to={`/tasks/${task._id}`} className="text-decoration-none">
                 <div
                   className="card pt-5 p-3 bg-light border-0"
                   style={{ width: "330px", height: "200px" }}>
-                  <h5 className="mb-3"> {task.name}</h5>
+                  <h5 className="mb-3">{task.name}</h5>
                   <p>Time to Complete: {task.timeToComplete}</p>
                   <p>
-                    Owners:{" "}
-                    {task.owners.map((owner, index) => (
-                      <span className="col-md-4 " key={index}>
+                    Owners:
+                    {task.owners.map((owner, idx) => (
+                      <span className="col-md-4" key={idx}>
                         <span
-                          className="d-inline-flex align-items-center justify-content-center
-                 border rounded-pill px-3 me-n2"
+                          className="d-inline-flex align-items-center justify-content-center border rounded-pill px-3 me-n2"
                           style={{
                             backgroundColor: "antiquewhite",
                             minWidth: "80px",
                             height: "30px",
                           }}>
-                          {owner.name}
-                        </span>{" "}
+                          {owner.name} {/* <- owner name */}
+                        </span>
                       </span>
                     ))}
                   </p>
@@ -119,13 +117,6 @@ export default function TasksList() {
               </Link>
             </div>
           ))}
-        <div
-          className="modal fade"
-          id="addNewTask"
-          tabIndex="-1"
-          aria-labelledby="taskModelLabel">
-          <AddTask />
-        </div>
       </div>
     </div>
   );
