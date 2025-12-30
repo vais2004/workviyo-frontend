@@ -12,7 +12,6 @@ export default function AddMember() {
   const { teamId } = useParams();
   console.log("teamId from params:", teamId);
 
-  const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
 
   const dispatch = useDispatch();
@@ -32,29 +31,29 @@ export default function AddMember() {
 
   useEffect(() => {
     dispatch(fetchMembersAsync());
+    dispatch(fetchTeamsAsync());
   }, [dispatch]);
 
   const handleAddMember = async (e) => {
     e.preventDefault();
-    console.log(teamId, teamName, selectedMembers);
+    if (!getTeam) return;
 
-    try {
-      await dispatch(
-        updateTeamAsync({
-          id: teamId,
-          name: teamName,
-          members: selectedMembers,
-        })
-      ).unwrap();
-      setSelectedMembers([]);
-      setTeamName("");
+    const updatedMembers = [
+      ...getTeam.members.map((m) => m._id),
+      ...selectedMembers,
+    ];
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } catch (error) {
-      console.error("Failed to update team:", error);
-    }
+    const uniqueMembers = [...new Set(updatedMembers)];
+
+    await dispatch(
+      updateTeamAsync({
+        id: teamId,
+        members: uniqueMembers,
+      })
+    ).unwrap();
+
+    setSelectedMembers([]);
+    dispatch(fetchTeamsAsync());
   };
 
   return (
@@ -86,3 +85,5 @@ export default function AddMember() {
     </div>
   );
 }
+
+
