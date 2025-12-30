@@ -10,28 +10,19 @@ export default function TasksList() {
   const { tasks, status, error } = useSelector((state) => state.tasks);
   const [search, setSearch] = useState("");
 
-  const taskStatus = searchParams.get("taskStatus") || "";
+  const [statusFilter, setStatusFilter] = useState("");
 
   useEffect(() => {
-    dispatch(fetchTasksAsync({ taskStatus }));
-  }, [taskStatus]);
+    dispatch(fetchTasksAsync());
+  }, [dispatch]);
 
-  const handleFilterByStatus = (value) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (value) {
-      newParams.set("taskStatus", value);
-    } else {
-      newParams.delete("taskStatus");
-    }
-    setSearchParams(newParams);
-  };
-
-  const findTaskByQuery =
-    search === ""
-      ? tasks
-      : tasks?.filter((task) =>
-          task?.name.toLowerCase().includes(search.toLowerCase())
-        );
+  const filteredTasks = tasks?.filter((task) => {
+    const matchesStatus = statusFilter ? task.status === statusFilter : true;
+    const matchesSearch = task.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    return matchesStatus && matchesSearch;
+  });
 
   return (
     <div className="row">
@@ -41,7 +32,8 @@ export default function TasksList() {
       <div className="col-md-5">
         <select
           className="form-select mb-3"
-          onChange={(e) => handleFilterByStatus(e.target.value)}>
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">---Filter Tasks By Status---</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
@@ -58,6 +50,17 @@ export default function TasksList() {
           data-bs-whatever="@mdo">
           + New Task
         </button>
+        <div
+          className="modal fade"
+          id="addNewTask"
+          tabIndex="-1"
+          aria-hidden="true">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <AddTask />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="row">
@@ -72,8 +75,8 @@ export default function TasksList() {
           </p>
         )}
 
-        {findTaskByQuery?.length > 0 &&
-          findTaskByQuery.map((task, index) => (
+        {filteredTasks?.length > 0 ? (
+          filteredTasks.map((task, index) => (
             <div className="col-md-4 py-2" key={index}>
               <Link to={`/tasks/${task._id}`} className="text-decoration-none">
                 <div
@@ -116,7 +119,10 @@ export default function TasksList() {
                 </div>
               </Link>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-center p-3">No tasks found</p>
+        )}
       </div>
     </div>
   );

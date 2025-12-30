@@ -74,8 +74,7 @@ export const memberSlice = createSlice({
     });
     builder.addCase(addMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "Added members";
-      state.members = action.payload;
-      console.log(action.payload, "payload");
+      state.members.push(action.payload);
     });
     builder.addCase(addMembersAsync.rejected, (state, action) => {
       state.memberStatus = "error";
@@ -87,8 +86,7 @@ export const memberSlice = createSlice({
     });
     builder.addCase(deleteMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "Deleted member";
-      state.members = action.payload;
-      console.log(action.payload, "payload");
+      state.members = state.members.filter((m) => m._id !== action.payload._id);
     });
     builder.addCase(deleteMembersAsync.rejected, (state, action) => {
       state.memberStatus = "error";

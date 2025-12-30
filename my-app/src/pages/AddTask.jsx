@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsAsync } from "../features/projectSlice";
 import { fetchTeamsAsync } from "../features/teamSlice";
-import { fetchTasksAsync, addTaskAsync, updateTaskAsync } from "../features/taskSlice";
+import {
+  fetchTasksAsync,
+  addTaskAsync,
+  updateTaskAsync,
+} from "../features/taskSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 import { fetchUserAsync } from "../features/userSlice";
 import { ToastContainer, toast } from "react-toastify";
@@ -30,9 +34,15 @@ export default function AddTask({ taskId }) {
   const isEdit = Boolean(existingTask);
 
   useEffect(() => {
-    dispatch(fetchMembersAsync());
     dispatch(fetchProjectsAsync());
     dispatch(fetchTeamsAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchMembersAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(fetchUserAsync());
   }, [dispatch]);
 

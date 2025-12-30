@@ -36,27 +36,36 @@ export default function Settings() {
   }, []);
 
   const handleDeleteProject = (id) => {
-    dispatch(deleteProjectAsync({ id }));
-    toast.success("Project Deleted Successfully!");
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    dispatch(deleteProjectAsync({ id }))
+      .unwrap()
+      .then(() => {
+        toast.success("Project Deleted Successfully!");
+      })
+      .catch(() => {
+        toast.error("Failed to delete project!");
+      });
   };
 
   const handleDeleteTeam = (id) => {
-    dispatch(deleteTeamAsync({ id }));
-    toast.success("Team Deleted Successfully!");
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    dispatch(deleteTeamAsync({ id }))
+      .unwrap()
+      .then(() => {
+        toast.success("Team Deleted Successfully!");
+      })
+      .catch(() => {
+        toast.error("Failed to delete team!");
+      });
   };
 
   const handleDeleteTask = (id) => {
-    dispatch(deleteTaskAsync({ id }));
-    toast.success("Task Deleted Successfully!");
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    dispatch(deleteTaskAsync(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Task Deleted Successfully!");
+      })
+      .catch(() => {
+        toast.error("Failed to delete task!");
+      });
   };
 
   const handleLogout = () => {

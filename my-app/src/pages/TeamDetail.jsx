@@ -34,10 +34,26 @@ export default function TeamDetail() {
 
   const handleAdd = async () => {
     try {
-      await dispatch(addMembersAsync({ name: newName })).unwrap();
+      const newMember = await dispatch(
+        addMembersAsync({ name: newName })
+      ).unwrap();
+
+      // 🔥 FIX IS HERE
+      const updatedMembers = [
+        ...teamData.members.map((m) => m._id),
+        newMember._id,
+      ];
+
+      await dispatch(
+        updateTeamAsync({
+          id: teamData._id,
+          members: updatedMembers,
+        })
+      ).unwrap();
+
       setNewName("");
-      toast.success("Member created");
-      dispatch(fetchMembersAsync());
+      toast.success("Member added to team");
+      dispatch(fetchTeamsAsync());
     } catch (error) {
       console.error("failed to add:", error);
     }
@@ -50,18 +66,18 @@ export default function TeamDetail() {
       alert("Member not found.");
       return;
     }
-    const updatedMembers = [
-      ...teamData.members.filter((mem) => mem._id !== id),
-    ];
+
+    const updatedMembers = teamData.members
+      .filter((mem) => mem._id !== id)
+      .map((mem) => mem._id);
 
     try {
       await dispatch(
         updateTeamAsync({
           id: teamData._id,
-          updateTeam: { members: updatedMembers },
+          members: updatedMembers,
         })
       ).unwrap();
-      //window.location.reload();
       toast.success("Member deleted successfully.");
       dispatch(fetchTeamsAsync());
     } catch (error) {
@@ -140,7 +156,7 @@ export default function TeamDetail() {
                         paddingBottom: "8px",
                       }}>
                       {member.name.charAt(0)}
-                    </p> {" "}
+                    </p>{" "}
                     {member.name}
                   </div>
                   <div className="col-md-4">
@@ -165,7 +181,7 @@ export default function TeamDetail() {
                 + Members
               </button>
             </div>
-            
+
             <div className="col-auto">
               <div className="input-group w-75 mt-1">
                 <input

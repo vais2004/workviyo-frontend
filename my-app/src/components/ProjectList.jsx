@@ -10,7 +10,6 @@ export default function ProjectList({ search }) {
   const [userId, setUserId] = useState(null);
   const dispatch = useDispatch();
   const { projects, status } = useSelector((state) => state.projects);
-
   const navigate = useNavigate();
   const token = localStorage.getItem("jwtToken");
 
@@ -18,44 +17,43 @@ export default function ProjectList({ search }) {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        console.log("Decoded JWT:", decoded);
         setUserId(decoded._id || decoded.id);
       } catch (error) {
-        console.error("Error decoding JWT token:", error);
-        //toast.error("Invalid session. Please log in again.")
         navigate("/login");
       }
     }
-  }, [navigate]);
+  }, [navigate, token]);
+
+  // 🔹 FETCH ALL PROJECTS ONLY ONCE
+  useEffect(() => {
+    dispatch(fetchProjectsAsync());
+  }, [dispatch]);
 
   const projectStatus = searchParams.get("projectStatus") || "";
 
-  useEffect(() => {
-    dispatch(fetchProjectsAsync({ projectStatus }));
-  }, [projectStatus]);
-
   const filterByStatus = (value) => {
     const newParams = new URLSearchParams(searchParams);
-    if (value) {
-      newParams.set("projectStatus", value);
-    } else {
-      newParams.delete("projectStatus");
-    }
+    value
+      ? newParams.set("projectStatus", value)
+      : newParams.delete("projectStatus");
     setSearchParams(newParams);
   };
 
-  const findProjectByQuery =
-    search === ""
-      ? projects
-      : projects?.filter((project) =>
-          project?.name.toLowerCase().includes(search.toLowerCase())
-        );
+  // 🔹 FRONTEND FILTER ONLY
+  const filteredProjects = projects
+    ?.filter((project) =>
+      projectStatus ? project.status === projectStatus : true
+    )
+    ?.filter((project) =>
+      search ? project.name.toLowerCase().includes(search.toLowerCase()) : true
+    );
 
   return (
     <div className="row py-3">
       <div className="col-md-1">
         <h3>Projects</h3>
       </div>
+
       <div className="col-md-8">
         <select
           style={{ width: "150ps" }}
@@ -75,27 +73,25 @@ export default function ProjectList({ search }) {
           type="button"
           className="btn btn-outline-primary float-end ms-auto me-2"
           data-bs-toggle="modal"
-          data-bs-target="#addNewProject"
-          data-bs-whatever="@mdo">
+          data-bs-target="#addNewProject">
           + New Project
         </button>
       </div>
 
       <div className="row">
         {status === "Loading" && (
-          <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis fw-normal ">
+          <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis">
             Loading...
           </p>
         )}
 
-        {findProjectByQuery?.length > 0 &&
-          findProjectByQuery?.map((project) => (
+        {filteredProjects?.length > 0 &&
+          filteredProjects.map((project) => (
             <div className="col-md-4 py-3" key={project._id}>
               <Link
                 to={`/projectDetails/${project._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}>
                 <div className="card pt-5 p-3 bg-light border-0 position-relative">
-                  {/* Status badge */}
                   <span
                     style={{
                       position: "absolute",
@@ -103,13 +99,12 @@ export default function ProjectList({ search }) {
                       right: "10px",
                       backgroundColor:
                         project.status === "Blocked"
-                          ? "#f7cce1ff" // soft plum
+                          ? "#f7cce1ff"
                           : project.status === "Completed"
-                          ? "#c1f9b7ff" // soft gold
+                          ? "#c1f9b7ff"
                           : project.status === "To Do"
-                          ? "#f5cdb9ff" // coral-peach
-                          : "#aeedcfff", // lavender-charcoal
-
+                          ? "#f5cdb9ff"
+                          : "#aeedcfff",
                       padding: "4px 10px",
                       borderRadius: "12px",
                       fontSize: "12px",
@@ -124,11 +119,11 @@ export default function ProjectList({ search }) {
               </Link>
             </div>
           ))}
+
         <div
           className="modal fade"
           id="addNewProject"
           tabIndex="-1"
-          aria-labelledby="projectModelLabel"
           aria-hidden="true">
           <AddProject />
         </div>

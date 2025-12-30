@@ -6,29 +6,25 @@ export const fetchTeamsAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
+      "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams",
       {
         headers: { Authorization: token },
       }
     );
-    const data = response.data;
-    return data;
+    return response.data;
   }
 );
 
 export const addTeamsAsync = createAsyncThunk(
   "teams/addTeamsAsync",
   async ({ name, members }) => {
-    console.log({ name, members });
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams`,
+      "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams",
       { name, members },
       { headers: { Authorization: token } }
     );
-    const data = response.data;
-    console.log("added data", data);
-    return data;
+    return response.data;
   }
 );
 
@@ -39,12 +35,9 @@ export const updateTeamAsync = createAsyncThunk(
     const response = await axios.put(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       { name, members },
-      {
-        headers: { Authorization: token },
-      }
+      { headers: { Authorization: token } }
     );
-    const data = response.data;
-    return data;
+    return response.data;
   }
 );
 
@@ -52,15 +45,11 @@ export const deleteTeamAsync = createAsyncThunk(
   "teams/deleteTeamAsync",
   async ({ id }) => {
     const token = localStorage.getItem("token");
-    const response = await axios.delete(
+    await axios.delete(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
-      {
-        headers: { Authorization: token },
-      }
+      { headers: { Authorization: token } }
     );
-    const data = response.data;
-    console.log(data, "deleted teams data");
-    return data;
+    return id; // ✅ return deleted ID
   }
 );
 
@@ -73,13 +62,13 @@ export const teamSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    // fetch
+    // FETCH
     builder.addCase(fetchTeamsAsync.pending, (state) => {
       state.status = "Loading";
     });
     builder.addCase(fetchTeamsAsync.fulfilled, (state, action) => {
       state.status = "All teams";
-      state.teams = action.payload;
+      state.teams = Array.isArray(action.payload) ? action.payload : [];
     });
     builder.addCase(fetchTeamsAsync.rejected, (state, action) => {
       state.status = "error";
@@ -90,9 +79,8 @@ export const teamSlice = createSlice({
       state.status = "Loading";
     });
     builder.addCase(addTeamsAsync.fulfilled, (state, action) => {
-      state.status = "Added teams";
-      state.teams = action.payload;
-      console.log(action.payload, "payload");
+      state.status = "Added team";
+      state.teams.push(action.payload); // ✅ push new team
     });
     builder.addCase(addTeamsAsync.rejected, (state, action) => {
       state.status = "error";
@@ -103,11 +91,10 @@ export const teamSlice = createSlice({
       state.status = "Loading";
     });
     builder.addCase(updateTeamAsync.fulfilled, (state, action) => {
-      state.status = "updated teams";
+      state.status = "Updated team";
       state.teams = state.teams.map((team) =>
         team._id === action.payload._id ? action.payload : team
       );
-      console.log(action.payload, "payload");
     });
     builder.addCase(updateTeamAsync.rejected, (state, action) => {
       state.status = "error";
@@ -119,7 +106,7 @@ export const teamSlice = createSlice({
     });
     builder.addCase(deleteTeamAsync.fulfilled, (state, action) => {
       state.status = "Team deleted";
-      state.projects = action.payload;
+      state.teams = state.teams.filter((team) => team._id !== action.payload);
     });
     builder.addCase(deleteTeamAsync.rejected, (state, action) => {
       state.status = "error";
