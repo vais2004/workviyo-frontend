@@ -190,7 +190,7 @@ export default function Teams() {
                                 marginRight: "-10px",
                                 paddingBottom: "8px",
                               }}>
-                              + +{team?.members?.length || 0}
+                               +{team?.members?.length || 0}
                             </span>{" "}
                           </p>
                         </div>
