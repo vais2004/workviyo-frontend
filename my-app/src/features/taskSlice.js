@@ -81,26 +81,38 @@ export const taskSlice = createSlice({
         state.status = "error";
         state.error = action.error.message;
       })
-
       .addCase(addTaskAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(addTaskAsync.fulfilled, (state, action) => {
+        state.status = "success";
         state.tasks.push(action.payload);
       })
       .addCase(addTaskAsync.rejected, (state, action) => {
         state.status = "error";
         state.error = action.error.message;
       })
-
+      .addCase(updateTaskAsync.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(updateTaskAsync.fulfilled, (state, action) => {
         state.tasks = state.tasks.map((t) =>
           t._id === action.payload._id ? action.payload : t
         );
       })
-
+      .addCase(updateTaskAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message;
+      })
+      .addCase(deleteTaskAsync.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(deleteTaskAsync.fulfilled, (state, action) => {
         state.tasks = state.tasks.filter((t) => t._id !== action.payload);
+      })
+      .addCase(deleteTaskAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message;
       });
   },
 });

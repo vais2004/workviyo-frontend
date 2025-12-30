@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsAsync } from "../features/projectSlice";
 import { fetchTeamsAsync } from "../features/teamSlice";
-import { addTaskAsync, updateTaskAsync } from "../features/taskSlice";
+import { fetchTasksAsync, addTaskAsync, updateTaskAsync } from "../features/taskSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 import { fetchUserAsync } from "../features/userSlice";
 import { ToastContainer, toast } from "react-toastify";
@@ -86,12 +86,18 @@ export default function AddTask({ taskId }) {
     if (isEdit) {
       dispatch(updateTaskAsync({ id: taskId, ...payload }))
         .unwrap()
-        .then(() => toast.success("Task updated successfully"))
+        .then(() => {
+          toast.success("Task updated successfully");
+          dispatch(fetchTasksAsync()); // <-- refresh task list
+        })
         .catch(() => toast.error("Failed to update task"));
     } else {
       dispatch(addTaskAsync(payload))
         .unwrap()
-        .then(() => toast.success("Task created successfully"))
+        .then(() => {
+          toast.success("Task created successfully");
+          dispatch(fetchTasksAsync()); // <-- refresh task list
+        })
         .catch(() => toast.error("Failed to create task"));
     }
 

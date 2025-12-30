@@ -5,67 +5,64 @@ import {
   fetchTeamsAsync,
   updateTeamAsync,
 } from "../features/teamSlice";
-import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
+import { fetchMembersAsync } from "../features/memberSlice";
 
 export default function AddTeam({ teamId }) {
   const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const { members } = useSelector((state) => state.members);
   const dispatch = useDispatch();
-  const { teams } = useSelector((state) => state.teams);
-  const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    if (teamId) {
-      const team = teams.find((t) => t._id === teamId);
-      if (team) {
-        setTeamName(team.name);
-        setSelectedMembers(team.members || []);
-        setInitialized(true);
-      }
-    }
-  }, [teamId, teams,initialized]);
-
-  const selectMemberHandler = (event) => {
-    const { checked, value } = event.target;
-    if (checked) {
-      setSelectedMembers((prevVal) => [...prevVal, value]);
-    } else {
-      setSelectedMembers((prevVal) => prevVal.filter((prev) => prev !== value));
-    }
-  };
-
-  console.log(selectedMembers);
-  const handleAddTeam = (e) => {
-    e.preventDefault();
-
-    if (teamId) {
-      dispatch(
-        updateTeamAsync({
-          id: teamId,
-          name: teamName,
-          members: selectedMembers,
-        })
-      );
-    } else {
-      dispatch(
-        addTeamsAsync({
-          name: teamName,
-          members: selectedMembers,
-        })
-      );
-    }
-
-    setTeamName("");
-    setSelectedMembers([]);
-
-    document.querySelector(".btn-close").click();
-  };
+  const { teams = [] } = useSelector((state) => state.teams);
+  const { members = [] } = useSelector((state) => state.members);
 
   useEffect(() => {
     dispatch(fetchTeamsAsync());
     dispatch(fetchMembersAsync());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (teamId) {
+      const team = teams.find((t) => t._id === teamId);
+      if (team) {
+        setTeamName(team.name || "");
+        setSelectedMembers(
+          Array.isArray(team.members) ? team.members.map((m) => m._id) : []
+        );
+      }
+    }
+  }, [teamId, teams]);
+
+  const selectMemberHandler = (event) => {
+    const { checked, value } = event.target;
+    if (checked) {
+      setSelectedMembers((prev) => [...prev, value]);
+    } else {
+      setSelectedMembers((prev) => prev.filter((id) => id !== value));
+    }
+  };
+
+  const handleAddTeam = (e) => {
+    e.preventDefault();
+
+    if (!teamName.trim()) {
+      alert("Please enter team name");
+      return;
+    }
+
+    const payload = {
+      name: teamName.trim(),
+      members: selectedMembers,
+    };
+
+    if (teamId) {
+      dispatch(updateTeamAsync({ id: teamId, ...payload }));
+    } else {
+      dispatch(addTeamsAsync(payload));
+    }
+
+    setTeamName("");
+    setSelectedMembers([]);
+    document.querySelector(".btn-close")?.click();
+  };
 
   return (
     <div className="modal-body">
@@ -75,7 +72,6 @@ export default function AddTeam({ teamId }) {
           <input
             type="text"
             className="form-control"
-            id="recipient-name"
             placeholder="Enter Team Name"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
@@ -83,18 +79,19 @@ export default function AddTeam({ teamId }) {
         </div>
         <div className="mb-3">
           <label className="col-form-label">Add Members:</label>
-          {members?.map((member) => (
-            <label key={member._id}>
-              <input
-                type="checkbox"
-                className="input-check my-3 ms-3"
-                placeholder={`Member `}
-                onChange={selectMemberHandler}
-                value={member._id}
-              />{" "}
-              {member.name}
-            </label>
-          ))}
+          {Array.isArray(members) &&
+            members.map((member) => (
+              <label key={member._id} className="d-block">
+                <input
+                  type="checkbox"
+                  className="me-2"
+                  value={member._id}
+                  checked={selectedMembers.includes(member._id)}
+                  onChange={selectMemberHandler}
+                />
+                {member.name}
+              </label>
+            ))}
         </div>
         <div className="modal-footer">
           <button type="submit" className="btn btn-primary">

@@ -23,16 +23,27 @@ export default function Projects() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchTasksAsync({ taskStatus, prioritySort, dateSort }));
-  }, [taskStatus, prioritySort, dateSort]);
+    dispatch(fetchTasksAsync());
+  }, []);
 
   const taskFilters = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
+
+    // 🔥 clear conflicting sort
+    if (key === "prioritySort") {
+      newParams.delete("dateSort");
+    }
+
+    if (key === "dateSort") {
+      newParams.delete("prioritySort");
+    }
+
     if (value) {
       newParams.set(key, value);
     } else {
       newParams.delete(key);
     }
+
     setSearchParams(newParams);
   };
 
@@ -53,6 +64,41 @@ export default function Projects() {
     : Array.isArray(tasks)
     ? tasks
     : [];
+
+  const priorityOrder = {
+    Low: 1,
+    Medium: 2,
+    High: 3,
+  };
+
+  let filteredTasks = [...tasksFromProject];
+
+  // STATUS FILTER
+  if (taskStatus) {
+    filteredTasks = filteredTasks.filter((task) => task.status === taskStatus);
+  }
+
+  // PRIORITY SORT
+  if (prioritySort === "Low-High") {
+    filteredTasks.sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
+  }
+
+  if (prioritySort === "High-Low") {
+    filteredTasks.sort(
+      (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+    );
+  }
+
+  // DATE SORT
+  if (dateSort === "Newest-Oldest") {
+    filteredTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
+
+  if (dateSort === "Oldest-Newest") {
+    filteredTasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  }
 
   const dueDate = (createdAt, timeToComplete) => {
     const created = new Date(createdAt);
@@ -96,6 +142,7 @@ export default function Projects() {
           }}>
           <SideNav />
         </div>
+
         <div className="col-12 col-md-9 col-lg-10 p-4">
           <button
             className="btn btn-outline-primary d-md-none mb-3"
@@ -105,6 +152,7 @@ export default function Projects() {
             aria-controls="mobileSidebar">
             <i className="bi bi-list"></i>
           </button>
+
           <section className="pb-2 px-2">
             <span className="fw-bold fs-2 heading-color">
               {projectData?.name || "Projects view"}
@@ -118,6 +166,7 @@ export default function Projects() {
             </p>
             <hr />
           </section>
+
           <section className="row pb-3 px-1">
             <span className="col-auto mb-1">
               <button
@@ -170,9 +219,10 @@ export default function Projects() {
               </button>
             </span>
           </section>
+
           <section className="pb-3 pe-2">
             {status === "Loading" && (
-              <div className="alert alert-info py-2 text-center">
+              <div className="alert alert-info text-center">
                 Loading tasks...
               </div>
             )}
@@ -195,18 +245,19 @@ export default function Projects() {
                   <th className="table-light" scope="col">
                     Due On
                   </th>
-
                   <th className="table-light" scope="col">
                     Status
                   </th>
                 </tr>
               </thead>
+
               <tbody>
-                {tasksFromProject
-                  ? Array.isArray(tasksFromProject) &&
-                    tasksFromProject.map((task, index) => (
+                {filteredTasks
+                  ? Array.isArray(filteredTasks) &&
+                    filteredTasks.map((task, index) => (
                       <tr key={index}>
                         <th scope="row container">{task.name}</th>
+
                         <td>
                           {task.owners.map((owner, index) => (
                             <span
@@ -228,6 +279,7 @@ export default function Projects() {
                             </span>
                           ))}
                         </td>
+
                         <td>
                           <span
                             style={{
@@ -244,6 +296,7 @@ export default function Projects() {
                         </td>
 
                         <td>{new Date(task.createdAt).toLocaleDateString()}</td>
+
                         <td>
                           <span
                             className={
@@ -278,6 +331,7 @@ export default function Projects() {
               </tbody>
             </table>
           </section>
+
           <div
             className="modal fade"
             id="addNewTask"

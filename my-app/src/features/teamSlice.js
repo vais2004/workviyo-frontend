@@ -118,9 +118,8 @@ export const teamSlice = createSlice({
       state.status = "Loading";
     });
     builder.addCase(deleteTeamAsync.fulfilled, (state, action) => {
-      state.status = "deleted teams";
-      state.teams = action.payload;
-      console.log(action.payload, "payload");
+      state.status = "Team deleted";
+      state.projects = action.payload;
     });
     builder.addCase(deleteTeamAsync.rejected, (state, action) => {
       state.status = "error";
