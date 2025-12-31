@@ -129,89 +129,80 @@ export default function Settings() {
           <section className="pb-3 px-2">
             <span className="fw-normal fs-3">Projects</span>
 
-            <div className="row">
+            <ul className="list-group mt-3">
               {projects?.length > 0 &&
-                projects?.map((project) => (
-                  <div className="col-md-4 " key={project._id}>
-                    <div className="card p-2 my-2">
-                      <div className="row ">
-                        <div className="col-md-6">
-                          <span> {project.name}</span>
-                        </div>
-                        <div className="col-md-6">
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary btn-sm"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#addNewProject-${project._id}`}
-                            data-bs-whatever="@mdo">
-                            {" "}
-                            Edit
-                          </button>{" "}
-                          <button
-                            className="btn btn-outline-danger btn-sm"
-                            onClick={() => handleDeleteProject(project._id)}>
-                            delete
-                          </button>
-                        </div>
-                      </div>
+                projects.map((project) => (
+                  <li
+                    key={project._id}
+                    className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{project.name}</span>
+
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm me-2"
+                        data-bs-toggle="modal"
+                        data-bs-target={`#addNewProject-${project._id}`}>
+                        Edit
+                      </button>
+
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => handleDeleteProject(project._id)}>
+                        Delete
+                      </button>
                     </div>
+
+                    {/* Modal */}
                     <div
                       className="modal fade"
                       id={`addNewProject-${project._id}`}
                       tabIndex="-1"
-                      aria-labelledby="projectModelLabel"
                       aria-hidden="true">
                       <AddProject projectId={project._id} />
                     </div>
-                  </div>
+                  </li>
                 ))}
-            </div>
+            </ul>
           </section>
 
           <section className="pb-4 px-2">
             <span className="fw-normal fs-3">Teams</span>
-            <div className="row">
+
+            <ul className="list-group mt-3">
               {teams?.length > 0 &&
-                teams?.map((team) => (
-                  <div className="col-md-4" key={team._id}>
-                    <div className="card p-2 my-2">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <span>{team.name}</span>
-                        </div>
-                        <div className="col-md-6">
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary btn-sm"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#addNewTeam-${team._id}`}
-                            data-bs-whatever="@mdo">
-                            {" "}
-                            Edit
-                          </button>{" "}
-                          <button
-                            className="btn btn-outline-danger btn-sm"
-                            onClick={() => handleDeleteTeam(team._id)}>
-                            delete
-                          </button>
-                        </div>
-                      </div>
+                teams.map((team) => (
+                  <li
+                    key={team._id}
+                    className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{team.name}</span>
+
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm me-2"
+                        data-bs-toggle="modal"
+                        data-bs-target={`#addNewTeam-${team._id}`}>
+                        Edit
+                      </button>
+
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => handleDeleteTeam(team._id)}>
+                        Delete
+                      </button>
                     </div>
+
+                    {/* Modal */}
                     <div
                       className="modal fade"
-                      id={`addNewTeam-${team._id}`}
+                      id={`#addNewTeam-${team._id}`}
                       tabIndex="-1"
-                      aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
                       <div className="modal-dialog">
                         <div className="modal-content">
                           <div className="modal-header">
-                            <h1
-                              className="modal-title fs-5"
-                              id="exampleModalLabel">
-                              Create New Team
-                            </h1>
+                            <h1 className="modal-title fs-5">Edit Team</h1>
                             <button
                               type="button"
                               className="btn-close"
@@ -221,52 +212,49 @@ export default function Settings() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </li>
                 ))}
-            </div>
+            </ul>
           </section>
 
           <section className="pb-3 px-2">
             <span className="fw-normal fs-3">Tasks</span>
 
-            <div className="row">
+            <ul className="list-group mt-3">
               {tasks?.length > 0 &&
-                tasks?.map((task) => (
-                  <div className="col-md-4 " key={task._id}>
-                    <div className="card p-2 my-2">
-                      <div className="row ">
-                        <div className="col-md-6">
-                          <span>{task.name}</span>
-                        </div>
-                        <div className="col-md-6">
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary btn-sm"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#addNewTask-${task._id}`}
-                            data-bs-whatever="@mdo">
-                            {" "}
-                            Edit
-                          </button>{" "}
-                          <button
-                            className="btn btn-outline-danger btn-sm"
-                            onClick={() => handleDeleteTask(task._id)}>
-                            delete
-                          </button>
-                        </div>
-                      </div>
+                tasks.map((task) => (
+                  <li
+                    key={task._id}
+                    className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{task.name}</span>
+
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm me-2"
+                        data-bs-toggle="modal"
+                        data-bs-target={`#addNewTask-${task._id}`}>
+                        Edit
+                      </button>
+
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => handleDeleteTask(task._id)}>
+                        Delete
+                      </button>
                     </div>
+
+                    {/* Modal */}
                     <div
                       className="modal fade"
                       id={`addNewTask-${task._id}`}
                       tabIndex="-1"
-                      aria-labelledby="taskModelLabel"
                       aria-hidden="true">
                       <AddTask taskId={task._id} />
                     </div>
-                  </div>
+                  </li>
                 ))}
-            </div>
+            </ul>
           </section>
         </div>
       </div>
