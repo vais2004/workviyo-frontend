@@ -114,6 +114,12 @@ export default function AddTask({ taskId }) {
     document.querySelector(".btn-close")?.click();
   };
 
+  const RequiredLabel = ({ text }) => (
+    <label className="form-label">
+      {text} <span className="text-danger">*</span>
+    </label>
+  );
+
   return (
     <div className="modal-dialog">
       <div className="modal-content">
@@ -133,114 +139,113 @@ export default function AddTask({ taskId }) {
             className="mt-5"
             autoClose={3000}
           />
-          <form onSubmit={handleSubmit}>
-            {/* Project */}
-            <select
-              className="form-select mb-3"
-              value={projectId}
-              onChange={(e) => setProjectId(e.target.value)}>
-              <option value="">Select Project</option>
-              {projects.map((p) => (
-                <option key={p._id} value={p._id}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
+          <div className="row justify-content-center">
+            <div className="col-8"></div>
+            <form onSubmit={handleSubmit}>
+              <RequiredLabel text="Select Project:" />
+              <select
+                className="form-select mb-3"
+                value={projectId}
+                onChange={(e) => setProjectId(e.target.value)}>
+                <option value="">---Select---</option>
+                {projects.map((p) => (
+                  <option key={p._id} value={p._id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
 
-            {/* Task Name */}
-            <input
-              className="form-control mb-3"
-              placeholder="Task name"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-            />
-
-            {/* Team */}
-            <select
-              className="form-select mb-3"
-              value={teamId}
-              onChange={(e) => setTeamId(e.target.value)}>
-              <option value="">Select Team</option>
-              {teams.map((t) => (
-                <option key={t._id} value={t._id}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Status */}
-            <select
-              className="form-select mb-3"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}>
-              <option value="">Select Status</option>
-              <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-              <option value="Blocked">Blocked</option>
-            </select>
-
-            {/* Owner */}
-            <select
-              className="form-select mb-3"
-              value={owners[0] || ""}
-              onChange={(e) =>
-                setOwners(e.target.value ? [e.target.value] : [])
-              }>
-              <option value="">Select Owner</option>
-              {members.map((m) => (
-                <option key={m._id} value={m._id}>
-                  {m.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Tags */}
-            <div className="d-flex mb-2">
+              <RequiredLabel text="Task Name:" />
               <input
-                className="form-control me-2"
-                value={newTag}
-                onChange={(e) => setNewTag(e.target.value)}
-                placeholder="Add tag"
+                className="form-control mb-3"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
               />
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={handleAddTag}>
-                Add
+
+              <RequiredLabel text="Select Team:" />
+              <select
+                className="form-select mb-3"
+                value={teamId}
+                onChange={(e) => setTeamId(e.target.value)}>
+                <option value="">---Select---</option>
+                {teams.map((t) => (
+                  <option key={t._id} value={t._id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+
+              <RequiredLabel text="Select Status:" />
+              <select
+                className="form-select mb-3"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}>
+                <option value="">---Select---</option>
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Blocked">Blocked</option>
+              </select>
+
+              <RequiredLabel text="Select Owner:" />
+              <select
+                className="form-select mb-3"
+                value={owners[0] || ""}
+                onChange={(e) =>
+                  setOwners(e.target.value ? [e.target.value] : [])
+                }>
+                <option value="">---Select---</option>
+                {members.map((m) => (
+                  <option key={m._id} value={m._id}>
+                    {m.name}
+                  </option>
+                ))}
+              </select>
+
+              <RequiredLabel text="Add Tag:" />
+              <div className="d-flex mb-2">
+                <input
+                  className="form-control me-2"
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={handleAddTag}>
+                  Add
+                </button>
+              </div>
+
+              {tags.map((tag, i) => (
+                <span key={i} className="badge bg-secondary me-2">
+                  {tag}
+                </span>
+              ))}
+              <RequiredLabel text="Time to complete:" />
+              <input
+                type="number"
+                className="form-control my-3"
+                value={timeToComplete}
+                onChange={(e) => setTimeToComplete(e.target.value)}
+              />
+
+              <RequiredLabel text="Select Priority:" />
+              <select
+                className="form-select mb-3"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}>
+                <option value="">---Select---</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+
+              <button className="btn btn-outline-primary float-end">
+                {isEdit ? "Update" : "Create"}
               </button>
-            </div>
-
-            {tags.map((tag, i) => (
-              <span key={i} className="badge bg-secondary me-2">
-                {tag}
-              </span>
-            ))}
-
-            {/* Time */}
-            <input
-              type="number"
-              className="form-control my-3"
-              placeholder="Time to complete"
-              value={timeToComplete}
-              onChange={(e) => setTimeToComplete(e.target.value)}
-            />
-
-            {/* Priority */}
-            <select
-              className="form-select mb-3"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}>
-              <option value="">Select Priority</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-
-            <button className="btn btn-outline-primary float-end">
-              {isEdit ? "Update" : "Create"}
-            </button>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
