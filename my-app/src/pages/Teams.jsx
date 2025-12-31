@@ -101,7 +101,7 @@ export default function Teams() {
               {teams?.length > 0 &&
                 Array.isArray(teams) &&
                 teams.map((team) => (
-                  <div className="col-md-4 py-2" key={team._id}>
+                  <div className="col-12 col-sm-6 col-md-4 py-2" key={team._id}>
                     <Link
                       style={{ textDecoration: "none" }}
                       to={`/teamDetail/${team._id}`}>
