@@ -24,7 +24,6 @@ export default function ProjectList({ search }) {
     }
   }, [navigate, token]);
 
-  // 🔹 FETCH ALL PROJECTS ONLY ONCE
   useEffect(() => {
     dispatch(fetchProjectsAsync());
   }, [dispatch]);
@@ -39,7 +38,6 @@ export default function ProjectList({ search }) {
     setSearchParams(newParams);
   };
 
-  // 🔹 FRONTEND FILTER ONLY
   const filteredProjects = projects
     ?.filter((project) =>
       projectStatus ? project.status === projectStatus : true

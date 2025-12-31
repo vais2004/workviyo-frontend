@@ -49,7 +49,7 @@ export const deleteTeamAsync = createAsyncThunk(
       `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
       { headers: { Authorization: token } }
     );
-    return id; // ✅ return deleted ID
+    return id;
   }
 );
 
@@ -62,7 +62,7 @@ export const teamSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    // FETCH
+    // fetch
     builder.addCase(fetchTeamsAsync.pending, (state) => {
       state.status = "Loading";
     });
@@ -80,7 +80,7 @@ export const teamSlice = createSlice({
     });
     builder.addCase(addTeamsAsync.fulfilled, (state, action) => {
       state.status = "Added team";
-      state.teams.push(action.payload); // ✅ push new team
+      state.teams.push(action.payload);
     });
     builder.addCase(addTeamsAsync.rejected, (state, action) => {
       state.status = "error";
@@ -100,6 +100,7 @@ export const teamSlice = createSlice({
       state.status = "error";
       state.error = action.error.message;
     });
+
     //delete
     builder.addCase(deleteTeamAsync.pending, (state) => {
       state.status = "Loading";

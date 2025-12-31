@@ -46,7 +46,7 @@ export default function Reports() {
     dispatch(fetchTasksAsync());
   }, [dispatch]);
 
-  //PIE chart for tasks closed by team
+  //pie chart for tasks closed by team
   const closedTasksByTeam = useMemo(() => {
     const completed = tasks?.filter((t) => t.status === "Completed") || [];
     const grouped = completed.reduce((acc, curr) => {
@@ -60,7 +60,7 @@ export default function Reports() {
     }));
   }, [tasks]);
 
-  // BAR chart for work done last week
+  //bar chart for work done last week
   const workDoneLastWeek = useMemo(() => {
     const filtered =
       tasks?.filter(
@@ -81,7 +81,7 @@ export default function Reports() {
     }));
   }, [tasks]);
 
-  //BAR chart for pending work
+  //bar chart for pending work
   const pendingWork = useMemo(() => {
     const pending =
       tasks?.filter(
@@ -143,7 +143,7 @@ export default function Reports() {
           </button>
           <h2 className="fw-bold mb-4">Reports</h2>
 
-          {/* PIE chart */}
+          {/* pie chart */}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Tasks Closed by Team</h5>
 
@@ -175,7 +175,7 @@ export default function Reports() {
             )}
           </section>
 
-          {/*BAR chart LAST WEEK*/}
+          {/*bar chart last week*/}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Total Work Done Last Week</h5>
 
@@ -193,7 +193,7 @@ export default function Reports() {
             </div>
           </section>
 
-          {/*BAR chart: PENDING*/}
+          {/*bar chart: pending*/}
           <section className="shadow p-3 mb-4 bg-white rounded">
             <h5 className="text-center mb-3">Total Days of Work Pending</h5>
 

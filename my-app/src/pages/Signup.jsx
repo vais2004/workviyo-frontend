@@ -49,7 +49,7 @@ export default function Signup() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <ToastContainer />
+      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div
         className="card p-4 border-0"
         style={{ width: "400px", backgroundColor: "#ffffff" }}>

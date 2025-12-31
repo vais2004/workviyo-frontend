@@ -54,7 +54,7 @@ export default function AddProject({ projectId }) {
       );
       toast.success("Project Created Successfull!");
 
-      // ✅ CLEAR FORM FIELDS
+      // clear form fields
       setProjectName("");
       setProjectDescription("");
       setStatus("");
@@ -79,7 +79,11 @@ export default function AddProject({ projectId }) {
             aria-label="Close"></button>
         </div>
         <div className="modal-body">
-          <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            className="mt-5"
+            autoClose={3000}
+          />
           <form onSubmit={handleAddProject}>
             <div className="mb-3">
               <label htmlFor="name" className="col-form-label">

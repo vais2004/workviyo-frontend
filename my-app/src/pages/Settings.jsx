@@ -75,7 +75,7 @@ export default function Settings() {
 
   return (
     <div className="container-fluid">
-      <ToastContainer />
+      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"
@@ -153,7 +153,6 @@ export default function Settings() {
                       </button>
                     </div>
 
-                    {/* Modal */}
                     <div
                       className="modal fade"
                       id={`addNewProject-${project._id}`}
@@ -193,7 +192,6 @@ export default function Settings() {
                       </button>
                     </div>
 
-                    {/* Modal */}
                     <div
                       className="modal fade"
                       id={`#addNewTeam-${team._id}`}
@@ -244,7 +242,6 @@ export default function Settings() {
                       </button>
                     </div>
 
-                    {/* Modal */}
                     <div
                       className="modal fade"
                       id={`addNewTask-${task._id}`}

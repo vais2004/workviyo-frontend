@@ -47,11 +47,11 @@ export const userLoginAsync = createAsyncThunk(
         `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/login`,
         credentials
       );
-      console.log("Login response: ", response.data);
+      //console.log("Login response: ", response.data);
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
-      console.error("Login error: ", error.response?.data);
+      //console.error("Login error: ", error.response?.data);
       throw error;
     }
   }

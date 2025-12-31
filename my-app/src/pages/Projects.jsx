@@ -29,7 +29,6 @@ export default function Projects() {
   const taskFilters = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
 
-    // 🔥 clear conflicting sort
     if (key === "prioritySort") {
       newParams.delete("dateSort");
     }
@@ -73,12 +72,12 @@ export default function Projects() {
 
   let filteredTasks = [...tasksFromProject];
 
-  // STATUS FILTER
+  // status filter
   if (taskStatus) {
     filteredTasks = filteredTasks.filter((task) => task.status === taskStatus);
   }
 
-  // PRIORITY SORT
+  // priority sort
   if (prioritySort === "Low-High") {
     filteredTasks.sort(
       (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
@@ -91,7 +90,7 @@ export default function Projects() {
     );
   }
 
-  // DATE SORT
+  // date sort
   if (dateSort === "Newest-Oldest") {
     filteredTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }

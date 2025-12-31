@@ -26,7 +26,7 @@ export const addMembersAsync = createAsyncThunk(
       { headers: { Authorization: token } }
     );
     const data = response.data;
-    console.log(data, "data submited");
+    //console.log(data, "data submited");
     return data;
   }
 );
@@ -42,7 +42,7 @@ export const deleteMembersAsync = createAsyncThunk(
       }
     );
     const data = response.data;
-    console.log(data, "deleted");
+    //console.log(data, "deleted");
     return data;
   }
 );

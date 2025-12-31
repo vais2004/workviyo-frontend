@@ -91,7 +91,7 @@ export default function AddTask({ taskId }) {
       tags: tags || [],
     };
 
-    console.log("TASK PAYLOAD BEFORE SENDING:", payload);
+    //console.log("TASK PAYLOAD BEFORE SENDING:", payload);
 
     if (isEdit) {
       dispatch(updateTaskAsync({ id: taskId, ...payload }))
@@ -128,7 +128,11 @@ export default function AddTask({ taskId }) {
         </div>
 
         <div className="modal-body">
-          <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            className="mt-5"
+            autoClose={3000}
+          />
           <form onSubmit={handleSubmit}>
             {/* Project */}
             <select

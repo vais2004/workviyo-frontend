@@ -93,7 +93,6 @@ const ProjectDetails = () => {
             <p className="text-muted">Project not found</p>
           )}
 
-          {/* TASKS */}
           <h3 className="mb-3">Tasks</h3>
           <hr />
           {taskStatus === "Loading" && (

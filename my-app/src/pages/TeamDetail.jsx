@@ -26,7 +26,7 @@ export default function TeamDetail() {
   const teamList = Array.isArray(teams) ? teams : [teams];
   const teamData = teamList.find((team) => team?._id === teamId);
 
-  console.log(teamData);
+  //console.log(teamData);
 
   useEffect(() => {
     dispatch(fetchTeamsAsync());
@@ -38,7 +38,6 @@ export default function TeamDetail() {
         addMembersAsync({ name: newName })
       ).unwrap();
 
-      // 🔥 FIX IS HERE
       const updatedMembers = [
         ...teamData.members.map((m) => m._id),
         newMember._id,
@@ -87,7 +86,7 @@ export default function TeamDetail() {
 
   return (
     <div className="container-fluid">
-      <ToastContainer />
+      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"

@@ -15,7 +15,7 @@ export const fetchProjectsAsync = createAsyncThunk(
         headers: { Authorization: token },
       }
     );
-    const data = response.data; // backend returns array directly
+    const data = response.data;
     return data;
   }
 );
@@ -31,7 +31,7 @@ export const addProjectAsync = createAsyncThunk(
         headers: { Authorization: token },
       }
     );
-    const data = response.data.projects; // backend returns { projects: [...] }
+    const data = response.data.projects;
     return data;
   }
 );
@@ -61,7 +61,7 @@ export const deleteProjectAsync = createAsyncThunk(
         headers: { Authorization: token },
       }
     );
-    const data = response.data.projects; // backend returns { projects: [...] }
+    const data = response.data.projects;
     return data;
   }
 );

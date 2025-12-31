@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 export default function AddMember() {
   const { teamId } = useParams();
-  console.log("teamId from params:", teamId);
+  //console.log("teamId from params:", teamId);
 
   const [selectedMembers, setSelectedMembers] = useState([]);
 
@@ -85,5 +85,3 @@ export default function AddMember() {
     </div>
   );
 }
-
-

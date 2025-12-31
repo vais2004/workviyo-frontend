@@ -1,18 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks";
-
-// FETCH TASKS
 export const fetchTasksAsync = createAsyncThunk("tasks/fetch", async () => {
   const token = localStorage.getItem("token");
-  const res = await axios.get(API_URL, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const res = await axios.get(
+    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return res.data;
 });
 
-// ADD TASK
 export const addTaskAsync = createAsyncThunk("tasks/add", async (task) => {
   const token = localStorage.getItem("token");
 
@@ -24,39 +23,47 @@ export const addTaskAsync = createAsyncThunk("tasks/add", async (task) => {
     timeToComplete: task.timeToComplete,
     priority: task.priority || "Medium",
     status: task.status || "To Do",
-    // FIX: Ensure tags is a proper array
     tags: Array.isArray(task.tags)
       ? task.tags.map((t) => t.toString().trim())
       : [],
   };
 
-  const res = await axios.post(API_URL, payload, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const res = await axios.post(
+    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks`,
+    payload,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 
   return res.data;
 });
 
-// UPDATE TASK
 export const updateTaskAsync = createAsyncThunk(
   "tasks/update",
   async ({ id, ...task }) => {
     const token = localStorage.getItem("token");
 
-    const res = await axios.put(`${API_URL}/${id}`, task, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await axios.put(
+      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
+      task,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     return res.data;
   }
 );
 
-// DELETE TASK
 export const deleteTaskAsync = createAsyncThunk("tasks/delete", async (id) => {
   const token = localStorage.getItem("token");
-  await axios.delete(`${API_URL}/${id}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  await axios.delete(
+    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   return id;
 });
 
