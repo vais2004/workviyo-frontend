@@ -13,83 +13,130 @@ Workviyo is a full-stack task and project management application designed to hel
 
 ---
 
-### 🏠 Home / Dashboard
-- Search bar to search projects by name
-- Filter projects by status
-- Create new projects
-- View project list
-- View task list
+## 🏠 Home Page (Dashboard)
+
+The **Home page** acts as the main dashboard of the application.
+
+### Project Section
+- Search bar to **search projects by name**
+- Status filter to **filter projects by status**
+- **New Project** button
+
+#### Create New Project
+Clicking the **New Project** button opens a form with:
+- Project Name
+- Project Description
+- Project Status
+
+On clicking **Create**, the project is saved and displayed in the **Project List**.
+
+Clicking on a **Project Card** navigates to the **Project Details Page**.
+
+---
+
+### Task Section
+Displayed below the project list.
+
+Features:
+- View all tasks
 - Filter tasks by status
-- Create new tasks
-- Navigate to project details and task details pages
+- **New Task** button
+
+#### Create New Task
+The task creation form includes:
+- Select Project
+- Task Name
+- Select Team
+- Select Status
+- Select Owner(s)
+- Add Tags
+- Time to Complete
+- Select Priority
+
+After clicking **Create**, the task appears in the task list.
+
+Clicking on a **Task Card** navigates to the **Task Details Page**, showing complete task information.
 
 ---
 
-### 📁 Project Management
-- Create projects with:
-  - Project name
-  - Project description
-  - Project status
-- View all projects as cards
-- Click on a project card to view **Project Details**
-- Projects page displays tasks in a table format with:
-  - Task name
-  - Owners
-  - Priority
-  - Created date
-  - Due date
-  - Status
-- Filters available:
-  - Low to High priority
-  - High to Low priority
-  - Newest first
-  - Oldest first
-  - Filter by status
-- Create new tasks directly from the Projects page
+## 📂 Side Navigation Bar
+A persistent sidebar visible on all pages.
+
+### Navigation Links:
+- Dashboard
+- Projects
+- Teams
+- Reports
+- Settings
 
 ---
 
-### ✅ Task Management
-- Create tasks with:
-  - Select project
-  - Task name
-  - Select team
-  - Select status
-  - Select owner
-  - Add tags
-  - Time to complete
-  - Select priority
-- Tasks displayed as cards on the Home page
-- Click on a task card to view **Task Details**
-- Filter tasks by status
+## 📋 Projects Page
+
+The **Projects page** displays tasks in a **table format** for better visibility.
+
+### Table Columns:
+- Task Name
+- Owners
+- Priority
+- Created On
+- Due Date
+- Status
+
+### Filters Available:
+- Low to High Priority
+- High to Low Priority
+- Newest First
+- Oldest First
+- Filter by Status
+
+Includes a **New Task** button for quick task creation.
 
 ---
 
-### 👥 Team & Member Management
-- View teams as cards
-- Create new teams
-- Navigate to **Team Details** page
-- View list of team members
-- Add new members using input field
-- Remove members from a team
-- Assign members to teams using member selection
+## 👥 Teams Page
+
+Teams are displayed as **cards** showing the team name.
+
+### Features:
+- Add new team
+- View team details
+
+#### Team Details Page
+- List of team members
+- Remove existing members
+- Add new members using input and add button
+- Assign members to teams using the **Members** selection button
 
 ---
 
-### 📊 Reports & Analytics
-- Pie chart showing tasks closed by team
-- Bar chart for total work done in the last week
-- Bar chart showing total days of pending work
+## 📊 Reports Page
+
+The **Reports page** provides visual insights using charts.
+
+### Charts Included:
+- **Pie Chart**: Tasks closed by each team
+- **Bar Chart**: Total work completed in the last week
+- **Bar Chart**: Total days of pending work
+
+These charts help track team performance and workload distribution.
 
 ---
 
-### ⚙️ Settings
-- View all:
-  - Projects
-  - Teams
-  - Tasks
-- Edit and delete projects, teams, and tasks
-- Sign out option available at the top
+## ⚙️ Settings Page
+
+The **Settings page** allows complete data management.
+
+### Sections:
+- Projects
+- Teams
+- Tasks
+
+Each section includes:
+- Edit button
+- Delete button
+
+A **Sign Out** button is available at the top of the page.
 
 ---
 
@@ -125,7 +172,6 @@ A side navigation bar is available on all pages with the following links:
 - **CORS** – Cross-origin resource sharing
 - **Dotenv** – Environment variable management
 - **Nodemon** – Development server auto-restart
-
 
 ---
 
