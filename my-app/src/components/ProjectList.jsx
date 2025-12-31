@@ -52,7 +52,7 @@ export default function ProjectList({ search }) {
         <h3>Projects</h3>
       </div>
 
-      <div className="col-md-8">
+      <div className="col-md-8 mb-2">
         <select
           style={{ width: "150ps" }}
           onChange={(e) => filterByStatus(e.target.value)}
@@ -66,7 +66,7 @@ export default function ProjectList({ search }) {
         </select>
       </div>
 
-      <div className="col-md-3">
+      <div className="col-md-3 mb-2">
         <button
           type="button"
           className="btn btn-outline-primary float-end ms-auto me-2"

@@ -50,7 +50,7 @@ export default function Home() {
             <input
               type="text"
               className="form-control"
-              placeholder="Search"
+              placeholder="Search Project By Name"
               aria-describedby="inputGroup"
               onChange={(e) => setSearch(e.target.value)}
             />
