@@ -6,7 +6,7 @@ export const fetchTeamsAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get("https://workviyo.vercel.app/teams", {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   }
@@ -19,7 +19,7 @@ export const addTeamsAsync = createAsyncThunk(
     const response = await axios.post(
       "https://workviyo.vercel.app/teams",
       { name, members },
-      { headers: { Authorization: token } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data;
   }
@@ -32,7 +32,7 @@ export const updateTeamAsync = createAsyncThunk(
     const response = await axios.put(
       `https://workviyo.vercel.app/teams/${id}`,
       { name, members },
-      { headers: { Authorization: token } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data;
   }
@@ -43,7 +43,7 @@ export const deleteTeamAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     await axios.delete(`https://workviyo.vercel.app/teams/${id}`, {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     });
     return id;
   }

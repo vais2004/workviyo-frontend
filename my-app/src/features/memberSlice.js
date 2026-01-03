@@ -6,7 +6,7 @@ export const fetchMembersAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get(`https://workviyo.vercel.app/members`, {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     });
     const data = response.data;
     return data;
@@ -20,7 +20,7 @@ export const addMembersAsync = createAsyncThunk(
     const response = await axios.post(
       `https://workviyo.vercel.app/members`,
       { name },
-      { headers: { Authorization: token } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = response.data;
     //console.log(data, "data submited");
@@ -35,7 +35,7 @@ export const deleteMembersAsync = createAsyncThunk(
     const response = await axios.delete(
       `https://workviyo.vercel.app/members/${id}`,
       {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     const data = response.data;
@@ -83,7 +83,7 @@ export const memberSlice = createSlice({
     });
     builder.addCase(deleteMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "Deleted member";
-      state.members = state.members.filter((m) => m._id !== action.payload._id);
+      state.members = state.members.filter((m) => m._id !== action.payload);
     });
     builder.addCase(deleteMembersAsync.rejected, (state, action) => {
       state.memberStatus = "error";

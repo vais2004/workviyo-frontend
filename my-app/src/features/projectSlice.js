@@ -12,7 +12,7 @@ export const fetchProjectsAsync = createAsyncThunk(
     const response = await axios.get(
       `https://workviyo.vercel.app/projects?${queryParams.toString()}`,
       {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     const data = response.data;
@@ -28,7 +28,7 @@ export const addProjectAsync = createAsyncThunk(
       `https://workviyo.vercel.app/projects`,
       { name, description, status },
       {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     const data = response.data.projects;
@@ -43,7 +43,7 @@ export const updateProjectAsync = createAsyncThunk(
     const response = await axios.put(
       `https://workviyo.vercel.app/projects/${id}`,
       { name, description, status },
-      { headers: { Authorization: token } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
 
     const data = response.data.projects;
@@ -58,7 +58,7 @@ export const deleteProjectAsync = createAsyncThunk(
     const response = await axios.delete(
       `https://workviyo.vercel.app/projects/${id}`,
       {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     const data = response.data.projects;
