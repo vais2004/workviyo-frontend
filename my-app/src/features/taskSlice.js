@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchTasksAsync = createAsyncThunk("tasks/fetch", async () => {
   const token = localStorage.getItem("token");
   const res = await axios.get(
-    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks`,
+    `https://workviyo.vercel.app/tasks`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }
@@ -29,7 +29,7 @@ export const addTaskAsync = createAsyncThunk("tasks/add", async (task) => {
   };
 
   const res = await axios.post(
-    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks`,
+    `https://workviyo.vercel.app/tasks`,
     payload,
     {
       headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +45,7 @@ export const updateTaskAsync = createAsyncThunk(
     const token = localStorage.getItem("token");
 
     const res = await axios.put(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
+      `https://workviyo.vercel.app/tasks/${id}`,
       task,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -59,7 +59,7 @@ export const updateTaskAsync = createAsyncThunk(
 export const deleteTaskAsync = createAsyncThunk("tasks/delete", async (id) => {
   const token = localStorage.getItem("token");
   await axios.delete(
-    `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/tasks/${id}`,
+    `https://workviyo.vercel.app/tasks/${id}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }

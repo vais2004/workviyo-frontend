@@ -10,7 +10,7 @@ export const fetchProjectsAsync = createAsyncThunk(
 
     if (projectStatus) queryParams.append("status", projectStatus);
     const response = await axios.get(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects?${queryParams.toString()}`,
+      `https://workviyo.vercel.app/projects?${queryParams.toString()}`,
       {
         headers: { Authorization: token },
       }
@@ -25,7 +25,7 @@ export const addProjectAsync = createAsyncThunk(
   async ({ name, description, status }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects`,
+      `https://workviyo.vercel.app/projects`,
       { name, description, status },
       {
         headers: { Authorization: token },
@@ -41,7 +41,7 @@ export const updateProjectAsync = createAsyncThunk(
   async ({ id, name, description, status }) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
+      `https://workviyo.vercel.app/projects/${id}`,
       { name, description, status },
       { headers: { Authorization: token } }
     );
@@ -56,7 +56,7 @@ export const deleteProjectAsync = createAsyncThunk(
   async ({ id }) => {
     const token = localStorage.getItem("token");
     const response = await axios.delete(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/projects/${id}`,
+      `https://workviyo.vercel.app/projects/${id}`,
       {
         headers: { Authorization: token },
       }

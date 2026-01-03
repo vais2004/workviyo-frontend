@@ -10,14 +10,11 @@ export const fetchUserAsync = createAsyncThunk(
   async () => {
     const token = localStorage.getItem("token");
 
-    const response = await axios.get(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/me`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get(`https://workviyo.vercel.app/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = response.data;
     return data;
   }
@@ -27,7 +24,7 @@ export const registerUserAsync = createAsyncThunk(
   "users/registerUserAsync",
   async (credentials) => {
     const response = await axios.post(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/signup`,
+      `https://workviyo.vercel.app/auth/signup`,
       credentials,
       {
         headers: { "Content-Type": "application/json" },
@@ -44,7 +41,7 @@ export const userLoginAsync = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axios.post(
-        `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/auth/login`,
+        `https://workviyo.vercel.app/auth/login`,
         credentials
       );
       //console.log("Login response: ", response.data);

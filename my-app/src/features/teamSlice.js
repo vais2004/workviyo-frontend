@@ -5,12 +5,9 @@ export const fetchTeamsAsync = createAsyncThunk(
   "teams/fetchTeamsAsync",
   async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.get(
-      "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams",
-      {
-        headers: { Authorization: token },
-      }
-    );
+    const response = await axios.get("https://workviyo.vercel.app/teams", {
+      headers: { Authorization: token },
+    });
     return response.data;
   }
 );
@@ -20,7 +17,7 @@ export const addTeamsAsync = createAsyncThunk(
   async ({ name, members }) => {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      "https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams",
+      "https://workviyo.vercel.app/teams",
       { name, members },
       { headers: { Authorization: token } }
     );
@@ -33,7 +30,7 @@ export const updateTeamAsync = createAsyncThunk(
   async ({ id, name, members }) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
+      `https://workviyo.vercel.app/teams/${id}`,
       { name, members },
       { headers: { Authorization: token } }
     );
@@ -45,10 +42,9 @@ export const deleteTeamAsync = createAsyncThunk(
   "teams/deleteTeamAsync",
   async ({ id }) => {
     const token = localStorage.getItem("token");
-    await axios.delete(
-      `https://zygomorphic-zahara-neog-f3974a52.koyeb.app/teams/${id}`,
-      { headers: { Authorization: token } }
-    );
+    await axios.delete(`https://workviyo.vercel.app/teams/${id}`, {
+      headers: { Authorization: token },
+    });
     return id;
   }
 );
