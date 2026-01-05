@@ -6,7 +6,7 @@ import {
 } from "../features/projectSlice";
 import { deleteTeamAsync, fetchTeamsAsync } from "../features/teamSlice";
 import { deleteTaskAsync, fetchTasksAsync } from "../features/taskSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import AddProject from "../pages/AddProject";
 import AddTask from "../pages/AddTask";
@@ -194,7 +194,7 @@ export default function Settings() {
 
                     <div
                       className="modal fade"
-                      id={`#addNewTeam-${team._id}`}
+                      id={`addNewTeam-${team._id}`}
                       tabIndex="-1"
                       aria-hidden="true">
                       <div className="modal-dialog">
