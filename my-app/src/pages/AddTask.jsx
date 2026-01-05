@@ -216,12 +216,14 @@ export default function AddTask({ taskId }) {
                   Add
                 </button>
               </div>
+             
 
               {tags.map((tag, i) => (
-                <span key={i} className="badge bg-secondary me-2">
+                <span key={i} className="badge bg-secondary me-2 mb-3">
                   {tag}
                 </span>
               ))}
+               <br/>
               <RequiredLabel text="Time to complete:" />
               <input
                 type="number"
