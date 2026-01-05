@@ -53,7 +53,7 @@ export default function Signup() {
       <div
         className="card p-4 border-0"
         style={{ width: "400px", backgroundColor: "#ffffff" }}>
-        <h4 className="heading-color text-center mb-3">Workviyo</h4>
+        <h4 className="heading-color text-center mb-3" style={{color:"#a37df6ff"}}>Workviyo</h4>
         <h2 className="text-center">Create an account</h2>
         <p className="text-center text-muted mb-4">Please enter your details</p>
         <form onSubmit={handleUserRegister}>
