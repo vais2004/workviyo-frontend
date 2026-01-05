@@ -43,7 +43,10 @@ export default function AddTask({ taskId }) {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchUserAsync());
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(fetchUserAsync());
+    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -216,14 +219,13 @@ export default function AddTask({ taskId }) {
                   Add
                 </button>
               </div>
-             
 
               {tags.map((tag, i) => (
                 <span key={i} className="badge bg-secondary me-2 mb-3">
                   {tag}
                 </span>
               ))}
-               <br/>
+              <br />
               <RequiredLabel text="Time to complete:" />
               <input
                 type="number"
