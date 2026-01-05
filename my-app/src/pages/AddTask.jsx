@@ -43,10 +43,7 @@ export default function AddTask({ taskId }) {
   }, [dispatch]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      dispatch(fetchUserAsync());
-    }
+    dispatch(fetchUserAsync());
   }, [dispatch]);
 
   useEffect(() => {
