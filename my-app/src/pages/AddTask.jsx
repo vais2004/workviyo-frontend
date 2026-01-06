@@ -98,7 +98,7 @@ export default function AddTask({ taskId }) {
         .unwrap()
         .then(() => {
           toast.success("Task updated successfully");
-          dispatch(fetchTasksAsync()); // <-- refresh task list
+          dispatch(fetchTasksAsync());
         })
         .catch(() => toast.error("Failed to update task"));
     } else {
@@ -106,7 +106,7 @@ export default function AddTask({ taskId }) {
         .unwrap()
         .then(() => {
           toast.success("Task created successfully");
-          dispatch(fetchTasksAsync()); // <-- refresh task list
+          dispatch(fetchTasksAsync());
         })
         .catch(() => toast.error("Failed to create task"));
     }
@@ -121,26 +121,25 @@ export default function AddTask({ taskId }) {
   );
 
   return (
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title">
-            {isEdit ? "Update Task" : "Create Task"}
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"></button>
-        </div>
+    <>
+      <div className="modal-header">
+        <h5 className="modal-title">
+          {isEdit ? "Update Task" : "Create Task"}
+        </h5>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"></button>
+      </div>
 
-        <div className="modal-body">
-          <ToastContainer
-            position="top-right"
-            className="mt-5"
-            autoClose={3000}
-          />
-          <div className="row justify-content-center">
-            <div className="col-8"></div>
+      <div className="modal-body">
+        <ToastContainer
+          position="top-right"
+          className="mt-5"
+          autoClose={3000}
+        />
+        <div>
+          <div>
             <form onSubmit={handleSubmit}>
               <RequiredLabel text="Select Project:" />
               <select
@@ -249,6 +248,6 @@ export default function AddTask({ taskId }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

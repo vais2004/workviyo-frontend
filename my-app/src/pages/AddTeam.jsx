@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTeamsAsync, updateTeamAsync } from "../features/teamSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 
-export default function AddTeam({ teamId }) {
+export default function AddTeam({ teamId, onTeamAdded }) {
   const dispatch = useDispatch();
 
   const { teams = [] } = useSelector((state) => state.teams);
@@ -15,16 +15,6 @@ export default function AddTeam({ teamId }) {
   useEffect(() => {
     dispatch(fetchMembersAsync());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!teamId) return;
-
-  //   const team = teams.find((t) => t._id === teamId);
-  //   if (!team) return;
-
-  //   setTeamName(team.name);
-  //   setSelectedMembers(team.members.map((m) => m._id));
-  // }, [teamId, teams]);
 
   useEffect(() => {
     if (!teamId || teams.length === 0) return;
@@ -57,8 +47,11 @@ export default function AddTeam({ teamId }) {
         await dispatch(updateTeamAsync({ id: teamId, ...payload })).unwrap();
       } else {
         await dispatch(addTeamsAsync(payload)).unwrap();
+        //add this line to refresh teams list
+        if (onTeamAdded) onTeamAdded();
       }
 
+      // close the modal
       document.querySelector(".btn-close")?.click();
     } catch (err) {
       console.error(err);

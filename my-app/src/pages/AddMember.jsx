@@ -7,6 +7,8 @@ import {
 } from "../features/teamSlice";
 import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddMember() {
   const { teamId } = useParams();
@@ -45,19 +47,27 @@ export default function AddMember() {
 
     const uniqueMembers = [...new Set(updatedMembers)];
 
-    await dispatch(
-      updateTeamAsync({
-        id: teamId,
-        members: uniqueMembers,
-      })
-    ).unwrap();
+    try {
+      await dispatch(
+        updateTeamAsync({
+          id: teamId,
+          members: uniqueMembers,
+        })
+      ).unwrap();
 
-    setSelectedMembers([]);
-    dispatch(fetchTeamsAsync());
+      toast.success("Members added successfully");
+
+      setSelectedMembers([]);
+      dispatch(fetchTeamsAsync());
+    } catch (err) {
+      toast.error("Failed to add members");
+    }
   };
 
   return (
     <div className="modal-body">
+      <ToastContainer position="top-right" autoClose={3000} />
+
       <form onSubmit={handleAddMember}>
         <div className="mb-3">
           {members &&

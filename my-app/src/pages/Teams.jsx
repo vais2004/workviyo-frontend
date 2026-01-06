@@ -7,7 +7,9 @@ import AddTeam from "./AddTeam";
 
 export default function Teams() {
   const dispatch = useDispatch();
-  const { teams = [], status, error } = useSelector((state) => state.teams);
+  const { teams = [], status: teamStatus } = useSelector(
+    (state) => state.teams
+  );
 
   useEffect(() => {
     dispatch(fetchTeamsAsync());
@@ -79,27 +81,28 @@ export default function Teams() {
                       data-bs-dismiss="modal"
                       aria-label="Close"></button>
                   </div>
-                  <AddTeam />
+                  <AddTeam onTeamAdded={() => dispatch(fetchTeamsAsync())} />
                 </div>
               </div>
             </div>
           </div>
           <section className="pb-3 px-2">
             <div className="row">
-              {status === "Loading" && (
-                <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis fw-normal ">
-                  Loading...
-                </p>
+              {(teamStatus === "idle" || teamStatus === "loading") && (
+                <div className="alert alert-info text-center mt-3">
+                  Loading teams...
+                </div>
               )}
-              {error !== null && (
-                <p className="text-center p-3 mb-2 bg-warning-subtle text-info-emphasis fw-normal">
-                  {error}
+
+              {teamStatus !== "loading" && teams?.length === 0 && (
+                <p className="text-muted mt-2">
+                  No teams have been created yet.
                 </p>
               )}
               {teams?.length > 0 &&
                 Array.isArray(teams) &&
-                teams.map((team) => (
-                  <div className="col-12 col-sm-6 col-md-4 py-2" key={team._id}>
+                teams.map((team, index) => (
+                  <div className="col-12 col-sm-6 col-md-4 py-2" key={index}>
                     <Link
                       style={{ textDecoration: "none" }}
                       to={`/teamDetail/${team._id}`}>

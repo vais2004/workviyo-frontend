@@ -220,11 +220,7 @@ export default function Projects() {
           </section>
 
           <section className="pb-3 pe-2">
-            {status === "Loading" && (
-              <div className="alert alert-info text-center">
-                Loading tasks...
-              </div>
-            )}
+            
 
             <table className="table">
               <thead>
@@ -249,6 +245,7 @@ export default function Projects() {
                   </th>
                 </tr>
               </thead>
+            
 
               <tbody>
                 {filteredTasks
@@ -329,6 +326,19 @@ export default function Projects() {
                   : ""}
               </tbody>
             </table>
+             <div>
+               {(status === "idle" || status === "loading") && (
+              <div className="alert alert-info text-center mt-3">
+                Loading tasks...
+              </div>
+            )}
+
+            {status !== "loading" && tasks?.length === 0 && (
+              <p className="text-muted mt-2">
+                Currently, there are no tasks assigned.
+              </p>
+            )}
+             </div>
           </section>
 
           <div

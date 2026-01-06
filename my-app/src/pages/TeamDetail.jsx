@@ -131,44 +131,49 @@ export default function TeamDetail() {
               <i className="bi bi-arrow-left"></i> Back to Teams
             </Link>
           </section>
+
           <section className="px-2">
             <div className="p-4">
               <h3>{teamData?.name}</h3>
-              <h4 className="fw-normal fs-5 text-light-gray">MEMBERS</h4>
-              {teamData?.members?.map((member, index) => (
-                <div className="pb-1 row" key={index}>
-                  <div className="col-md-4">
-                    {" "}
-                    <p
-                      style={{
-                        display: "inline-block",
-                        width: "30px",
-                        height: "30px",
-                        border: "1px solid white",
-                        borderRadius: "50%",
-                        textAlign: "center",
-                        lineHeight: "30px",
-                        backgroundColor: "antiquewhite",
-                        color: "brown",
-                        zIndex: 1,
+              <h4 className="fw-normal fs-5 text-muted">Members</h4>
 
-                        paddingBottom: "8px",
-                      }}>
-                      {member.name.charAt(0)}
-                    </p>{" "}
-                    {member.name}
-                  </div>
-                  <div className="col-md-4">
+              <ul className="list-group col-6 mt-3">
+                {teamData?.members?.length === 0 && (
+                  <li className="list-group-item text-muted">
+                    No members in this team.
+                  </li>
+                )}
+
+                {teamData?.members?.map((member) => (
+                  <li
+                    key={member._id}
+                    className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                      <span
+                        className="me-2 rounded-circle d-inline-block text-center"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          lineHeight: "30px",
+                          backgroundColor: "antiquewhite",
+                          color: "brown",
+                        }}>
+                        {member.name.charAt(0)}
+                      </span>
+                      {member.name}
+                    </span>
+
                     <button
                       className="btn btn-outline-danger btn-sm"
                       onClick={() => handleRemoveMember(member._id)}>
-                      Remove Member
+                      Remove
                     </button>
-                  </div>
-                </div>
-              ))}
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
+
           <section className="pb-3 px-2 row">
             <div className="py-1 col-auto">
               <button

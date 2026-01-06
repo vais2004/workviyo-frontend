@@ -77,10 +77,14 @@ export default function ProjectList({ search }) {
       </div>
 
       <div className="row">
-        {status === "Loading" && (
-          <p className="text-center p-3 mb-2 bg-primary-subtle text-info-emphasis">
-            Loading...
-          </p>
+        {(status === "idle" || status === "loading") && (
+          <div className="alert alert-info text-center mt-3">
+            Loading projects...
+          </div>
+        )}
+
+        {status !== "loading" && projects?.length === 0 && (
+          <p className="text-muted mt-2">There are no projects at this time.</p>
         )}
 
         {filteredProjects?.length > 0 &&

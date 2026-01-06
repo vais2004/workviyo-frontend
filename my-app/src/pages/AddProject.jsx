@@ -9,7 +9,8 @@ export default function AddProject({ projectId }) {
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [status, setStatus] = useState("");
-  const navigate = useNavigate();
+  const navigate=useNavigate()
+
   const dispatch = useDispatch();
 
   const { projects } = useSelector((state) => state.projects);
@@ -31,6 +32,7 @@ export default function AddProject({ projectId }) {
 
   const handleAddProject = (e) => {
     e.preventDefault();
+
     if (existing && projectId) {
       dispatch(
         updateProjectAsync({
@@ -41,8 +43,8 @@ export default function AddProject({ projectId }) {
         })
       );
       toast.success("Project Updated Successful!");
-      setTimeout(() => {
-        navigate("/dashboard");
+       setTimeout(() => {
+        navigate("/settings");
       }, 1500);
     } else {
       dispatch(
@@ -58,10 +60,6 @@ export default function AddProject({ projectId }) {
       setProjectName("");
       setProjectDescription("");
       setStatus("");
-
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1500);
     }
   };
 
