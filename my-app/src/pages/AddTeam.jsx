@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTeamsAsync, updateTeamAsync } from "../features/teamSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTeam({ teamId, onTeamAdded }) {
   const dispatch = useDispatch();
@@ -45,8 +47,10 @@ export default function AddTeam({ teamId, onTeamAdded }) {
     try {
       if (teamId) {
         await dispatch(updateTeamAsync({ id: teamId, ...payload })).unwrap();
+        toast.success("Team updated successfully!");
       } else {
         await dispatch(addTeamsAsync(payload)).unwrap();
+        toast.success("Team created successfully!");
         //add this line to refresh teams list
         if (onTeamAdded) onTeamAdded();
       }
@@ -54,6 +58,7 @@ export default function AddTeam({ teamId, onTeamAdded }) {
       // close the modal
       document.querySelector(".btn-close")?.click();
     } catch (err) {
+      toast.error("Something went wrong. Please try again!");
       console.error(err);
     }
   };

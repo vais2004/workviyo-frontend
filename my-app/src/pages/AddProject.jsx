@@ -9,7 +9,7 @@ export default function AddProject({ projectId }) {
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [status, setStatus] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ export default function AddProject({ projectId }) {
         })
       );
       toast.success("Project Updated Successful!");
-       setTimeout(() => {
+      setTimeout(() => {
         navigate("/settings");
       }, 1500);
     } else {
@@ -77,11 +77,6 @@ export default function AddProject({ projectId }) {
             aria-label="Close"></button>
         </div>
         <div className="modal-body">
-          <ToastContainer
-            position="top-right"
-            className="mt-5"
-            autoClose={3000}
-          />
           <form onSubmit={handleAddProject}>
             <div className="mb-3">
               <label htmlFor="name" className="col-form-label">

@@ -13,7 +13,6 @@ import AddTask from "../pages/AddTask";
 import AddTeam from "../pages/AddTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-<ToastContainer />;
 
 export default function Settings() {
   const dispatch = useDispatch();
