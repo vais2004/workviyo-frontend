@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProjectAsync, updateProjectAsync } from "../features/projectSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,12 +22,12 @@ export default function AddProject({ projectId }) {
   const existing = Boolean(projectExist);
 
   useEffect(() => {
-    if (existing) {
+    if (existing && projectExist) {
       setProjectName(projectExist.name || "");
       setProjectDescription(projectExist.description || "");
       setStatus(projectExist.status || "");
     }
-  }, [projectExist, existing]);
+  }, [projectId]);
 
   const handleAddProject = (e) => {
     e.preventDefault();
@@ -40,10 +40,10 @@ export default function AddProject({ projectId }) {
           status: status,
         })
       );
-      toast.success("Project Updated Successfull!");
+      toast.success("Project Updated Successful!");
       setTimeout(() => {
         navigate("/dashboard");
-      }, 2000);
+      }, 1500);
     } else {
       dispatch(
         addProjectAsync({
@@ -52,7 +52,7 @@ export default function AddProject({ projectId }) {
           status: status,
         })
       );
-      toast.success("Project Created Successfull!");
+      toast.success("Project Created Successful!");
 
       // clear form fields
       setProjectName("");
@@ -60,8 +60,8 @@ export default function AddProject({ projectId }) {
       setStatus("");
 
       setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+        navigate("/dashboard");
+      }, 1500);
     }
   };
 

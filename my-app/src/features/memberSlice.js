@@ -55,7 +55,7 @@ export const memberSlice = createSlice({
   extraReducers: (builder) => {
     //fetch
     builder.addCase(fetchMembersAsync.pending, (state) => {
-      state.memberStatus = "Loading";
+      state.memberStatus = "loading";
     });
     builder.addCase(fetchMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "All members";
@@ -67,7 +67,7 @@ export const memberSlice = createSlice({
     });
     //add
     builder.addCase(addMembersAsync.pending, (state) => {
-      state.memberStatus = "Loading";
+      state.memberStatus = "loading";
     });
     builder.addCase(addMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "Added members";
@@ -79,7 +79,7 @@ export const memberSlice = createSlice({
     });
     //delete
     builder.addCase(deleteMembersAsync.pending, (state) => {
-      state.memberStatus = "Loading";
+      state.memberStatus = "loading";
     });
     builder.addCase(deleteMembersAsync.fulfilled, (state, action) => {
       state.memberStatus = "Deleted member";

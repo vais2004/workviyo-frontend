@@ -16,15 +16,25 @@ export default function AddTeam({ teamId }) {
     dispatch(fetchMembersAsync());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   if (!teamId) return;
+
+  //   const team = teams.find((t) => t._id === teamId);
+  //   if (!team) return;
+
+  //   setTeamName(team.name);
+  //   setSelectedMembers(team.members.map((m) => m._id));
+  // }, [teamId, teams]);
+
   useEffect(() => {
-    if (!teamId) return;
+    if (!teamId || teams.length === 0) return;
 
     const team = teams.find((t) => t._id === teamId);
     if (!team) return;
 
-    setTeamName(team.name);
+    setTeamName(team.name || "");
     setSelectedMembers(team.members.map((m) => m._id));
-  }, [teamId, teams]);
+  }, [teamId, teams.length]);
 
   const selectMemberHandler = (e) => {
     const { checked, value } = e.target;

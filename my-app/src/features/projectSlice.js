@@ -77,7 +77,7 @@ export const projectSlice = createSlice({
   extraReducers: (builder) => {
     //fetch
     builder.addCase(fetchProjectsAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(fetchProjectsAsync.fulfilled, (state, action) => {
       state.status = "All Projects";
@@ -89,7 +89,7 @@ export const projectSlice = createSlice({
     });
     //add
     builder.addCase(addProjectAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(addProjectAsync.fulfilled, (state, action) => {
       state.status = "Project Added";
@@ -101,7 +101,7 @@ export const projectSlice = createSlice({
     });
     //update
     builder.addCase(updateProjectAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(updateProjectAsync.fulfilled, (state, action) => {
       state.status = "Project updated";
@@ -113,7 +113,7 @@ export const projectSlice = createSlice({
     });
     //delete
     builder.addCase(deleteProjectAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(deleteProjectAsync.fulfilled, (state, action) => {
       state.status = "Project deleted";

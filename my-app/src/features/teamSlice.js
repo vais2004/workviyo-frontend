@@ -60,7 +60,7 @@ export const teamSlice = createSlice({
   extraReducers: (builder) => {
     // fetch
     builder.addCase(fetchTeamsAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(fetchTeamsAsync.fulfilled, (state, action) => {
       state.status = "All teams";
@@ -72,7 +72,7 @@ export const teamSlice = createSlice({
     });
     //add
     builder.addCase(addTeamsAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(addTeamsAsync.fulfilled, (state, action) => {
       state.status = "Added team";
@@ -84,7 +84,7 @@ export const teamSlice = createSlice({
     });
     //update
     builder.addCase(updateTeamAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(updateTeamAsync.fulfilled, (state, action) => {
       state.status = "Updated team";
@@ -99,7 +99,7 @@ export const teamSlice = createSlice({
 
     //delete
     builder.addCase(deleteTeamAsync.pending, (state) => {
-      state.status = "Loading";
+      state.status = "loading";
     });
     builder.addCase(deleteTeamAsync.fulfilled, (state, action) => {
       state.status = "Team deleted";

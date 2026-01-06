@@ -18,11 +18,9 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Settings() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { projects } = useSelector((state) => {
-    return state.projects;
-  });
-  const { teams } = useSelector((state) => state.teams);
-  const { tasks } = useSelector((state) => state.tasks);
+  const { projects, status } = useSelector((state) => state.projects);
+  const { teams, status: teamStatus } = useSelector((state) => state.teams);
+  const { tasks, status: taskStatus } = useSelector((state) => state.tasks);
 
   const projectStatus = "";
 
@@ -128,8 +126,19 @@ export default function Settings() {
 
           <section className="pb-3 px-2">
             <span className="fw-normal fs-3">Projects</span>
+            {(status === "idle" || status === "loading") && (
+              <div className="alert alert-info text-center mt-3">
+                Loading projects...
+              </div>
+            )}
 
             <ul className="list-group mt-3">
+              {status !== "loading" && projects?.length === 0 && (
+                <p className="text-muted mt-2">
+                  There are no projects at this time.
+                </p>
+              )}
+
               {projects?.length > 0 &&
                 projects.map((project) => (
                   <li
@@ -167,8 +176,19 @@ export default function Settings() {
 
           <section className="pb-4 px-2">
             <span className="fw-normal fs-3">Teams</span>
+            {(teamStatus === "idle" || teamStatus === "loading") && (
+              <div className="alert alert-info text-center mt-3">
+                Loading teams...
+              </div>
+            )}
 
             <ul className="list-group mt-3">
+              {teamStatus !== "loading" && teams?.length === 0 && (
+                <p className="text-muted mt-2">
+                  No teams have been created yet.
+                </p>
+              )}
+
               {teams?.length > 0 &&
                 teams.map((team) => (
                   <li
@@ -217,8 +237,19 @@ export default function Settings() {
 
           <section className="pb-3 px-2">
             <span className="fw-normal fs-3">Tasks</span>
+            {(taskStatus === "idle" || taskStatus === "loading") && (
+              <div className="alert alert-info text-center mt-3">
+                Loading tasks...
+              </div>
+            )}
 
             <ul className="list-group mt-3">
+              {taskStatus !== "loading" && tasks?.length === 0 && (
+                <p className="text-muted mt-2">
+                  Currently, there are no tasks assigned.
+                </p>
+              )}
+
               {tasks?.length > 0 &&
                 tasks.map((task) => (
                   <li
