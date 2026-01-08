@@ -9,8 +9,7 @@ import {
 } from "../features/taskSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 import { fetchUserAsync } from "../features/userSlice";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function AddTask({ taskId }) {
   const dispatch = useDispatch();
@@ -111,7 +110,7 @@ export default function AddTask({ taskId }) {
         .catch(() => toast.error("Failed to create task"));
     }
 
-    document.querySelector(".btn-close")?.click();
+    //document.querySelector(".btn-close")?.click();
   };
 
   const RequiredLabel = ({ text }) => (
@@ -133,11 +132,6 @@ export default function AddTask({ taskId }) {
       </div>
 
       <div className="modal-body">
-        <ToastContainer
-          position="top-right"
-          className="mt-5"
-          autoClose={3000}
-        />
         <div>
           <div>
             <form onSubmit={handleSubmit}>
@@ -241,7 +235,10 @@ export default function AddTask({ taskId }) {
                 <option value="High">High</option>
               </select>
 
-              <button className="btn btn-outline-primary float-end">
+              <button
+                type="submit"
+                className="btn btn-outline-primary float-end"
+                data-bs-dismiss="modal">
                 {isEdit ? "Update" : "Create"}
               </button>
             </form>

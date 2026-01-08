@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUserAsync, userLoginAsync } from "../features/userSlice";
 import ShowHidePassword from "../components/ShowHidePassword";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -49,11 +47,14 @@ export default function Signup() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div
         className="card p-4 border-0"
         style={{ width: "400px", backgroundColor: "#ffffff" }}>
-        <h4 className="heading-color text-center mb-3" style={{color:"#a37df6ff"}}>Workviyo</h4>
+        <h4
+          className="heading-color text-center mb-3"
+          style={{ color: "#a37df6ff" }}>
+          Workviyo
+        </h4>
         <h2 className="text-center">Create an account</h2>
         <p className="text-center text-muted mb-4">Please enter your details</p>
         <form onSubmit={handleUserRegister}>

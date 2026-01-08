@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamsAsync, updateTeamAsync } from "../features/teamSlice";
-import {
-  addMembersAsync,
-  deleteMembersAsync,
-  fetchMembersAsync,
-} from "../features/memberSlice";
+import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
 import SideNav from "../components/SideNav";
 import AddMember from "./AddMember";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function TeamDetail() {
   const [newName, setNewName] = useState("");
@@ -86,7 +81,6 @@ export default function TeamDetail() {
 
   return (
     <div className="container-fluid">
-      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"

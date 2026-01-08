@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLoginAsync } from "../features/userSlice";
 import ShowHidePassword from "../components/ShowHidePassword";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,7 +44,11 @@ export default function Login() {
       <div
         className="card  border-0 p-4 "
         style={{ width: "400px", backgroundColor: "#ffffff" }}>
-        <h4 className="heading-color text-center mb-3" style={{color:"#a37df6ff"}}>Workviyo</h4>
+        <h4
+          className="heading-color text-center mb-3"
+          style={{ color: "#a37df6ff" }}>
+          Workviyo
+        </h4>
         <h2 className="text-center">Log in to your account</h2>
         <p className="text-center text-muted mb-4">
           Please enter your details.

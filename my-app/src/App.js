@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./App.css";
 import Home from "./pages/Home.jsx";
 import Projects from "./pages/Projects.jsx";
@@ -17,6 +20,14 @@ import TaskDetails from "./pages/TaskDetails.jsx";
 function App() {
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        pauseOnHover
+        newestOnTop
+        style={{ zIndex: 9999 }}
+      />
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

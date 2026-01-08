@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addTeamsAsync,
-  fetchTeamsAsync,
-  updateTeamAsync,
-} from "../features/teamSlice";
-import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
+import { fetchTeamsAsync, updateTeamAsync } from "../features/teamSlice";
+import { fetchMembersAsync } from "../features/memberSlice";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function AddMember() {
   const { teamId } = useParams();
@@ -66,8 +61,6 @@ export default function AddMember() {
 
   return (
     <div className="modal-body">
-      <ToastContainer position="top-right" autoClose={3000} />
-
       <form onSubmit={handleAddMember}>
         <div className="mb-3">
           {members &&

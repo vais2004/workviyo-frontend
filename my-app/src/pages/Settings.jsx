@@ -11,8 +11,7 @@ import SideNav from "../components/SideNav";
 import AddProject from "../pages/AddProject";
 import AddTask from "../pages/AddTask";
 import AddTeam from "../pages/AddTeam";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -72,7 +71,6 @@ export default function Settings() {
 
   return (
     <div className="container-fluid">
-      <ToastContainer position="top-right" className="mt-5" autoClose={3000} />
       <div className="row">
         <div
           className="offcanvas offcanvas-start"
@@ -272,12 +270,23 @@ export default function Settings() {
                       </button>
                     </div>
 
-                    <div
+                    {/* <div
                       className="modal fade"
                       id={`addNewTask-${task._id}`}
                       tabIndex="-1"
                       aria-hidden="true">
                       <AddTask taskId={task._id} />
+                    </div> */}
+                    <div
+                      className="modal fade"
+                      id={`addNewTask-${task._id}`}
+                      tabIndex="-1"
+                      aria-hidden="true">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <AddTask taskId={task._id} />
+                        </div>
+                      </div>
                     </div>
                   </li>
                 ))}

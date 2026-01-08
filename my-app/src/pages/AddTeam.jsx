@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTeamsAsync, updateTeamAsync } from "../features/teamSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function AddTeam({ teamId, onTeamAdded }) {
   const dispatch = useDispatch();
