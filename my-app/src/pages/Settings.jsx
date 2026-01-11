@@ -65,6 +65,7 @@ export default function Settings() {
   };
 
   const handleLogout = () => {
+    toast.dismiss();
     localStorage.removeItem("Login token");
     navigate("/");
   };
