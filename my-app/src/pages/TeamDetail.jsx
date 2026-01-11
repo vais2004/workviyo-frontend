@@ -46,8 +46,10 @@ export default function TeamDetail() {
       ).unwrap();
 
       setNewName("");
-      toast.success("Member added to team");
+      dispatch(fetchMembersAsync());
       dispatch(fetchTeamsAsync());
+
+      toast.success("Member added to team");
     } catch (error) {
       console.error("failed to add:", error);
     }
@@ -186,6 +188,7 @@ export default function TeamDetail() {
                   className="form-control"
                   type="text"
                   placeholder="Add member name"
+                  value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                 />
                 <button className="btn btn-outline-primary" onClick={handleAdd}>

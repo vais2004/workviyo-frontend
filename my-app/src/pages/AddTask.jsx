@@ -110,7 +110,7 @@ export default function AddTask({ taskId }) {
         .catch(() => toast.error("Failed to create task"));
     }
 
-    //document.querySelector(".btn-close")?.click();
+    document.querySelector("#addNewTask .btn-close")?.click();
   };
 
   const RequiredLabel = ({ text }) => (
@@ -237,8 +237,7 @@ export default function AddTask({ taskId }) {
 
               <button
                 type="submit"
-                className="btn btn-outline-primary float-end"
-                data-bs-dismiss="modal">
+                className="btn btn-outline-primary float-end">
                 {isEdit ? "Update" : "Create"}
               </button>
             </form>

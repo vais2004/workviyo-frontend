@@ -344,7 +344,11 @@ export default function Projects() {
             tabIndex="-1"
             aria-labelledby="taskModelLabel"
             aria-hidden="true">
-            <AddTask />
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <AddTask />
+              </div>
+            </div>
           </div>
         </div>
       </div>
