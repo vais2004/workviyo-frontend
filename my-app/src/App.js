@@ -25,7 +25,7 @@ function App() {
         autoClose={3000}
         pauseOnHover
         newestOnTop
-        style={{ zIndex: 9999 }}
+        containerStyle={{ zIndex: 999999 }}
       />
 
       <Routes>
