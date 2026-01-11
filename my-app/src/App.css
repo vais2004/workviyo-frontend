@@ -39,12 +39,12 @@
 }
 
 /* React Toastify vs Bootstrap fix */
+.Toastify__toast-container {
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+
 .Toastify__toast {
   opacity: 1 !important;
   transform: none !important;
-}
-
-.Toastify__toast-container {
-  z-index: 999999 !important;
-  position: fixed !important;
 }

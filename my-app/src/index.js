@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import store from "./app/store.js";
 import App from "./App.js";
 
@@ -13,6 +14,13 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          pauseOnHover
+          newestOnTop
+          containerStyle={{ zIndex: 999999 }}
+        />
         <App />
       </Provider>
     </BrowserRouter>
