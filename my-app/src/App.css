@@ -32,7 +32,19 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* React Toastify vs Bootstrap fix */
+.Toastify__toast {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.Toastify__toast-container {
+  z-index: 999999 !important;
+  position: fixed !important;
 }
