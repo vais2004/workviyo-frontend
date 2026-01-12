@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchTasksAsync } from "../features/taskSlice";
 import SideNav from "../components/SideNav";
+import AddTask from "../pages/AddTask";
 
 export default function TaskDetails() {
   const { taskId } = useParams();
@@ -75,10 +76,19 @@ export default function TaskDetails() {
             aria-controls="mobileSidebar">
             <i className="bi bi-list"></i>
           </button>
+
           <div className="card border-0 shadow-sm">
             <div className="card-body">
-              <h3 className="mb-3">{task.name}</h3>
-
+              <div className="d-flex justify-content-between py-3">
+                <h3 className="mb-3">{task.name}</h3>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary ms-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTaskModal">
+                  Update Task
+                </button>
+              </div>
               <p>
                 <strong>Project:</strong> {task.project?.name || "N/A"}
               </p>
@@ -161,6 +171,17 @@ export default function TaskDetails() {
                 <span className="text-muted">No tags</span>
               )}
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal fade"
+        id="editTaskModal"
+        tabIndex="-1"
+        aria-hidden="true">
+        <div className="modal-dialog modal-lg modal-dialog-centered">
+          <div className="modal-content">
+            <AddTask taskId={task._id} />
           </div>
         </div>
       </div>

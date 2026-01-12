@@ -90,35 +90,38 @@ export default function ProjectList({ search }) {
         {filteredProjects?.length > 0 &&
           filteredProjects.map((project) => (
             <div className="col-md-4 py-3" key={project._id}>
-              <Link
-                to={`/projectDetails/${project._id}`}
-                style={{ textDecoration: "none", color: "inherit" }}>
-                <div className="card pt-5 p-3 bg-light border-0 position-relative">
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      backgroundColor:
-                        project.status === "Blocked"
-                          ? "#f7cce1ff"
-                          : project.status === "Completed"
-                          ? "#c1f9b7ff"
-                          : project.status === "To Do"
-                          ? "#f5cdb9ff"
-                          : "#aeedcfff",
-                      padding: "4px 10px",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                      fontWeight: "500",
-                    }}>
-                    {project.status}
-                  </span>
+              <div className="card pt-5 p-3 bg-light border-0 position-relative">
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    backgroundColor:
+                      project.status === "Blocked"
+                        ? "#f7cce1ff"
+                        : project.status === "Completed"
+                        ? "#c1f9b7ff"
+                        : project.status === "To Do"
+                        ? "#f5cdb9ff"
+                        : "#aeedcfff",
+                    padding: "4px 10px",
+                    borderRadius: "12px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                  }}>
+                  {project.status}
+                </span>
 
-                  <h5>{project.name}</h5>
-                  <p>Description: {project.description}</p>
+                <h5>{project.name}</h5>
+                <p>Description: {project.description}</p>
+                <div className="d-flex justify-content-between mt-3">
+                  <button
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => navigate(`/projects/${project._id}`)}>
+                    View Tasks
+                  </button>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
 

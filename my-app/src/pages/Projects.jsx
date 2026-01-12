@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { fetchProjectsAsync } from "../features/projectSlice";
@@ -17,6 +17,7 @@ export default function Projects() {
   const taskStatus = searchParams.get("taskStatus") || "";
   const prioritySort = searchParams.get("prioritySort") || "";
   const dateSort = searchParams.get("dateSort") || "";
+  const [selectedProject, setSelectedProject] = useState("");
 
   useEffect(() => {
     dispatch(fetchProjectsAsync());
@@ -25,6 +26,12 @@ export default function Projects() {
   useEffect(() => {
     dispatch(fetchTasksAsync());
   }, []);
+
+  useEffect(() => {
+    if (projectId) {
+      setSelectedProject(projectId);
+    }
+  }, [projectId]);
 
   const taskFilters = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
@@ -56,13 +63,19 @@ export default function Projects() {
     setSearchParams(newParams);
   };
 
-  const projectData = projects.find((project) => project._id === projectId);
+  const projectData = projectId
+    ? projects.find((project) => project._id === projectId)
+    : null;
 
-  const tasksFromProject = projectData
-    ? tasks.filter((task) => task.project?.name === projectData?.name)
-    : Array.isArray(tasks)
-    ? tasks
-    : [];
+  const tasksFromProject = selectedProject
+    ? tasks.filter(
+        (task) => task.project && task.project._id === selectedProject
+      )
+    : tasks;
+
+  console.log("Project ID:", projectId);
+  console.log("Task project:", tasks[0]?.project);
+  console.log("URL Project ID:", projectId);
 
   const priorityOrder = {
     Low: 1,
@@ -205,6 +218,19 @@ export default function Projects() {
                 <option value="Completed">Completed</option>
                 <option value="To Do">To Do</option>
                 <option value="Blocked">Blocked</option>
+              </select>
+            </span>
+            <span className="col-auto mb-1">
+              <select
+                value={selectedProject}
+                onChange={(e) => setSelectedProject(e.target.value)}
+                className="form-select">
+                <option value="">All Projects</option>
+                {projects.map((p) => (
+                  <option value={p._id} key={p._id}>
+                    {p.name}
+                  </option>
+                ))}
               </select>
             </span>
             <span className="col-auto mb-1">

@@ -8,7 +8,6 @@ import AddMember from "./AddMember";
 import { toast } from "react-toastify";
 
 export default function TeamDetail() {
-  const [newName, setNewName] = useState("");
   const { teamId } = useParams();
   const dispatch = useDispatch();
   const { teams } = useSelector((state) => state.teams);
@@ -26,34 +25,6 @@ export default function TeamDetail() {
   useEffect(() => {
     dispatch(fetchTeamsAsync());
   }, [dispatch]);
-
-  const handleAdd = async () => {
-    try {
-      const newMember = await dispatch(
-        addMembersAsync({ name: newName })
-      ).unwrap();
-
-      const updatedMembers = [
-        ...teamData.members.map((m) => m._id),
-        newMember._id,
-      ];
-
-      await dispatch(
-        updateTeamAsync({
-          id: teamData._id,
-          members: updatedMembers,
-        })
-      ).unwrap();
-
-      setNewName("");
-      dispatch(fetchMembersAsync());
-      dispatch(fetchTeamsAsync());
-
-      toast.success("Member added to team");
-    } catch (error) {
-      console.error("failed to add:", error);
-    }
-  };
 
   const handleRemoveMember = async (id) => {
     const matchedMember = members.find((member) => member._id === id);
@@ -182,20 +153,6 @@ export default function TeamDetail() {
               </button>
             </div>
 
-            <div className="col-auto">
-              <div className="input-group w-75 mt-1">
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Add member name"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                />
-                <button className="btn btn-outline-primary" onClick={handleAdd}>
-                  Add
-                </button>
-              </div>
-            </div>
             <div className="py-1">
               <div
                 className="modal fade"
@@ -207,7 +164,7 @@ export default function TeamDetail() {
                   <div className="modal-content">
                     <div className="modal-header">
                       <h1 className="modal-title fs-5" id="memberModalLabel">
-                        Create New Member
+                        Add New Member to Team
                       </h1>
                       <button
                         type="button"

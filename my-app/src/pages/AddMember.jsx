@@ -4,10 +4,12 @@ import { fetchTeamsAsync, updateTeamAsync } from "../features/teamSlice";
 import { fetchMembersAsync } from "../features/memberSlice";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { addMembersAsync } from "../features/memberSlice";
 
 export default function AddMember() {
   const { teamId } = useParams();
   //console.log("teamId from params:", teamId);
+  const [newMemberName, setNewMemberName] = useState("");
 
   const [selectedMembers, setSelectedMembers] = useState([]);
 
@@ -59,6 +61,26 @@ export default function AddMember() {
     }
   };
 
+  const handleCreateMember = async () => {
+    if (!newMemberName.trim()) return;
+
+    try {
+      const newMember = await dispatch(
+        addMembersAsync({ name: newMemberName })
+      ).unwrap();
+
+      // auto-select newly created member
+      setSelectedMembers((prev) => [...prev, newMember._id]);
+
+      setNewMemberName("");
+      dispatch(fetchMembersAsync());
+
+      toast.success("Member created");
+    } catch (err) {
+      toast.error("Failed to create member");
+    }
+  };
+
   return (
     <div className="modal-body">
       <form onSubmit={handleAddMember}>
@@ -85,6 +107,21 @@ export default function AddMember() {
           </button>
         </div>
       </form>
+      <div className="mb-3 d-flex">
+        <input
+          type="text"
+          className="form-control me-2"
+          placeholder="Add new member name"
+          value={newMemberName}
+          onChange={(e) => setNewMemberName(e.target.value)}
+        />
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          onClick={handleCreateMember}>
+          Add
+        </button>
+      </div>
     </div>
   );
 }
