@@ -112,6 +112,9 @@ export default function Projects() {
     filteredTasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   }
 
+  const isAnyFilterApplied =
+    taskStatus || prioritySort || dateSort || selectedProject;
+
   const dueDate = (createdAt, timeToComplete) => {
     const created = new Date(createdAt);
     const due = new Date(created);
@@ -271,82 +274,92 @@ export default function Projects() {
               </thead>
 
               <tbody>
-                {filteredTasks
+                {/* {filteredTasks
                   ? Array.isArray(filteredTasks) &&
-                    filteredTasks.map((task, index) => (
-                      <tr key={index}>
-                        <th scope="row container">{task.name}</th>
+                    filteredTasks.map((task, index) => (*/}
+                {filteredTasks.length > 0 ? (
+                  filteredTasks.map((task, index) => (
+                    <tr key={index}>
+                      <th scope="row container">{task.name}</th>
 
-                        <td>
-                          {task.owners.map((owner, index) => (
-                            <span
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                width: "30px",
-                                height: "30px",
-                                border: "1px solid white",
-                                borderRadius: "50%",
-                                textAlign: "center",
-                                lineHeight: "30px",
-                                backgroundColor: "antiquewhite",
-                                color: "brown",
-                                zIndex: 1,
-                                paddingBottom: "8px",
-                              }}>
-                              {owner.name.charAt(0)}
-                            </span>
-                          ))}
-                        </td>
-
-                        <td>
+                      <td>
+                        {task.owners.map((owner, index) => (
                           <span
+                            key={index}
                             style={{
-                              backgroundColor:
-                                task.priority === "High"
-                                  ? "#e6d1fcff"
-                                  : task.priority === "Medium"
-                                  ? "#d3ecfcff"
-                                  : "#dbdee2ff",
-                            }}
-                            className="rounded-pill fw-normal px-3 py-1 ">
-                            {task.priority}
+                              display: "inline-block",
+                              width: "30px",
+                              height: "30px",
+                              border: "1px solid white",
+                              borderRadius: "50%",
+                              textAlign: "center",
+                              lineHeight: "30px",
+                              backgroundColor: "antiquewhite",
+                              color: "brown",
+                              zIndex: 1,
+                              paddingBottom: "8px",
+                            }}>
+                            {owner.name.charAt(0)}
                           </span>
-                        </td>
+                        ))}
+                      </td>
 
-                        <td>{new Date(task.createdAt).toLocaleDateString()}</td>
+                      <td>
+                        <span
+                          style={{
+                            backgroundColor:
+                              task.priority === "High"
+                                ? "#e6d1fcff"
+                                : task.priority === "Medium"
+                                ? "#d3ecfcff"
+                                : "#dbdee2ff",
+                          }}
+                          className="rounded-pill fw-normal px-3 py-1 ">
+                          {task.priority}
+                        </span>
+                      </td>
 
-                        <td>
+                      <td>{new Date(task.createdAt).toLocaleDateString()}</td>
+
+                      <td>
+                        <span
+                          className={
+                            isOverdue(task) ? "text-danger fw-bold" : ""
+                          }>
+                          {dueDate(
+                            task.createdAt,
+                            task.timeToComplete
+                          ).toLocaleDateString()}
+                        </span>
+                      </td>
+
+                      <td>
+                        <p className="d-grid gap-2 col-6 mx-auto text-center">
                           <span
                             className={
-                              isOverdue(task) ? "text-danger fw-bold" : ""
+                              task.status === "Completed"
+                                ? "bg-primary-subtle text-success-emphasis rounded fw-normal "
+                                : task.status === "Blocked"
+                                ? "bg-danger-subtle text-danger-emphasis rounded fw-normal "
+                                : task.status === "In Progress"
+                                ? "bg-info-subtle text-info-emphasis fw-normal "
+                                : "bg-warning-subtle text-warning-emphasis fw-normal "
                             }>
-                            {dueDate(
-                              task.createdAt,
-                              task.timeToComplete
-                            ).toLocaleDateString()}
+                            {task.status}
                           </span>
-                        </td>
-
-                        <td>
-                          <p className="d-grid gap-2 col-6 mx-auto text-center">
-                            <span
-                              className={
-                                task.status === "Completed"
-                                  ? "bg-primary-subtle text-success-emphasis rounded fw-normal "
-                                  : task.status === "Blocked"
-                                  ? "bg-danger-subtle text-danger-emphasis rounded fw-normal "
-                                  : task.status === "In Progress"
-                                  ? "bg-info-subtle text-info-emphasis fw-normal "
-                                  : "bg-warning-subtle text-warning-emphasis fw-normal "
-                              }>
-                              {task.status}
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
-                    ))
-                  : ""}
+                        </p>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center text-muted py-4">
+                      {isAnyFilterApplied
+                        ? "No tasks found for the selected filters."
+                        : "No tasks available."}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
             <div>
