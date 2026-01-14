@@ -1,28 +1,19 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import store from "./app/store.js";
-import App from "./App.js";
+
+import store from "./app/store";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
-      <Provider store={store}>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          pauseOnHover
-          newestOnTop
-          containerStyle={{ zIndex: 999999 }}
-        />
-        <App />
-      </Provider>
+      <App /> {/* ToastContainer is inside App, so it will work */}
     </BrowserRouter>
-  </StrictMode>
+  </Provider>
 );

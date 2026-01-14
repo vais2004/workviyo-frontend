@@ -85,6 +85,26 @@ export default function AddMember() {
     <div className="modal-body">
       <form onSubmit={handleAddMember}>
         <div className="mb-3">
+          {members?.map((member) => {
+            // Skip member if already in team
+            if (getTeam?.members?.some((m) => m._id === member._id))
+              return null;
+
+            return (
+              <label key={member._id}>
+                <input
+                  type="checkbox"
+                  className="input-check my-3 ms-3"
+                  onChange={selectMemberHandler}
+                  value={member._id}
+                />{" "}
+                {member.name}
+              </label>
+            );
+          })}
+        </div>
+
+        {/* <div className="mb-3">
           {members &&
             members?.length > 0 &&
             members?.map((member) => (
@@ -99,7 +119,7 @@ export default function AddMember() {
                 {member.name}
               </label>
             ))}
-        </div>
+        </div> */}
 
         <div className="modal-footer">
           <button type="submit" className="btn btn-primary">

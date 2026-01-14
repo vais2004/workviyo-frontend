@@ -13,10 +13,20 @@ import AddTask from "./pages/AddTask.jsx";
 import AddProject from "./pages/AddProject.jsx";
 import AddTeam from "./pages/AddTeam.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
+      {/* Toast container is here, only one instance */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        pauseOnHover
+        newestOnTop
+        limit={3}
+      />
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

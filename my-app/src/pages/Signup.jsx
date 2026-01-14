@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserAsync, userLoginAsync } from "../features/userSlice";
+import {
+  registerUserAsync,
+  userLoginAsync,
+  fetchUserAsync,
+} from "../features/userSlice";
 import ShowHidePassword from "../components/ShowHidePassword";
 import { toast } from "react-toastify";
 
@@ -15,15 +19,15 @@ export default function Signup() {
 
   const handleUserRegister = async (event) => {
     event.preventDefault();
-
-    console.log(name, email, password); // Check before sending
-
     try {
       await dispatch(registerUserAsync({ name, email, password })).unwrap();
-      toast.success("Signup successful!");
+
+      const user = await dispatch(fetchUserAsync()).unwrap();
+
+      toast.success(`Signup successful! Welcome ${user.name}`);
       navigate("/dashboard");
     } catch (error) {
-      toast.error(error?.message || "Signup failed!");
+      toast.error("Signup failed!");
     }
   };
 
@@ -35,10 +39,10 @@ export default function Signup() {
     setPassword(guestPassword);
 
     try {
-      await dispatch(
+      const user = await dispatch(
         userLoginAsync({ email: guestEmail, password: guestPassword })
       ).unwrap();
-      toast.success("Login successful!");
+      toast.success(`Login successful! Welcome, ${user.name || "Guest"}`);
       navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid guest credentials!");

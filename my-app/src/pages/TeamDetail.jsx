@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamsAsync, updateTeamAsync } from "../features/teamSlice";
-import { addMembersAsync, fetchMembersAsync } from "../features/memberSlice";
+import { fetchMembersAsync } from "../features/memberSlice";
 import SideNav from "../components/SideNav";
 import AddMember from "./AddMember";
 import { toast } from "react-toastify";
@@ -45,7 +45,9 @@ export default function TeamDetail() {
           members: updatedMembers,
         })
       ).unwrap();
+
       toast.success("Member deleted successfully.");
+
       dispatch(fetchTeamsAsync());
     } catch (error) {
       console.log("Error:", error);

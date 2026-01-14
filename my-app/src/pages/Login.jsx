@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { userLoginAsync } from "../features/userSlice";
+import { userLoginAsync, fetchUserAsync } from "../features/userSlice";
 import ShowHidePassword from "../components/ShowHidePassword";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,7 +16,10 @@ export default function Login() {
     event.preventDefault();
     try {
       await dispatch(userLoginAsync({ email, password })).unwrap();
-      toast.success("Login successful!");
+
+      const user = await dispatch(fetchUserAsync()).unwrap();
+
+      toast.success(`Login successful! Welcome ${user.name}`);
       navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid credentials while logging in!");
@@ -28,11 +31,11 @@ export default function Login() {
       const guestEmail = "guest1@example.com";
       const guestPassword = "guest1";
 
-      await dispatch(
+      const user = await dispatch(
         userLoginAsync({ email: guestEmail, password: guestPassword })
       ).unwrap();
 
-      toast.success("Login successful!");
+      toast.success(`Login successful! Welcome, ${user.name || "Guest"}`);
       navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid credentials while guest login!");
@@ -40,7 +43,6 @@ export default function Login() {
   };
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
-      <ToastContainer />
       <div
         className="card  border-0 p-4 "
         style={{ width: "400px", backgroundColor: "#ffffff" }}>
