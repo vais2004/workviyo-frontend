@@ -55,7 +55,6 @@ export default function AddProject({ projectId }) {
       );
       toast.success("Project Created Successful!");
 
-      // clear form fields
       setProjectName("");
       setProjectDescription("");
       setStatus("");
