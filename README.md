@@ -208,7 +208,7 @@ A side navigation bar is available on all pages with the following links:
 <img width="1919" height="883" alt="Screenshot 2026-01-12 093509" src="https://github.com/user-attachments/assets/24a08581-8dba-47b7-868e-3d5642620dea" />
 
 ### 📁 PROJECTS PAGE
-<img width="1919" height="882" alt="Screenshot 2026-01-12 093344" src="https://github.com/user-attachments/assets/b9747ae1-c2ae-4ec2-9fed-dd804118da36" /> 
+<img width="1919" height="883" alt="Screenshot 2026-01-15 232724" src="https://github.com/user-attachments/assets/011da233-4731-4a4a-bdff-8e35709d4f35" />
 <img width="1919" height="882" alt="Screenshot 2026-01-12 093401" src="https://github.com/user-attachments/assets/b73ec477-1995-40f9-b835-6dbb7e6cbfcc" />
 
 ### 👥 TEAMS PAGE
