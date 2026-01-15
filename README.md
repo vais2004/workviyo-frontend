@@ -38,8 +38,6 @@ Clicking the **New Project** button opens a form with:
 
 On clicking **Create**, the project is saved and displayed in the **Project List**.
 
-Clicking on a **Project Card** navigates to the **Project Details Page**.
-
 ---
 
 ### Task Section
@@ -63,7 +61,7 @@ The task creation form includes:
 
 After clicking **Create**, the task appears in the task list.
 
-Clicking on a **Task Card** navigates to the **Task Details Page**, showing complete task information.
+Clicking on a **Task Card** navigates to the **Task Details Page**, showing complete task information and Update Task button.
 
 ---
 
@@ -97,6 +95,7 @@ The **Projects page** displays tasks in a **table format** for better visibility
 - Newest First
 - Oldest First
 - Filter by Status
+- Filter by Project
 
 Includes a **New Task** button for quick task creation.
 
@@ -113,8 +112,7 @@ Teams are displayed as **cards** showing the team name.
 #### Team Details Page
 - List of team members
 - Remove existing members
-- Add new members using input and add button
-- Assign members to teams using the **Members** selection button
+- “+ Members” opens a member management form where existing members can be selected, new members can be created, and selected members are added to the team
 
 ---
 
