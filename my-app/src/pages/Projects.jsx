@@ -73,10 +73,6 @@ export default function Projects() {
       )
     : tasks;
 
-  console.log("Project ID:", projectId);
-  console.log("Task project:", tasks[0]?.project);
-  console.log("URL Project ID:", projectId);
-
   const priorityOrder = {
     Low: 1,
     Medium: 2,
