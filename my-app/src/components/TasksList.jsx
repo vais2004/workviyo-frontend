@@ -42,7 +42,7 @@ export default function TasksList() {
             <option value="Blocked">Blocked</option>
           </select>
         </div>
-        <div className="col-md-3 ms-auto ">
+        <div className="col-md-3 ms-auto pt-5">
           <button
             type="button"
             className="btn btn-outline-primary"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SideNav from "../components/SideNav";
 import ProjectsList from "../components/ProjectList";
 import TasksList from "../components/TasksList";
@@ -61,6 +61,7 @@ export default function Home() {
           <section>
             <ProjectsList search={search} />
           </section>
+          <hr />
           <section>
             <TasksList search={search} />
           </section>

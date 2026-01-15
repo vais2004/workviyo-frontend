@@ -228,7 +228,7 @@ export default function Projects() {
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
                 className="form-select">
-                <option value="">All Projects</option>
+                <option value="">---All Projects---</option>
                 {projects.map((p) => (
                   <option value={p._id} key={p._id}>
                     {p.name}
@@ -274,9 +274,6 @@ export default function Projects() {
               </thead>
 
               <tbody>
-                {/* {filteredTasks
-                  ? Array.isArray(filteredTasks) &&
-                    filteredTasks.map((task, index) => (*/}
                 {filteredTasks.length > 0 ? (
                   filteredTasks.map((task, index) => (
                     <tr key={index}>
