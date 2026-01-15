@@ -7,7 +7,7 @@ Workviyo is a full-stack task and project management application designed to hel
 -  **Live Application:** [View Demo](https://workviyo-frontend.vercel.app/)
 -  **Backend Source Code:** [Click here](https://github.com/vais2004/Workviyo)
 -  **Frontend Source Code:** [Click here](https://github.com/vais2004/workviyo-frontend)
--  **Project Walkthrough:** [Watch Video](https://drive.google.com/file/d/1WrpgegVmzN9Dr2I95eIGgw7-yBjZr1My/view)
+-  **Project Walkthrough:** [Watch Video](https://drive.google.com/file/d/114fh3X6H5v2dqnmVUohD74eap0TYa65b/view?usp=sharing)
 
 
 ---
