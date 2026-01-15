@@ -7,7 +7,7 @@ Workviyo is a full-stack task and project management application designed to hel
 -  **Live Application:** [View Demo](https://workviyo-frontend.vercel.app/)
 -  **Backend Source Code:** [Click here](https://github.com/vais2004/Workviyo)
 -  **Frontend Source Code:** [Click here](https://github.com/vais2004/workviyo-frontend)
--  **Project Walkthrough:** [Watch Video](https://drive.google.com/file/d/1WrpgegVmzN9Dr2I95eIGgw7-yBjZr1My/view)
+-  **Project Walkthrough:** [Watch Video](https://drive.google.com/file/d/114fh3X6H5v2dqnmVUohD74eap0TYa65b/view?usp=sharing)
 
 
 ---
@@ -193,15 +193,12 @@ A side navigation bar is available on all pages with the following links:
 <img width="1915" height="877" alt="Screenshot 2026-01-12 092947" src="https://github.com/user-attachments/assets/9e2ed675-e530-4815-89f6-485ba7e16fc1" />
 
 ### 🏠 DASHBOARD PAGE
-<img width="1914" height="886" alt="Screenshot 2026-01-12 093041" src="https://github.com/user-attachments/assets/f5d17b92-957d-40fe-8a82-fe5064d60a74" />
+<img width="1919" height="884" alt="Screenshot 2026-01-15 214814" src="https://github.com/user-attachments/assets/8275a0ef-7246-4b1c-bbba-2f0acf840030" />
 <img width="1919" height="884" alt="Screenshot 2026-01-12 093116" src="https://github.com/user-attachments/assets/3b079e61-3e30-444e-811d-70c0a6a80929" />
 <img width="1915" height="882" alt="Screenshot 2026-01-12 093135" src="https://github.com/user-attachments/assets/830146d2-4355-4dcd-beef-28f6c868afa8" />
 
-### PROJECT DETAILS PAGE
-<img width="1919" height="885" alt="Screenshot 2026-01-12 093208" src="https://github.com/user-attachments/assets/6af35857-1d52-4f5a-9649-44418a2cbdd4" />
-
 ### TASK DETAILS PAGE
-<img width="1919" height="890" alt="Screenshot 2026-01-12 093310" src="https://github.com/user-attachments/assets/087de33a-74fe-4cbe-9391-758640f8e199" />
+<img width="1919" height="887" alt="Screenshot 2026-01-15 214830" src="https://github.com/user-attachments/assets/2118e2ae-1058-431c-8367-1501fd5b8183" />
 
 ### CREATE NEW TASK FORM
 <img width="1919" height="889" alt="Screenshot 2026-01-12 093427" src="https://github.com/user-attachments/assets/71008b2e-6f2b-4fdc-8b0d-1443f17611c1" />
@@ -218,13 +215,13 @@ A side navigation bar is available on all pages with the following links:
 <img width="1919" height="881" alt="Screenshot 2026-01-12 093758" src="https://github.com/user-attachments/assets/c27e4a41-7dc0-4882-918d-0b603fa49880" />
 
 ### CREATE NEW TEAM FORM
-<img width="1919" height="884" alt="Screenshot 2026-01-12 093811" src="https://github.com/user-attachments/assets/b0910d2f-9aad-4330-986e-0915dd18d416" />
+<img width="1919" height="884" alt="Screenshot 2026-01-12 093811" src="https://github.com/user-attachments/assets/68869478-c310-47bc-89a0-3acdcaaa8f4a" />
 
 ### TEAM DETAILS PAGE
-<img width="1919" height="885" alt="Screenshot 2026-01-12 093839" src="https://github.com/user-attachments/assets/3fb47f53-1345-475a-a7fb-7d00c025d549" />
+<img width="1919" height="891" alt="Screenshot 2026-01-15 214906" src="https://github.com/user-attachments/assets/ca7ec61c-3008-47bf-bd10-0c06c9f08454" />
 
 ### ADD NEW MEMBERS TO TEAM FORM
-<img width="1919" height="888" alt="Screenshot 2026-01-12 094033" src="https://github.com/user-attachments/assets/e88c66b0-989b-4d70-9bd2-bff408758a85" />
+<img width="1919" height="888" alt="Screenshot 2026-01-15 222216" src="https://github.com/user-attachments/assets/0a5da717-b428-4f05-b3cb-9e18a7ea2e72" />
 
 ### 📊 REPORTS
 <img width="1919" height="885" alt="Screenshot 2026-01-12 094141" src="https://github.com/user-attachments/assets/c8121d9d-d798-48b8-b075-8e42e34e5fd0" />
