@@ -38,8 +38,6 @@ Clicking the **New Project** button opens a form with:
 
 On clicking **Create**, the project is saved and displayed in the **Project List**.
 
-Clicking on a **Project Card** navigates to the **Project Details Page**.
-
 ---
 
 ### Task Section
@@ -63,7 +61,7 @@ The task creation form includes:
 
 After clicking **Create**, the task appears in the task list.
 
-Clicking on a **Task Card** navigates to the **Task Details Page**, showing complete task information.
+Clicking on a **Task Card** navigates to the **Task Details Page**, showing complete task information and Update Task button.
 
 ---
 
@@ -97,6 +95,7 @@ The **Projects page** displays tasks in a **table format** for better visibility
 - Newest First
 - Oldest First
 - Filter by Status
+- Filter by Project
 
 Includes a **New Task** button for quick task creation.
 
@@ -113,8 +112,7 @@ Teams are displayed as **cards** showing the team name.
 #### Team Details Page
 - List of team members
 - Remove existing members
-- Add new members using input and add button
-- Assign members to teams using the **Members** selection button
+- “+ Members” opens a member management form where existing members can be selected, new members can be created, and selected members are added to the team
 
 ---
 
@@ -208,7 +206,7 @@ A side navigation bar is available on all pages with the following links:
 <img width="1919" height="883" alt="Screenshot 2026-01-12 093509" src="https://github.com/user-attachments/assets/24a08581-8dba-47b7-868e-3d5642620dea" />
 
 ### 📁 PROJECTS PAGE
-<img width="1919" height="882" alt="Screenshot 2026-01-12 093344" src="https://github.com/user-attachments/assets/b9747ae1-c2ae-4ec2-9fed-dd804118da36" /> 
+<img width="1919" height="883" alt="Screenshot 2026-01-15 232724" src="https://github.com/user-attachments/assets/011da233-4731-4a4a-bdff-8e35709d4f35" />
 <img width="1919" height="882" alt="Screenshot 2026-01-12 093401" src="https://github.com/user-attachments/assets/b73ec477-1995-40f9-b835-6dbb7e6cbfcc" />
 
 ### 👥 TEAMS PAGE
